@@ -11520,7 +11520,7 @@ function loadScene() {
     l_system.createAll();
     //console.log("SETNECE " + l_system.expandedSentence);
     icosphere = new __WEBPACK_IMPORTED_MODULE_3__geometry_Icosphere__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), 1, controls.tesselations);
-    //icosphere.create();
+    icosphere.create();
     m_mesh = new __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__["a" /* default */]('/geo/feather.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(98, 0, 0));
     //m_mesh.create();
     //m_mesh.center = vec4.fromValues(0, 1, 2, 1);
@@ -11574,6 +11574,10 @@ function main() {
         new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(115)),
         new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(116)),
     ]);
+    const sdf = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(117)),
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(118)),
+    ]);
     let time = 0.0;
     // This function will be called every frame
     function tick() {
@@ -11581,57 +11585,64 @@ function main() {
         stats.begin();
         gl.viewport(0, 0, window.innerWidth, window.innerHeight);
         renderer.clear();
-        renderer.render(camera, background, [
-            square,
-        ]);
         renderer.render(camera, lambert, [
-            //icosphere,
-            m_mesh,
+            icosphere,
         ]);
         time += 1;
         background.setTime(time);
-        for (let mesh of l_system.meshes) {
-            renderer.render(camera, planet, [
-                mesh,
-            ]);
-        }
+        sdf.setTime(time);
+        sdf.setResolution(__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(window.innerWidth, window.innerHeight, 1));
+        sdf.setCamPos(camera.controls.eye);
+        renderer.render(camera, sdf, [
+            square,
+        ], undefined, true);
+        //console.log("w " + window.innerWidth);
+        //console.log("h " + window.innerHeight);
+        //   console.log("CAMdir " + camera.direction);
+        // console.log("cam " + camera);
+        // for(let mesh of l_system.meshes) {
+        //   renderer.render(camera, planet, [
+        //     mesh,
+        //   ]
+        // );}
         let ts = 0.01;
-        for (let x = 0; x < xSubs; x++) {
-            for (let y = 0; y < ySubs; y++) {
-                for (let z = 0; z < zSubs; z++) {
-                    let i = x * ySubs * zSubs + y * zSubs + z;
-                    // console.log(i);
-                    let mesh = background_meshes[i];
-                    let dx = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].create();
-                    let dx2 = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, -1 * ts, 0);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].scale(dx, mesh.m_vel, ts);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].add(mesh.m_pos, mesh.m_pos, dx);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].add(mesh.m_vel, mesh.m_vel, dx2);
-                    let r = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-                    r = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].identity(r);
-                    //console.log(mesh.m_pos);
-                    // mesh.m_vel = vec3.fromValues(0,0,0);
-                    //console.log(mesh.m_vel);
-                    if (mesh.m_pos[1] < -2.0) {
-                        let randX = (x + Math.random()) * 2;
-                        let randY = (y + Math.random()) * 2;
-                        let randZ = (z + Math.random() - zSubs / 2) * 2;
-                        mesh.m_pos = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(-randX, randY, randZ);
-                        mesh.m_vel = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(2, 0, 0);
-                        // console.log(mesh.m_pos); 
-                    }
-                    let model = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].identity(model);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].translate(model, model, mesh.m_pos);
-                    mesh.m_angle += 0.001;
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateY(model, model, mesh.m_angle * 180 / Math.PI);
-                    // console.log(model);
-                    renderer.render(camera, planet, [
-                        mesh,
-                    ], model);
-                }
-            }
-        }
+        //   for(let x = 0; x < xSubs; x++) {
+        //     for(let y = 0; y < ySubs; y++) {
+        //       for(let z = 0; z < zSubs; z++) {
+        //         let i = x * ySubs * zSubs + y * zSubs + z;
+        //        // console.log(i);
+        //         let mesh = background_meshes[i];
+        //         let dx = vec3.create();
+        //         let dx2 = vec3.fromValues(0,-1 * ts,0);
+        //         vec3.scale(dx, mesh.m_vel, ts);
+        //         vec3.add(mesh.m_pos, mesh.m_pos, dx);
+        //         vec3.add(mesh.m_vel, mesh.m_vel, dx2);
+        //         let r = mat4.create();
+        //         r = mat4.identity(r);
+        //         //console.log(mesh.m_pos);
+        //        // mesh.m_vel = vec3.fromValues(0,0,0);
+        //         //console.log(mesh.m_vel);
+        //         if(mesh.m_pos[1] < -2.0) {
+        //           let randX = (x + Math.random()) * 2;
+        //           let randY = (y + Math.random()) * 2;
+        //           let randZ = (z + Math.random() - zSubs / 2) * 2;
+        //           mesh.m_pos = vec3.fromValues(-randX,randY,randZ);
+        //           mesh.m_vel = vec3.fromValues(2,0,0);
+        //          // console.log(mesh.m_pos); 
+        //         }
+        //         let model = mat4.create();
+        //         mat4.identity(model);
+        //         mat4.translate(model, model, mesh.m_pos);
+        //         mesh.m_angle += 0.001;
+        //         mat4.rotateY(model, model, mesh.m_angle * 180 / Math.PI);
+        //        // console.log(model);
+        //         renderer.render(camera, planet, [
+        //           mesh,
+        //         ],model
+        //       );
+        //     }
+        //   }
+        // }
         stats.end();
         // Tell the browser to call `tick` again whenever it renders a new frame
         requestAnimationFrame(tick);
@@ -18873,7 +18884,7 @@ class OpenGLRenderer {
     clear() {
         __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].clear(__WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].COLOR_BUFFER_BIT | __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].DEPTH_BUFFER_BIT);
     }
-    render(camera, prog, drawables, inModel = undefined) {
+    render(camera, prog, drawables, inModel = undefined, invertViewProj = false) {
         let model = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
         let viewProj = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
         let color = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(1, 1, 0, 1);
@@ -18883,6 +18894,9 @@ class OpenGLRenderer {
         }
         __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].multiply(viewProj, camera.projectionMatrix, camera.viewMatrix);
         prog.setModelMatrix(model);
+        if (invertViewProj) {
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].invert(viewProj, viewProj);
+        }
         prog.setViewProjMatrix(viewProj);
         prog.setGeometryColor(color);
         for (let drawable of drawables) {
@@ -22016,6 +22030,8 @@ class ShaderProgram {
         this.unifViewProj = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ViewProj");
         this.unifColor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Color");
         this.unifTime = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Time");
+        this.unifCamPos = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_CamPos");
+        this.unifRes = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Resolution");
     }
     use() {
         if (activeProgram !== this.prog) {
@@ -22039,6 +22055,18 @@ class ShaderProgram {
         this.use();
         if (this.unifTime !== -1) {
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform1f(this.unifTime, time);
+        }
+    }
+    setResolution(res) {
+        this.use();
+        if (this.unifRes !== -1) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform3fv(this.unifRes, res);
+        }
+    }
+    setCamPos(pos) {
+        this.use();
+        if (this.unifCamPos !== -1) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform3fv(this.unifCamPos, pos);
         }
     }
     setViewProjMatrix(vp) {
@@ -24025,6 +24053,18 @@ module.exports = "#version 300 es\n\n//This is a vertex shader. While it is call
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nuniform float u_Time;\n\nconst vec3 bluegreen[5] = vec3[](\nvec3(254, 186, 98) / 255.0,\nvec3(255, 182, 192) / 255.0,\nvec3(177, 187, 187) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(142, 199, 230) / 255.0);\n\nconst vec3 sunset[5] = vec3[](\n    vec3(115, 120, 176) / 255.0, \n    vec3(142, 120, 184) / 255.0, \n\nvec3(142, 120, 184) / 255.0,\nvec3(252, 144, 168) / 255.0,\nvec3(255, 182, 192) / 255.0\n);\n\nconst float cutoffs[5] = float[](0.15,0.3,0.4,0.65,0.75);\n\nvec3 uvToSunset(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return sunset[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(sunset[0], sunset[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(sunset[1], sunset[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(sunset[2], sunset[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(sunset[3], sunset[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return sunset[4];\n}\n\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\n\nvoid main()\n{\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n         //diffuseColor = vec4(0.1,1,1,1);\n        vec2 uv = 0.5 * (fs_Pos.xy + vec2(1,1));\n\n        // Calculate the diffuse term for Lambert shading\n        float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        float ambientTerm = 0.7;\n\n        float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n\n        // Compute final shaded color\n       // out_Col = vec4(0,0.8,0.5,1);\n       out_Col = vec4(uvToSunset(uv),1);\n\t//out_Col = diffuseColor;\n}\n"
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports) {
+
+module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Pos;\nconst vec4 lightPos = vec4(4, 5, 5, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n                                                \n\n                                                          \n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n    \n   // modelposition.z = -0.1;\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n    \n    fs_Pos = modelposition;\n    gl_Position = modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n                                             \n}\n"
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports) {
+
+module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\nuniform vec3 u_Resolution;\n\nuniform float u_Time;\nuniform mat4 u_ViewProj;\nuniform vec3 u_CamPos;\n\nconst vec3 bluegreen[5] = vec3[](\nvec3(142, 199, 230) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0);\n\nconst float cutoffs[5] = float[](0.0,0.5,0.6,0.8,0.9);\n\n\nvec3 uvToSunset(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return bluegreen[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(bluegreen[0], bluegreen[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(bluegreen[1], bluegreen[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(bluegreen[2], bluegreen[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(bluegreen[3], bluegreen[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return bluegreen[4];\n}\n\nvec3 twist(vec3 p) {\n    float k = 1.3f; // or some other amount\n    float c = cos(k*p.y);\n    float s = sin(k*p.y);\n    mat2  m = mat2(c,-s,s,c);\n    vec3  q = vec3(m*vec2(p.x, p.z),p.y);\n    return q;\n}\n\nfloat sphere(vec3 p, float s) {\n    return length(p) - s;\n}\n\nfloat displace(vec3 p) {\n    //return sin(5.f * sin(20.f * p.x) + sin(20*p.y) + sin(20*p.z));\n    float freq = 3.f;\n    float octaves = 3.f;\n    float res = 0.f;\n    for(float i = 0.f; i <= octaves; i++) {\n        float amp = pow(2.f, -i) * ((sin(u_Time * 0.01) + 2.f) * 0.25f);\n        res += amp * sin(freq * pow(2.f, i) * p.x)\n        + amp * sin(freq * pow(2.f, i) * p.y) +\n        amp * sin(freq * pow(2.f, i) * p.z);\n    }\n    return res;\n  //  return sin(3.f* p.x) + sin(3.f*p.y) + sin(3.f*p.z) +\n            //0.5f * (sin(6.f * p.x) + sin(6.f * p.y) + sin(6.f * p.z))\n            //+ 0.25f * (sin(12.f * p.x) + sin(12.f * p.y) + sin(12.f * p.z))\n            //+0.125f * (sin(24.f * p.x) + sin(24.f * p.y) + sin(24.f * p.z));\n}\n\nfloat unionCSG(float d1, float d2) {\n    return min(d1,d2);\n}\n\nfloat intersectionCSG(float d1, float d2) {\n    return max(d1,d2);\n}\n\nfloat differenceCSG(float d1, float d2) {\n    return max(-d1,d2);\n}\n\nfloat transformSDF(vec3 p) {\n    vec3 twisted = twist(p);\n    float sphere2 = sphere(twisted,2.f);\n\n    p.x += -3.f;\n\n    float normSphere = sphere(p, 1.5f);\n    return unionCSG(sphere2 + displace(twisted), normSphere);\n}\n\n\n\nfloat epsilon = 0.01;\nvec3 estimateNormal(vec3 p) {\n    return normalize(vec3(transformSDF(vec3(p.x + epsilon, p.y, p.z)) - transformSDF(vec3(p.x - epsilon, p.y, p.z)),\n                                   transformSDF(vec3(p.x, p.y  + epsilon, p.z)) - transformSDF(vec3(p.x, p.y - epsilon, p.z)),\n                                   transformSDF(vec3(p.x, p.y, p.z  + epsilon)) - transformSDF(vec3(p.x, p.y, p.z - epsilon))));\n}\n\nvec4 raymarch(vec3 rayDir, vec3 rayOrigin)\n{\n    //p is the far clip position we are casting to\n    float tmax = 20.f;\n    float t = 0.f;\n    int maxSteps = 30;\n    for(int i = 0; i < maxSteps; i++) {\n        vec3 p = rayOrigin + rayDir * t;\n        float dist = transformSDF(p);\n\n        if (dist < 0.00001f) {\n            return vec4(p,1);\n        }\n\n        t += dist;\n        if(t > 1000.f) {\n            return vec4(0);\n        }\n\n    }\n    return vec4(0);\n}\n\nvoid main()\n{\n    vec2 ndc = (gl_FragCoord.xy / u_Resolution.xy) * 2.0 - 1.0; // -1 to 1 NDC\n    //vec2 ndc = (vec2(1) + fs_Pos.xy) *0.5f;\n    //ndc.y = 1.f - ndc.y;\n    //ndc = vec2(1,1);\n    //    outColor = vec3(ndc * 0.5 + 0.5, 1);\n    vec3 blankCol = uvToSunset(ndc);\n    vec4 p = vec4(ndc.xy, 1, 1); // Pixel at the far clip plane\n    p *= 1000.0; // Times far clip plane value\n    p = u_ViewProj  * p; // Convert from unhomogenized screen to world\n\n    //determine the ray between the camera and the viewing frustum at the specific pixel\n    //because it is normalized, we are essentially projecting a circle of radius 1 against the plane\n    vec3 rayDir = normalize(p.xyz - u_CamPos);\n\n    vec3 p1 = u_CamPos;\n    vec4 isect = raymarch(rayDir,u_CamPos);\n    if(isect.w > 0.00001) {\n        vec3 nor = estimateNormal(isect.xyz);\n        vec3 h = (normalize(u_CamPos) + normalize(fs_LightVec.xyz)) * 0.5f;\n        float specularIntensity = max(pow(dot(h, nor), 2.f), 0.f);\n        float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(fs_LightVec));\n        diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);\n        vec4 albedo = vec4(23.f,83.f,128.f,255.f) / 255.f;\n        //diffuseTerm += specularIntensity;\n        out_Col = albedo * diffuseTerm + specularIntensity;\n\n    } else {\n        out_Col = vec4(blankCol, 1);\n       // out_Col = vec4(p.xyz * 0.001f, 1);\n\n    }\n   // out_Col = vec4(rayDir,1);\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n        \n         //diffuseColor = vec4(0.1,1,1,1);\n        // Calculate the diffuse term for Lambert shading\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        //float ambientTerm = 0.7;\n\n       // float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n//        if(lightIntensity == 0f) {\n//            lightIntensity = 0.2f;\n//        }\n        // Compute final shaded color\n}\n"
 
 /***/ })
 /******/ ]);
