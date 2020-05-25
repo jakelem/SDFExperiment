@@ -28,6 +28,19 @@ uniform float u_Time;
 uniform mat4 u_ViewProj;
 uniform vec3 u_CamPos;
 
+const int numLights = 2;
+const vec3 pointLights[numLights] = vec3[] (
+    vec3(2,4,3), vec3(-2,4,3)
+);
+
+
+const vec3 geomColors[5] = vec3[](
+vec3(23, 59, 132) / 255.0,
+vec3(131, 23, 73) / 255.0,
+vec3(40, 80, 109) / 255.0,
+vec3(195, 232, 213) / 255.0,
+vec3(195, 232, 213) / 255.0);
+
 const vec3 bluegreen[5] = vec3[](
 vec3(142, 199, 230) / 255.0,
 vec3(195, 232, 213) / 255.0,
@@ -70,10 +83,12 @@ float sphere(vec3 p, float s) {
     return length(p) - s;
 }
 
-float displace(vec3 p) {
+float plane(vec3 p) {
+    return p.y;
+}
+
+float displace(vec3 p, float freq, float octaves) {
     //return sin(5.f * sin(20.f * p.x) + sin(20*p.y) + sin(20*p.z));
-    float freq = 3.f;
-    float octaves = 3.f;
     float res = 0.f;
     for(float i = 0.f; i <= octaves; i++) {
         float amp = pow(2.f, -i) * ((sin(u_Time * 0.01) + 2.f) * 0.25f);
@@ -88,58 +103,160 @@ float displace(vec3 p) {
             //+0.125f * (sin(24.f * p.x) + sin(24.f * p.y) + sin(24.f * p.z));
 }
 
-float unionCSG(float d1, float d2) {
-    return min(d1,d2);
+vec2 unionCSG(vec2 d1, vec2 d2) {
+    if (d1.x > d2.x)  {
+        return d2;
+    }
+    else{
+        return d1;
+    }
 }
 
-float intersectionCSG(float d1, float d2) {
-    return max(d1,d2);
+vec2 intersectionCSG(vec2 d1, vec2 d2) {
+    if (d1.x < d2.x)  {
+        return d2;
+    }
+    else{
+        return d1;
+    }
 }
 
-float differenceCSG(float d1, float d2) {
-    return max(-d1,d2);
+vec2 differenceCSG(vec2 d1, vec2 d2) {
+    if (-d1.x < d2.x)  {
+        return d2;
+    }
+    else{
+        return vec2(-d1.x,d1.y);
+    }
 }
 
-float transformSDF(vec3 p) {
+vec2 scene(vec3 p) {
     vec3 twisted = twist(p);
-    float sphere2 = sphere(twisted,2.f);
+    float sphere2 = sphere(twisted,3.f);
 
-    p.x += -3.f;
+    p.x += -2.f;
 
-    float normSphere = sphere(p, 1.5f);
-    return unionCSG(sphere2 + displace(twisted), normSphere);
+    vec2 normSphere = vec2(sphere(p, 3.f),0.f);
+
+
+    vec2 twisty = vec2(sphere2 + displace(twisted, 2.f, 3.f), 1.f);
+    vec2 plane = vec2(plane(p + vec3(0,4,0)),2.f);
+
+    p.x += 4.f;
+    p.y += -3.f;
+
+    float s3 = sphere(p, 1.5f) + displace(p,3.f,3.f);
+    vec2 sphere3 = vec2(s3,2.f);
+
+    vec2 world = differenceCSG(normSphere, twisty);
+    world = differenceCSG(sphere3, world);
+    vec2 res = unionCSG(world, plane);
+    //res = unionCSG(res, sphere3);
+
+    return res;
 }
-
 
 
 float epsilon = 0.01;
 vec3 estimateNormal(vec3 p) {
-    return normalize(vec3(transformSDF(vec3(p.x + epsilon, p.y, p.z)) - transformSDF(vec3(p.x - epsilon, p.y, p.z)),
-                                   transformSDF(vec3(p.x, p.y  + epsilon, p.z)) - transformSDF(vec3(p.x, p.y - epsilon, p.z)),
-                                   transformSDF(vec3(p.x, p.y, p.z  + epsilon)) - transformSDF(vec3(p.x, p.y, p.z - epsilon))));
+    return normalize(vec3(scene(vec3(p.x + epsilon, p.y, p.z)).x - scene(vec3(p.x - epsilon, p.y, p.z)).x,
+                                   scene(vec3(p.x, p.y  + epsilon, p.z)).x - scene(vec3(p.x, p.y - epsilon, p.z)).x,
+                                   scene(vec3(p.x, p.y, p.z  + epsilon)).x - scene(vec3(p.x, p.y, p.z - epsilon)).x));
 }
 
 vec4 raymarch(vec3 rayDir, vec3 rayOrigin)
 {
     //p is the far clip position we are casting to
-    float tmax = 20.f;
+    float tmax = 80.f;
     float t = 0.f;
-    int maxSteps = 30;
+    int maxSteps = 300;
     for(int i = 0; i < maxSteps; i++) {
         vec3 p = rayOrigin + rayDir * t;
-        float dist = transformSDF(p);
-
-        if (dist < 0.00001f) {
-            return vec4(p,1);
+        vec2 res = scene(p);
+        float dist = res.x;
+        int col = int(res.y);
+        if (dist < 0.001f) {
+            if(dist < 0.f) {
+               // return vec4(p - rayDir * dist, 1);
+            }
+            //final term is color index
+            return vec4(p,col);
         }
 
         t += dist;
         if(t > 1000.f) {
-            return vec4(0);
+            return vec4(0.f,0.f,0.f,-1.f);
         }
 
     }
-    return vec4(0);
+    return vec4(0.f,0.f,0.f,-1.f);
+}
+
+//x: light intensity, yzw: reflected color index, if applicable
+vec2 shadow (vec3 lightDir, vec3 rayOrigin) {
+    float penumbraK = 1.0f;
+    float tmax = 20.f;
+    float t = 0.f;
+    int maxSteps = 20;
+    float res = 1.0f;
+    for(int i = 0; i < maxSteps; i++) {
+        vec3 p = rayOrigin + lightDir * t;
+        vec2 res = scene(p);
+        float dist = res.x;
+
+        if (dist < 0.01f) {
+            return vec2(0.0f,res.y) ;
+        }
+        res = min( res, penumbraK * dist / t );
+        t += dist;
+    }
+    return vec2(res,-1.f);
+}
+
+
+float ao(vec3 p, vec3 nor) {
+    int numSteps = 10;
+    float intensity = 1.f;
+    float decay = 0.95f;
+    //larger res means more occlusion
+    float res = 0.f;
+    for(int i = 0; i < numSteps; i++) {
+        //t is distance from current object
+        float t = 0.02f * (float(i)) + 0.02;
+        vec3 offP = p + nor * t;
+        //farther away, less ao
+        float dist = scene(offP).x;
+        //if (dist < 0.0) break;
+        res += intensity * (t - dist);
+        intensity *= decay;
+        if(res > 0.25) break;
+    }
+    return clamp(1.0f - 3.5f * res, 0.0f, 1.0f);
+
+}
+vec4 render(vec4 isect) {
+
+    vec3 nor = estimateNormal(isect.xyz);
+    vec3 res = vec3(0.f);
+    for(int i = 0; i < numLights; i ++) {
+        vec3 lightOrigin = pointLights[i];
+        vec3 lightDir = isect.xyz - lightOrigin;
+        float ambientTerm = ao(isect.xyz,nor) + 0.4f;
+        vec2 lighting = shadow(-lightDir,isect.xyz + nor * 0.1f);
+        float intensity = lighting.x + ambientTerm;
+        //intensity = ambientTerm;
+        vec3 albedo = geomColors[int(isect.w)];
+        
+        vec3 h = (normalize(u_CamPos) + normalize(lightDir)) * 0.5f;
+        float specularIntensity = max(pow(dot(h, nor), 10.f), 0.f);
+
+        float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(vec4(lightDir,1)));
+        diffuseTerm = clamp(diffuseTerm, 0.f, 1.f) + specularIntensity;
+
+        res += (intensity * albedo.xyz * diffuseTerm) / float(numLights);
+    }
+
+    return vec4(res,1.f);
 }
 
 void main()
@@ -160,15 +277,9 @@ void main()
 
     vec3 p1 = u_CamPos;
     vec4 isect = raymarch(rayDir,u_CamPos);
-    if(isect.w > 0.00001) {
-        vec3 nor = estimateNormal(isect.xyz);
-        vec3 h = (normalize(u_CamPos) + normalize(fs_LightVec.xyz)) * 0.5f;
-        float specularIntensity = max(pow(dot(h, nor), 2.f), 0.f);
-        float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(fs_LightVec));
-        diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);
-        vec4 albedo = vec4(23.f,83.f,128.f,255.f) / 255.f;
+    if(isect.w > -0.5f) {
         //diffuseTerm += specularIntensity;
-        out_Col = albedo * diffuseTerm + specularIntensity;
+        out_Col = render(isect);
 
     } else {
         out_Col = vec4(blankCol, 1);
