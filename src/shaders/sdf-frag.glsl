@@ -31,15 +31,15 @@ uniform vec3 u_CamPos;
 
 const int numLights = 4;
 const vec3 pointLights[numLights] = vec3[] (
-    vec3(0,3,20), vec3(0,30,10), vec3(0,5,-5), vec3(14,20,10)
+    vec3(5,6,7), vec3(0,10,10), vec3(8,5,-7), vec3(14,20,10)
 );
 
 const float lightIntensities[numLights] = float[] (
-    1.f, 2.f, 0.f, 0.f
+    0.8f, 1.6f, 1.2f, 0.f
 );
 
 const vec3 lightColors[numLights] = vec3[] (
-    vec3(1,1,1), vec3(120,223,255)/255.f, vec3(0.8,1,1), vec3(1,1,0.9)
+    vec3(1,1,1), vec3(0.3, 0.4, 1.0), vec3(1,0.7,0.5), vec3(1,1,0.9)
 );
 
 const bool lightCastsShadow[numLights] = bool[] (
@@ -50,7 +50,7 @@ const bool lightCastsSpecular[numLights] = bool[] (
     true, true, true, true
 );
 
-//body, floor, eye
+//body, eye, white
 const vec3 matColors[5] = vec3[](
 vec3(102, 138, 41) / 255.0,
 vec3(20, 10, 10) / 255.0,
@@ -61,20 +61,20 @@ vec3(50, 56, 89) / 255.0);
 const float matCosPow[5] = float[](
 150.0, 
 6.0,
-160.0,
+980.0,
 6.0,
 6.0);
 
 const float matSpec[5] = float[](
-0.6, 
-1.4,
-1.4,
+0.3, 
+1.7,
+0.3,
 0.2,
 0.6);
 
 const float matDiff[5] = float[](
-1.5, 
-1.5,
+1.0, 
+1.0,
 0.9,
 0.4,
 0.1);
@@ -108,6 +108,9 @@ vec3 uvToSunset(vec2 uv) {
     return bluegreen[4];
 }
 
+vec3 transRot(vec3 p, mat4 rot, vec3 trans) {
+    return (rot * vec4(p-trans, 1.f)).xyz;
+}
 
 mat4 rotateX( float angle ) {
 	return mat4(	1.0,		0,			0,			0,
@@ -171,6 +174,13 @@ float box(vec3 p, vec3 b) {
     vec3 q = abs(p) - b;
     return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 
+}
+
+float stick(vec3 p, vec3 a, vec3 b, float r1, float r2)
+{
+    vec3 pa = p-a, ba = b-a;
+	float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+	return  length( pa - ba*h ) - mix(r1,r2,h*h*(3.0-2.0*h));
 }
 
 float roundBox( vec3 p, vec3 b, float r )
@@ -248,9 +258,17 @@ vec2 lightVis(vec3 p) {
     return res;
 }
 
-vec2 smoothMin(vec2 d1,vec2 d2,float k)
+vec2 smin( vec2 a, vec2 b, float k )
 {
-	return -log(exp(-k*d1)+exp(-k*d2))/k;
+    float h = clamp( 0.5+0.5*(b.x-a.x)/k, 0.0, 1.0 );
+    return mix( b, a, h ) - k*h*(1.0-h);
+}
+//taken from http://iquilezles.org/www/articles/smin/smin.htm
+//intersect
+vec2 smax( vec2 a, vec2 b, float k )
+{
+    float h = max(k-abs(a.x-b.x),0.0);
+    return (a.x > b.x ? vec2((a.x + h*h*0.25/k), a.y) : vec2((b.x + h*h*0.25/k), b.y));
 }
 
 vec2 scene(vec3 p) {
@@ -261,48 +279,105 @@ vec2 scene(vec3 p) {
     vec2 body = vec2(sphere(p - vec3(0,-0.1,0.9),1.9f),0.f);
     vec2 head = vec2(sphere(p - vec3(0,0.3,3),1.3f),0.f);
 
-    vec2 smoothy = smoothMin(body, head, 5.f);
+    vec2 smoothy = smin(body, head, 0.4f);
 
     vec2 throat = vec2(sphere(p - vec3(0,-0.7,2.7),1.1f + throatsize),0.f);
-    vec2 eye1 = vec2(sphere(p - vec3(-0.9,1.2,3.4),0.45f),0.f);
-    vec2 eye2 = vec2(sphere(p - vec3(0.9,1.2,3.4),0.45f),0.f);
-
     vec2 box = vec2(roundBox(p - vec3(0,0,-1),vec3(0.3,0.3,0.3), 0.3f),0.f);
     vec3 rot = (rotateX(5.f) * vec4(p - vec3(0,0.3,3.8),1)).xyz;
     vec2 snout = vec2(roundBox(rot,vec3(0.2,0.2,0.2), 0.4f),0.f);
 
-    smoothy = smoothMin(smoothy, throat, 5.f);
-    smoothy = smoothMin(smoothy, eye2, 12.f);
-    smoothy = smoothMin(smoothy, eye1, 12.f);
-    smoothy = smoothMin(smoothy, box, 2.f);
-    smoothy = smoothMin(smoothy, snout, 4.f);
+    smoothy = smin(smoothy, throat, 0.5f);
+    smoothy = smin(smoothy, box, 1.f);
+    smoothy = smin(smoothy, snout, 1.f);
 
-    for(int i = -1; i <= 1; i+=2) {
-        float ifloat = float(i);
-        vec2 eye1 = vec2(sphere(p - vec3(-0.9 * ifloat,1.2,3.4),0.45f),0.f);
-        vec2 eyeball1 = vec2(sphere(p - vec3(-0.95 * ifloat,1.2,3.5),0.4f),2.f);
-        vec2 pupil1 = vec2(sphere(p - vec3(-0.95 * ifloat,1.2,3.5),0.4f),1.f);
-        vec2 slitA = vec2(sphere(p - vec3(-1.0 * ifloat,1.31,3.6),0.35f),1.f);
-        vec2 slitB = vec2(sphere(p - vec3(-1.0 * ifloat,1.13,3.6),0.35f),1.f);
-
-        vec2 slit1 = intersectionCSG(slitA, slitB);
-        vec2 cut1 = vec2(sphere(p - vec3(-0.89 * ifloat,1.18,3.4),0.49f),1.f);
-
-        eyeball1 = differenceCSG(slit1, eyeball1);
-        eyeball1 = differenceCSG(cut1, eyeball1);
-        smoothy = unionCSG(smoothy, eyeball1);
-        smoothy = unionCSG(smoothy, pupil1);
-
-    }
     vec2 bodColor = vec2(sphere(p -  vec3(0.f,-2.4f,2.9f),3.2f),2.f);
+
+    smoothy = unionColor(smoothy, bodColor);
+
+        //eyes
+        {
+            float ifloat = 1.f;
+            vec3 sp = vec3(abs(p.x), p.yz);
+            vec2 eyeridge1 = vec2(sphere(sp - vec3(0.9,1.2,3.42),0.45f),0.f);
+            smoothy = smin(smoothy, eyeridge1, 0.09f);
+
+            vec2 eye1 = vec2(sphere(sp - vec3(0.9 * ifloat,1.2,3.4),0.45f),1.f);
+            vec2 eyeball1 = vec2(sphere(sp - vec3(0.95 * ifloat,1.2,3.5),0.4f),1.f);
+            vec2 sclera = vec2(sphere(sp - vec3(0.95 * ifloat,1.2,3.5),0.42f),2.f);
+            vec2 slitA = vec2(sphere(sp - vec3(1.0 * ifloat,1.32,3.64),0.33f),2.f);
+            vec2 slitB = vec2(sphere(sp - vec3(1.0 * ifloat,1.12,3.64),0.33f),2.f);
+            vec2 slit = intersectionCSG(slitA, slitB);
+            vec2 cut1 = vec2(sphere(sp - vec3(0.89 * ifloat,1.18,3.4),0.4f),2.f);
+
+            eyeball1 = smax(slit, eyeball1, 0.02);
+            sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);
+            //smoothy = unionCSG(smoothy, slit1);
+
+            smoothy = smin(smoothy, eyeball1, 0.01);
+            smoothy = smin(smoothy, sclera, 0.02);
+
+        }
+
+        //arms
+        {
+            vec3 sp = vec3(abs(p.x), p.yz);
+            vec3 shoulder = vec3(1.3,-0.3,2.5);
+            vec3 elbow = shoulder + vec3(0.5,-0.7,-0.3);
+            vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);
+            vec3 f1 = wrist + vec3(-0.8,-0.1,1.1);
+            vec3 f2 = wrist + vec3(-0.3,-0.1,1.6);
+            vec3 f3 = wrist + vec3(0.2,-0.1,1.3);
+
+            vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f, 0.34f), 0.f);
+            vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f, 0.4f), 0.f);
+            wrist -= vec3(0.2,0.3,0);
+            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);
+
+            smoothy = smin(smoothy, sticky, 0.3);
+            smoothy = smin(smoothy, forearm, 0.1);
+            smoothy = smin(smoothy, finger, 0.2);
+            finger = vec2(stick(sp, wrist, f2, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.2);
+
+            finger = vec2(stick(sp, wrist, f3, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.2);
+
+
+        }
+
+        //legs
+        {
+            vec3 sp = vec3(abs(p.x), p.yz);
+            vec3 hip = vec3(1.0,-0.2,-1.3);
+            vec3 knee = hip + vec3(0.4,-0.7,1.3);
+            vec3 wrist = knee + vec3(-0.5,-0.7, -1.3);
+            vec3 f1 = wrist + vec3(-0.3,-0.1,1.7);
+            vec3 f2 = wrist + vec3(0.2,-0.1,2.2);
+            vec3 f3 = wrist + vec3(1.0,-0.1,1.9);
+
+            vec2 upleg = vec2(stick(sp, hip, knee, 0.55f, 0.42f), 0.f);
+            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.5f, 0.45f), 0.f);
+            wrist -= vec3(0.2,0.3,0);
+            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);
+
+            smoothy = smin(smoothy, upleg, 0.3);
+            smoothy = smin(smoothy, lowleg, 0.1);
+            smoothy = smin(smoothy, finger, 0.2);
+            finger = vec2(stick(sp, wrist, f2, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.2);
+
+            finger = vec2(stick(sp, wrist, f3, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.2);
+
+        }
+
+    
     vec2 snowman = unionCSG(head, body);
     snowman = unionCSG(snowman, throat);
 
-    snowman = smoothy;
-    snowman = unionColor(snowman, bodColor);
-
     vec2 plane = vec2(plane(p + vec3(0,2,0)),3.f);
-    vec2 res = unionCSG(snowman, plane);
+  // vec2 res = unionCSG(snowman, plane);
+    vec2 res = vec2(smoothy.x * 0.6, smoothy.y);
     return res;
 
 
@@ -338,6 +413,7 @@ vec2 sceneA(vec3 p) {
 
     vec2 res = world;//unionCSG(world, plane);
     res = unionCSG(res, box2);
+    res.x *= 0.2;
     return res;
 }
 
@@ -358,7 +434,7 @@ vec4 raymarch(vec3 rayDir, vec3 rayOrigin)
     for(int i = 0; i < maxSteps; i++) {
         vec3 p = rayOrigin + rayDir * t;
         vec2 res = (scene(p));
-        res = unionCSG(lightVis(p), scene(p));
+        //res = unionCSG(lightVis(p), scene(p));
         float dist = res.x;
         int col = int(res.y);
         if (dist <precis) {
@@ -461,7 +537,7 @@ vec4 render(vec4 isect) {
 
         float lightIntensity = lightIntensities[i] / lightDist;
         test = lightDir;
-        float ambientTerm = ao(isect.xyz,nor);
+        float ambientTerm =1.f;// ao(isect.xyz,nor);
         vec2 lighting = vec2(1.f,1.f);
 
         if(lightCastsShadow[i]) {
