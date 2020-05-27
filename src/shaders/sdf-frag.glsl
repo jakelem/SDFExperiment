@@ -31,46 +31,51 @@ uniform vec3 u_CamPos;
 
 const int numLights = 4;
 const vec3 pointLights[numLights] = vec3[] (
-    vec3(0,10,2), vec3(-5,20,0), vec3(0,5,-5), vec3(14,20,0)
+    vec3(0,3,20), vec3(0,30,10), vec3(0,5,-5), vec3(14,20,10)
 );
 
 const float lightIntensities[numLights] = float[] (
-    1.f, 2.f, 1.f, 2.f
+    1.f, 2.f, 0.f, 0.f
 );
 
 const vec3 lightColors[numLights] = vec3[] (
-    vec3(1,1,1), vec3(197,223,255)/255.f, vec3(0.8,1,1), vec3(1,1,0.9)
+    vec3(1,1,1), vec3(120,223,255)/255.f, vec3(0.8,1,1), vec3(1,1,0.9)
 );
 
 const bool lightCastsShadow[numLights] = bool[] (
-    false, false, false, false
+    true, false, true, true
 );
 
 const bool lightCastsSpecular[numLights] = bool[] (
-    true, true, false, true
+    true, true, true, true
 );
 
-
+//body, floor, eye
 const vec3 matColors[5] = vec3[](
-vec3(23, 59, 102) / 255.0,
-vec3(50, 50, 55) / 255.0,
-vec3(40, 60, 89) / 255.0,
+vec3(102, 138, 41) / 255.0,
+vec3(20, 10, 10) / 255.0,
+vec3(255, 255, 190) / 255.0,
 vec3(40, 30, 89) / 255.0,
 vec3(50, 56, 89) / 255.0);
 
-
+const float matCosPow[5] = float[](
+150.0, 
+6.0,
+160.0,
+6.0,
+6.0);
 
 const float matSpec[5] = float[](
 0.6, 
-0.9,
-0.6,
+1.4,
+1.4,
 0.2,
 0.6);
 
 const float matDiff[5] = float[](
-1.0, 
-1.0,
+1.5, 
 1.5,
+0.9,
 0.4,
 0.1);
 
@@ -101,6 +106,28 @@ vec3 uvToSunset(vec2 uv) {
         return mix(bluegreen[3], bluegreen[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));
     }
     return bluegreen[4];
+}
+
+
+mat4 rotateX( float angle ) {
+	return mat4(	1.0,		0,			0,			0,
+			 		0, 	cos(angle),	-sin(angle),		0,
+					0, 	sin(angle),	 cos(angle),		0,
+					0, 			0,			  0, 		1);
+}
+
+mat4 rotateY( float angle ) {
+	return mat4(	cos(angle),		0,		sin(angle),	0,
+			 				0,		1.0,			 0,	0,
+					-sin(angle),	0,		cos(angle),	0,
+							0, 		0,				0,	1);
+}
+
+mat4 rotateZ( float angle ) {
+	return mat4(	cos(angle),		-sin(angle),	0,	0,
+			 		sin(angle),		cos(angle),		0,	0,
+							0,				0,		1,	0,
+							0,				0,		0,	1);
 }
 
 
@@ -146,6 +173,12 @@ float box(vec3 p, vec3 b) {
 
 }
 
+float roundBox( vec3 p, vec3 b, float r )
+{
+  vec3 q = abs(p) - b;
+  return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
+}
+
 float displace(vec3 p, float freq, float octaves) {
     //return sin(5.f * sin(20.f * p.x) + sin(20*p.y) + sin(20*p.z));
     
@@ -171,6 +204,16 @@ float displace(vec3 p, float freq, float octaves) {
 vec2 unionCSG(vec2 d1, vec2 d2) {
     if (d1.x > d2.x)  {
         return d2;
+    }
+    else{
+        return d1;
+    }
+}
+
+//preserves the geometry of d1, but changes color to d2
+vec2 unionColor(vec2 d1, vec2 d2) {
+    if (d1.x > d2.x)  {
+        return vec2(d1.x, d2.y);
     }
     else{
         return d1;
@@ -205,30 +248,85 @@ vec2 lightVis(vec3 p) {
     return res;
 }
 
+vec2 smoothMin(vec2 d1,vec2 d2,float k)
+{
+	return -log(exp(-k*d1)+exp(-k*d2))/k;
+}
+
 vec2 scene(vec3 p) {
     if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {
         return vec2(9e10, 0.f);
     }
+    float throatsize = 0.4 * abs(sin(u_Time * 0.1));
+    vec2 body = vec2(sphere(p - vec3(0,-0.1,0.9),1.9f),0.f);
+    vec2 head = vec2(sphere(p - vec3(0,0.3,3),1.3f),0.f);
+
+    vec2 smoothy = smoothMin(body, head, 5.f);
+
+    vec2 throat = vec2(sphere(p - vec3(0,-0.7,2.7),1.1f + throatsize),0.f);
+    vec2 eye1 = vec2(sphere(p - vec3(-0.9,1.2,3.4),0.45f),0.f);
+    vec2 eye2 = vec2(sphere(p - vec3(0.9,1.2,3.4),0.45f),0.f);
+
+    vec2 box = vec2(roundBox(p - vec3(0,0,-1),vec3(0.3,0.3,0.3), 0.3f),0.f);
+    vec3 rot = (rotateX(5.f) * vec4(p - vec3(0,0.3,3.8),1)).xyz;
+    vec2 snout = vec2(roundBox(rot,vec3(0.2,0.2,0.2), 0.4f),0.f);
+
+    smoothy = smoothMin(smoothy, throat, 5.f);
+    smoothy = smoothMin(smoothy, eye2, 12.f);
+    smoothy = smoothMin(smoothy, eye1, 12.f);
+    smoothy = smoothMin(smoothy, box, 2.f);
+    smoothy = smoothMin(smoothy, snout, 4.f);
+
+    for(int i = -1; i <= 1; i+=2) {
+        float ifloat = float(i);
+        vec2 eye1 = vec2(sphere(p - vec3(-0.9 * ifloat,1.2,3.4),0.45f),0.f);
+        vec2 eyeball1 = vec2(sphere(p - vec3(-0.95 * ifloat,1.2,3.5),0.4f),2.f);
+        vec2 pupil1 = vec2(sphere(p - vec3(-0.95 * ifloat,1.2,3.5),0.4f),1.f);
+        vec2 slitA = vec2(sphere(p - vec3(-1.0 * ifloat,1.31,3.6),0.35f),1.f);
+        vec2 slitB = vec2(sphere(p - vec3(-1.0 * ifloat,1.13,3.6),0.35f),1.f);
+
+        vec2 slit1 = intersectionCSG(slitA, slitB);
+        vec2 cut1 = vec2(sphere(p - vec3(-0.89 * ifloat,1.18,3.4),0.49f),1.f);
+
+        eyeball1 = differenceCSG(slit1, eyeball1);
+        eyeball1 = differenceCSG(cut1, eyeball1);
+        smoothy = unionCSG(smoothy, eyeball1);
+        smoothy = unionCSG(smoothy, pupil1);
+
+    }
+    vec2 bodColor = vec2(sphere(p -  vec3(0.f,-2.4f,2.9f),3.2f),2.f);
+    vec2 snowman = unionCSG(head, body);
+    snowman = unionCSG(snowman, throat);
+
+    snowman = smoothy;
+    snowman = unionColor(snowman, bodColor);
+
+    vec2 plane = vec2(plane(p + vec3(0,2,0)),3.f);
+    vec2 res = unionCSG(snowman, plane);
+    return res;
+
+
+}
+
+vec2 sceneA(vec3 p) {
+    if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {
+        return vec2(9e10, 0.f);
+    }
     vec3 twisted = twist(p);
-   //twisted = p;
-    float sphere2 = sphere(twisted,2.f);
+    float sphere2 = sphere(twisted,3.f);
     float boxy = box(twisted,vec3(2,2,2));
 
     vec2 box1 = vec2(box(p + vec3(0,2,0), vec3(2,4,2)), 0.f);
     vec2 box2 = vec2(box(p + vec3(0,7,0), vec3(2,4,2)), 0.f);
 
-   // p.z -= 2.f;
 
-    vec2 normSphere = vec2(sphere(p, 0.f),2.f);
+    vec2 normSphere = vec2(sphere(p - vec3(0,0,2), 2.f),2.f);
 
-
-    vec2 twisty = vec2(sphere2 + 0.3 * displace(twisted, 3.f, 3.f), 1.f);
-    //twisty = vec2(sphere2, 1.f);
+    vec2 twisty = vec2(sphere2 + 0.3 * displace(twisted, 2.f, 2.f), 1.f);
     vec2 plane = vec2(plane(p + vec3(0,5,0)),3.f);
     p.x += 4.f;
     p.y += -3.f;
 
-   // float s3 = sphere(p, 1.5f) + displace(p,3.f,3.f);
     float s3 = sphere(p, 1.5f);
     vec2 sphere3 = vec2(s3,2.f);
 
@@ -236,16 +334,10 @@ vec2 scene(vec3 p) {
     //world = differenceCSG(sphere3, world);
     vec2 cutout = differenceCSG(normSphere, box1);
 
-     world = twisty;
+    // world = twisty;
 
-   vec2 res = world;//unionCSG(world, plane);
-   // res = vec2(length(p) - 1.5 + displace(p, 2.f, 2.f), 1.f);
-  // res = unionCSG(normSphere, box2);
-  //  res= box2;
-   // res = unionCSG(plane, res);
-   //res = unionCSG(plane, cutout);
+    vec2 res = world;//unionCSG(world, plane);
     res = unionCSG(res, box2);
-
     return res;
 }
 
@@ -256,17 +348,17 @@ vec3 estimateNormal(vec3 p) {
                                    scene(vec3(p.x, p.y  + epsilon, p.z)).x - scene(vec3(p.x, p.y - epsilon, p.z)).x,
                                    scene(vec3(p.x, p.y, p.z  + epsilon)).x - scene(vec3(p.x, p.y, p.z - epsilon)).x));
 }
-float precis = 0.0002;
+float precis = 0.002;
 vec4 raymarch(vec3 rayDir, vec3 rayOrigin)
 {
     //p is the far clip position we are casting to
-    float tmax = 400.f;
+    float tmax = 100.f;
     float t = 0.f;
-    int maxSteps = 400;
+    int maxSteps = 250;
     for(int i = 0; i < maxSteps; i++) {
         vec3 p = rayOrigin + rayDir * t;
         vec2 res = (scene(p));
-        //res = unionCSG(lightVis(p), scene(p));
+        res = unionCSG(lightVis(p), scene(p));
         float dist = res.x;
         int col = int(res.y);
         if (dist <precis) {
@@ -290,7 +382,7 @@ vec4 raymarch(vec3 rayDir, vec3 rayOrigin)
 vec2 shadow (vec3 lightDir, vec3 rayOrigin, float tmax) {
     float penumbraK = 8.f;
     float t = 0.f;
-    int maxSteps = 128;
+    int maxSteps = 200;
     float sol = 1.0f;
     for(int i = 0; i < maxSteps; i++) {
         vec3 p = rayOrigin + lightDir * t;
@@ -373,12 +465,10 @@ vec4 render(vec4 isect) {
         vec2 lighting = vec2(1.f,1.f);
 
         if(lightCastsShadow[i]) {
-            lighting = shadow(lightDir,isect.xyz + nor * 0.03f, 10.f);
+            lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);
         }
          
         float intensity = lighting.x;
-        intensity += 0.06;
-        intensity = ambientTerm;
         int geom = int(isect.w);
         //material values
         vec3 albedo = matColors[geom];
@@ -386,7 +476,7 @@ vec4 render(vec4 isect) {
         float ks = matSpec[geom];
 
         vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
-        float specularIntensity = max(pow(dot(h, nor), 9.f), 0.f);
+        float specularIntensity = max(pow(dot(h, nor), matCosPow[i]), 0.f);
         vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);
         vec3 refCol = vec3(1.f); 
 
