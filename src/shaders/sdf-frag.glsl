@@ -31,11 +31,11 @@ uniform vec3 u_CamPos;
 
 const int numLights = 4;
 const vec3 pointLights[numLights] = vec3[] (
-    vec3(5,6,7), vec3(0,10,10), vec3(8,5,-7), vec3(14,20,10)
+    vec3(5,6,7), vec3(0,10,10), vec3(8,5,-7), vec3(2,0,10)
 );
 
 const float lightIntensities[numLights] = float[] (
-    0.8f, 1.6f, 1.2f, 0.f
+    0.8f, 1.6f, 1.2f, 0.2f
 );
 
 const vec3 lightColors[numLights] = vec3[] (
@@ -53,28 +53,28 @@ const bool lightCastsSpecular[numLights] = bool[] (
 //body, eye, white
 const vec3 matColors[5] = vec3[](
 vec3(102, 138, 41) / 255.0,
-vec3(20, 10, 10) / 255.0,
+vec3(30, 20, 15) / 255.0,
 vec3(255, 255, 190) / 255.0,
 vec3(40, 30, 89) / 255.0,
 vec3(50, 56, 89) / 255.0);
 
 const float matCosPow[5] = float[](
-150.0, 
-6.0,
-980.0,
+20.0, 
+8.0,
+8.0,
 6.0,
 6.0);
 
 const float matSpec[5] = float[](
-0.3, 
-1.7,
+1.2, 
+1.0,
 0.3,
 0.2,
 0.6);
 
 const float matDiff[5] = float[](
-1.0, 
-1.0,
+0.5, 
+0.3,
 0.9,
 0.4,
 0.1);
@@ -88,6 +88,64 @@ vec3(195, 232, 213) / 255.0);
 
 const float cutoffs[5] = float[](0.0,0.5,0.6,0.8,0.9);
 
+vec2 hash (vec2 p) {
+    return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);
+}
+
+float cubic(float t) {
+    return t * t * (3.0 - 2.0 * t);
+}
+
+vec2 cubic2(vec2 t) {
+    return t * t * (3.0 - 2.0 * t);
+}
+
+float quintic(float t) {
+    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);
+}
+
+vec2 quintic2(vec2 t) {
+    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);
+}
+
+
+float noise(vec2 p) {
+float intX = floor(p.x);
+float fractX = fract(p.x);
+
+float intY = floor(p.y);
+float fractY = fract(p.y);
+fractX = cubic(fractX);
+fractY = cubic(fractY);
+
+float v1 = hash(vec2(intX,intY)).x;
+float v2 = hash(vec2(intX + 1.0,intY)).x;
+float v3 = hash(vec2(intX,intY + 1.0)).x;
+float v4 = hash(vec2(intX + 1.0,intY + 1.0)).x;
+
+float i1 = mix(v1, v2, fractX);
+float i2 = mix(v3, v4, fractX);
+return mix(i1, i2, fractY);
+}
+
+vec2 noise2(vec2 p) {
+float intX = floor(p.x);
+float fractX = fract(p.x);
+
+float intY = floor(p.y);
+float fractY = fract(p.y);
+fractX = quintic(fractX);
+fractY = quintic(fractY);
+
+vec2 v1 = hash(vec2(intX,intY));
+vec2 v2 = hash(vec2(intX + 1.0,intY));
+vec2 v3 = hash(vec2(intX,intY + 1.0));
+vec2 v4 = hash(vec2(intX + 1.0,intY + 1.0));
+
+vec2 i1 = mix(v1, v2, fractX);
+vec2 i2 = mix(v3, v4, fractX);
+return mix(i1, i2, fractY);
+}
 
 vec3 uvToSunset(vec2 uv) {
     if(uv.y < cutoffs[0]) {
@@ -132,6 +190,19 @@ mat4 rotateZ( float angle ) {
 							0,				0,		1,	0,
 							0,				0,		0,	1);
 }
+
+
+vec3 getMatColor(int i) {
+    if(i == 0) {
+
+    } else if (i == 1) {
+
+    } else {
+        return vec3(1,1,1);
+    }
+}
+
+
 
 
 vec3 uvToA(vec2 uv) {
@@ -187,6 +258,53 @@ float roundBox( vec3 p, vec3 b, float r )
 {
   vec3 q = abs(p) - b;
   return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
+}
+
+
+float surflet(vec2 p, vec2 gridPoint) {
+    vec2 t2 = abs(p - gridPoint);
+    vec2 t = vec2(1.f) - cubic2(t2);
+    vec2 gradient = hash(gridPoint) * 2.f - vec2(1,1);
+    vec2 diff = p - gridPoint;
+    float height = dot(diff, gradient);
+    return height * t.x * t.y;
+
+}
+
+float perlin(vec2 p) {
+    vec2 f = floor(p);
+    return surflet(p, f+vec2(0,0)) 
+    + surflet(p, f+vec2(1,0))
+    +surflet(p, f+vec2(0,1))
+    +surflet(p, f+vec2(1,1));
+}
+
+vec2 fbm(vec3 p, float persistence, float octaves) {
+    //vec2 res = vec2(0);
+    float timefactor = abs((sin(u_Time * 0.01) + 3.f) * 0.25f);
+    vec2 inp = p.xy;
+    float res = 0.f;
+    for(float i = 0.f; i < octaves; i++) {
+        res += pow(2.f, -i) * perlin(pow(persistence, i) * inp);
+    }
+    return vec2(res);
+}
+
+
+vec3 getMatDisp(vec3 q, int i) {
+    if(i == 0) {
+        vec2 uv = q.xy;
+        float off = -0.001 * clamp(3.0 * perlin(50.0 * uv), 0.0, 1.0);
+
+        return vec3(off);
+
+    } else if (i == 2) {
+        vec2 uv = q.xy;
+        float off = -0.003 * clamp(4.0 *  perlin(38.0 * uv), 0.0, 1.0);
+        return vec3(off);
+    } else {
+        return vec3(0.f);
+    }
 }
 
 float displace(vec3 p, float freq, float octaves) {
@@ -261,7 +379,11 @@ vec2 lightVis(vec3 p) {
 vec2 smin( vec2 a, vec2 b, float k )
 {
     float h = clamp( 0.5+0.5*(b.x-a.x)/k, 0.0, 1.0 );
-    return mix( b, a, h ) - k*h*(1.0-h);
+    if(h < 0.5) {
+        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), b.y);
+    } else {
+        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), a.y);
+    }
 }
 //taken from http://iquilezles.org/www/articles/smin/smin.htm
 //intersect
@@ -275,18 +397,19 @@ vec2 scene(vec3 p) {
     if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {
         return vec2(9e10, 0.f);
     }
-    float throatsize = 0.4 * abs(sin(u_Time * 0.1));
-    vec2 body = vec2(sphere(p - vec3(0,-0.1,0.9),1.9f),0.f);
-    vec2 head = vec2(sphere(p - vec3(0,0.3,3),1.3f),0.f);
+    float throatsize = 0.4 * abs(sin(u_Time * 0.4));
+    vec3 q = p; 
+
+    vec3 bodOffset = vec3(0,-0.1,0.9) + vec3(0, throatsize * 0.2, throatsize * 0.5);
+    vec2 body = vec2(sphere(p - bodOffset,1.9f - 0.2 * throatsize),0.f);
+    bodOffset = vec3(0,0.3,3) + vec3(0, throatsize * 0.1, throatsize * 0.1);
+    vec2 head = vec2(sphere(p - bodOffset,1.3f),0.f);
 
     vec2 smoothy = smin(body, head, 0.4f);
-
-    vec2 throat = vec2(sphere(p - vec3(0,-0.7,2.7),1.1f + throatsize),0.f);
+    
     vec2 box = vec2(roundBox(p - vec3(0,0,-1),vec3(0.3,0.3,0.3), 0.3f),0.f);
     vec3 rot = (rotateX(5.f) * vec4(p - vec3(0,0.3,3.8),1)).xyz;
     vec2 snout = vec2(roundBox(rot,vec3(0.2,0.2,0.2), 0.4f),0.f);
-
-    smoothy = smin(smoothy, throat, 0.5f);
     smoothy = smin(smoothy, box, 1.f);
     smoothy = smin(smoothy, snout, 1.f);
 
@@ -298,21 +421,21 @@ vec2 scene(vec3 p) {
         {
             float ifloat = 1.f;
             vec3 sp = vec3(abs(p.x), p.yz);
-            vec2 eyeridge1 = vec2(sphere(sp - vec3(0.9,1.2,3.42),0.45f),0.f);
+            vec3 ridge = vec3(0.86,1.2,3.42);
+            vec2 eyeridge1 = vec2(sphere(sp -ridge,0.45f),0.f);
             smoothy = smin(smoothy, eyeridge1, 0.09f);
+            //vec2 eyeposridge + (0.03, 0, 0.05);
+            vec2 eyeball1 = vec2(sphere(sp - vec3(0.93,1.2,3.47),0.41f),1.f);
+            vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),2.f);
+            vec2 slitA = vec2(sphere(sp - vec3(1.03,1.35,3.63),0.32f),1.f);
+            vec2 slitB = vec2(sphere(sp - vec3(1.03,1.10,3.63),0.32f),1.f);
+            vec2 slit = smax(slitA, slitB, 0.05);
+            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),0.4f),1.f);
 
-            vec2 eye1 = vec2(sphere(sp - vec3(0.9 * ifloat,1.2,3.4),0.45f),1.f);
-            vec2 eyeball1 = vec2(sphere(sp - vec3(0.95 * ifloat,1.2,3.5),0.4f),1.f);
-            vec2 sclera = vec2(sphere(sp - vec3(0.95 * ifloat,1.2,3.5),0.42f),2.f);
-            vec2 slitA = vec2(sphere(sp - vec3(1.0 * ifloat,1.32,3.64),0.33f),2.f);
-            vec2 slitB = vec2(sphere(sp - vec3(1.0 * ifloat,1.12,3.64),0.33f),2.f);
-            vec2 slit = intersectionCSG(slitA, slitB);
-            vec2 cut1 = vec2(sphere(sp - vec3(0.89 * ifloat,1.18,3.4),0.4f),2.f);
-
-            eyeball1 = smax(slit, eyeball1, 0.02);
             sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);
-            //smoothy = unionCSG(smoothy, slit1);
+            sclera = smax(vec2(-slit.x, slit.y), sclera, 0.04);
 
+            //smoothy = smin(smoothy, slit, 0.01);
             smoothy = smin(smoothy, eyeball1, 0.01);
             smoothy = smin(smoothy, sclera, 0.02);
 
@@ -322,25 +445,26 @@ vec2 scene(vec3 p) {
         {
             vec3 sp = vec3(abs(p.x), p.yz);
             vec3 shoulder = vec3(1.3,-0.3,2.5);
-            vec3 elbow = shoulder + vec3(0.5,-0.7,-0.3);
+            vec3 elbow = shoulder + vec3(0.6,-0.7,-0.3);
             vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);
             vec3 f1 = wrist + vec3(-0.8,-0.1,1.1);
-            vec3 f2 = wrist + vec3(-0.3,-0.1,1.6);
-            vec3 f3 = wrist + vec3(0.2,-0.1,1.3);
+            //vec3 f2 = wrist + vec3(-0.3,-0.1,1.6);
+           // vec3 f3 = wrist + vec3(0.2,-0.1,1.3);
 
             vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f, 0.34f), 0.f);
             vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f, 0.4f), 0.f);
             wrist -= vec3(0.2,0.3,0);
             vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);
 
-            smoothy = smin(smoothy, sticky, 0.3);
+            smoothy = smin(smoothy, sticky, 0.1);
             smoothy = smin(smoothy, forearm, 0.1);
-            smoothy = smin(smoothy, finger, 0.2);
-            finger = vec2(stick(sp, wrist, f2, 0.2f, 0.2f), 0.f);
-            smoothy = smin(smoothy, finger, 0.2);
-
-            finger = vec2(stick(sp, wrist, f3, 0.2f, 0.2f), 0.f);
-            smoothy = smin(smoothy, finger, 0.2);
+            smoothy = smin(smoothy, finger, 0.15);
+            f1 = wrist + vec3(-0.3,-0.1,1.6);
+            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.15);
+            f1 = wrist + vec3(0.2,-0.1,1.3);
+            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);
+            smoothy = smin(smoothy, finger, 0.15);
 
 
         }
@@ -371,13 +495,17 @@ vec2 scene(vec3 p) {
 
         }
 
-    
-    vec2 snowman = unionCSG(head, body);
-    snowman = unionCSG(snowman, throat);
+        vec2 throat = vec2(sphere(p - vec3(0,-0.6,3.0),1.1f + throatsize),2.f);
+
+    smoothy = smin(smoothy, throat, 0.2f);
+    vec2 spine = vec2(stick(p, vec3(0,2.0,4.1), vec3(0,2.4,2.1) , 0.9f, 0.6f), 0.f);
+    smoothy = smax(smoothy, vec2(-spine.x, spine.y), 0.2f);
 
     vec2 plane = vec2(plane(p + vec3(0,2,0)),3.f);
-  // vec2 res = unionCSG(snowman, plane);
-    vec2 res = vec2(smoothy.x * 0.6, smoothy.y);
+    vec3 off = getMatDisp(p, int(smoothy.y));
+    smoothy.x += off.x;
+    vec2 res = vec2(smoothy.x * 0.9, smoothy.y);
+
     return res;
 
 
@@ -531,7 +659,6 @@ vec4 render(vec4 isect) {
 
         vec3 lightOrigin = pointLights[i];
         vec3 lightCol = lightColors[i];
-
         vec3 lightDir = normalize(lightOrigin-isect.xyz);
         float lightDist = length(lightOrigin-isect.xyz) * 0.1f;
 
@@ -552,7 +679,7 @@ vec4 render(vec4 isect) {
         float ks = matSpec[geom];
 
         vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
-        float specularIntensity = max(pow(dot(h, nor), matCosPow[i]), 0.f);
+        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.f);
         vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);
         vec3 refCol = vec3(1.f); 
 
@@ -562,9 +689,7 @@ vec4 render(vec4 isect) {
 
         specularIntensity *= reflected.x;
 
-        //specularIntensity = 1.f;
         float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
-        //diffuseTerm *= ambientTerm;
         diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);
         res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);
         if(lightCastsSpecular[i]) {
@@ -611,6 +736,8 @@ void main()
        // out_Col = vec4(p.xyz * 0.001f, 1);
 
     }
+
+    //out_Col = 90.0 * vec4(getMatDisp(gl_FragCoord.xyz * 0.0005, 2),1);
    // out_Col = vec4(rayDir,1);
     // Material base color (before shading)
         vec4 diffuseColor = fs_Col;
