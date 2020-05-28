@@ -70,14 +70,14 @@ const float matSpec[5] = float[](
 1.0,
 0.3,
 0.2,
-0.6);
+1.2);
 
 const float matDiff[5] = float[](
 0.5, 
 0.3,
 0.9,
 0.4,
-0.1);
+1.0);
 
 const vec3 bluegreen[5] = vec3[](
 vec3(142, 199, 230) / 255.0,
@@ -192,17 +192,6 @@ mat4 rotateZ( float angle ) {
 }
 
 
-vec3 getMatColor(int i) {
-    if(i == 0) {
-
-    } else if (i == 1) {
-
-    } else {
-        return vec3(1,1,1);
-    }
-}
-
-
 
 
 vec3 uvToA(vec2 uv) {
@@ -291,6 +280,42 @@ vec2 fbm(vec3 p, float persistence, float octaves) {
 }
 
 
+vec3 getMatColor(vec3 q, int i) {
+    if(i == 0) {
+        vec2 uv = q.xy * q.z - 0.04;
+        uv.x *= 2.f;
+        float n = 3.f * perlin(0.5f * uv);
+        float off = clamp(n * 5.f * n, 0.0, 1.0);
+        vec3 res = mix(vec3(0.5, 0.6, 0.15), vec3(0.4, 0.5, 0.2), off);
+        off = clamp(n * n, 0.0, 1.0);
+        res = mix(res, vec3(0.59, 0.75, 0.3), off);
+        res = mix(res, vec3(0.87, 0.9, 0.2), 1.f - clamp(abs(q.y - 0.5), 0.f, 1.f));
+
+        return res;
+    }
+    else if(i == 2) {
+        vec2 uv = q.xy * q.z;
+        uv.x *= 2.f;
+        float n = 5.f * perlin(2.f * uv);
+        float off = 1.0f - clamp(n * n, 0.0, 1.0);
+        vec3 res =  mix(vec3(1, 1, 0.7), vec3(0.8, 0.8, 0.5), off);
+        res = mix(res, vec3(0.7, 0.6, 0.4), clamp(1.0 - abs(q.y), 0.f, 1.f));
+        return res;
+    }
+    else if(i == 4) {
+        vec2 uv = q.xy * q.z;
+        uv.x *= 2.f;
+        float n = 8.f * perlin(10.f * uv);
+
+        float off = 1.0f - clamp(n, 0.0, 1.0);
+
+        return mix(vec3(0.3, 0.25, 0.05), vec3(0.4, 0.3, 0.2), off);
+    } else {
+        return matColors[i];
+    }
+}
+
+
 vec3 getMatDisp(vec3 q, int i) {
     if(i == 0) {
         vec2 uv = q.xy;
@@ -302,6 +327,14 @@ vec3 getMatDisp(vec3 q, int i) {
         vec2 uv = q.xy;
         float off = -0.003 * clamp(4.0 *  perlin(38.0 * uv), 0.0, 1.0);
         return vec3(off);
+    }
+    else if ( i == 4) {
+        vec2 uv = q.xy * q.z;
+        uv.x *= 2.f;
+        float n = 4.f * perlin(10.f * uv);
+        float off = -0.001 * clamp(n * n, 0.0, 1.0);
+        return vec3(off);
+
     } else {
         return vec3(0.f);
     }
@@ -426,7 +459,7 @@ vec2 scene(vec3 p) {
             smoothy = smin(smoothy, eyeridge1, 0.09f);
             //vec2 eyeposridge + (0.03, 0, 0.05);
             vec2 eyeball1 = vec2(sphere(sp - vec3(0.93,1.2,3.47),0.41f),1.f);
-            vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),2.f);
+            vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),4.f);
             vec2 slitA = vec2(sphere(sp - vec3(1.03,1.35,3.63),0.32f),1.f);
             vec2 slitB = vec2(sphere(sp - vec3(1.03,1.10,3.63),0.32f),1.f);
             vec2 slit = smax(slitA, slitB, 0.05);
@@ -674,7 +707,7 @@ vec4 render(vec4 isect) {
         float intensity = lighting.x;
         int geom = int(isect.w);
         //material values
-        vec3 albedo = matColors[geom];
+        vec3 albedo = getMatColor(isect.xyz, geom);
         float kd = matDiff[geom];
         float ks = matSpec[geom];
 
