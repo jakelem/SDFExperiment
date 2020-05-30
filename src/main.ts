@@ -17,12 +17,15 @@ const controls = {
   iterations: 4,
   'Body Color 1': "#54cd7f",
   'Body Color 2': "#4ecd82",
+  'Body Texture': 2.0,
   'Belly Color 1': "#cce8c8",
   'Belly Color 2': "#bbdcb9",
+  'Belly Texture': 2.0,
   'Eye Color': "#43423c",
   'Body Size': 1.9,
   'Head Size': 1.2,
-  'Eye Size': 0.3,
+  'Eye Size': 0.45,
+  'Pupil Size': 0.15,
   'Radial Decay': 1.6,
   'Angle': 5,
   'Offset': -0.01,
@@ -45,7 +48,12 @@ function getBodyColors() {
 
 
 function getBodySizes() {
-  return [controls["Body Size"], controls["Head Size"], controls["Eye Size"]];
+  return [controls["Body Size"], 
+  controls["Head Size"], 
+  controls["Eye Size"], 
+  0.3 - controls["Pupil Size"],
+controls['Body Texture'],
+controls['Belly Texture']];
   
 }
 
@@ -88,12 +96,18 @@ function main() {
   gui.addColor(controls, 'Body Color 1');
 
   gui.addColor(controls, 'Body Color 2');
+  gui.add(controls, 'Body Texture', 0.2, 4).step(0.1);
+
   gui.addColor(controls, 'Belly Color 1');
   gui.addColor(controls, 'Belly Color 2');
+  gui.add(controls, 'Belly Texture', 0.0, 4).step(0.1);
+
   gui.addColor(controls, 'Eye Color');
 
   gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
+  gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
+  gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');

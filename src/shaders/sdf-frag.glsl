@@ -30,7 +30,7 @@ uniform mat4 u_ViewProj;
 uniform vec3 u_CamPos;
 
 //body, head, eye, arm, leg
-uniform float u_BodySizes[4];
+uniform float u_BodySizes[6];
 
 //0 - 2 are upper body, 3 - 5 are lower body, 6 - 7 eyes
 uniform vec3 u_BodyColors[8];
@@ -290,7 +290,8 @@ vec3 getMatColor(vec3 q, int i) {
     if(i == 0) {
         vec2 uv = q.xy * q.z - 0.04;
         uv.x *= 2.f;
-        float n = 3.f * perlin(2.5f * uv);
+        float bodtex = u_BodySizes[4];
+        float n = 3.f * perlin(bodtex * uv);
         float off = clamp(n * 5.f * n, 0.0, 1.0);
         //vec3 f = vec3(0.5, 0.6, 0.15);
         vec3 a = u_BodyColors[0] / 255.0;
@@ -299,8 +300,9 @@ vec3 getMatColor(vec3 q, int i) {
         vec3 d = u_BodyColors[3] / 255.0;
 
         vec3 res1 = mix(a, b, off);
+        float beltex = u_BodySizes[5];
 
-        float n2 = 5.f * perlin(2.f * uv);
+        float n2 = 5.f * perlin(beltex * uv);
         float off2 = 1.0f - clamp(n2 * n2, 0.0, 1.0);
         vec3 res2 =  mix(c, d, off2);
         //res2 = mix(res2, c + vec3(0.1,0.1,0), clamp(1.0 - abs(q.y), 0.f, 1.f));
@@ -502,23 +504,21 @@ vec2 scene(vec3 p) {
             vec3 ridge = bodOffset + vec3(0.86,hs-0.4,0.42);
             //bodOffset = vec3(0,0.3,3)
 
-            //ridge = (0.86, 1.2, 3.42)
+            float es = u_BodySizes[2];
+            float ps = u_BodySizes[3];
 
-            vec2 eyeridge1 = vec2(sphere(sp - ridge,0.45f),0.f);
+            vec2 eyeridge1 = vec2(sphere(sp - ridge,es),0.f);
             smoothy = smin(smoothy, eyeridge1, 0.09f);
             //vec2 eyeposridge + (0.03, 0, 0.05);
-            
+            float esf = es / 0.45;
             ridge += vec3(0.03, 0.0, 0.05);
-           // vec2 eyeball1 = vec2(sphere(sp - vec3(0.93,1.2,3.47),0.41f),1.f);
-            vec2 eyeball1 = vec2(sphere(sp - ridge,0.41f),1.f);
+            vec2 eyeball1 = vec2(sphere(sp - ridge,es-0.04),1.f);
             ridge += vec3(0.015, 0, 0.025);
-            //vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),4.f);
-            vec2 sclera = vec2(sphere(sp - ridge,0.39f),4.f);
-            
-            vec2 slitA = vec2(sphere(sp - (ridge + vec3(0.085, 0.15, 0.135)),0.32f),1.f);
-            vec2 slitB = vec2(sphere(sp - (ridge + vec3(0.085, -0.15, 0.135)),0.32f),1.f);
+            vec2 sclera = vec2(sphere(sp - ridge,es-0.06),4.f);
+            vec2 slitA = vec2(sphere(sp - (ridge + vec3(0.085, ps, 0.135)),es - 0.13),1.f);
+            vec2 slitB = vec2(sphere(sp - (ridge + vec3(0.085, -ps, 0.135)),es - 0.13),1.f);
             vec2 slit = smax(slitA, slitB, 0.05);
-            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),0.4f),1.f);
+            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),es - 0.05),1.f);
 
             sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);
             sclera = smax(vec2(-slit.x, slit.y), sclera, 0.04);
