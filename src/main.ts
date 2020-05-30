@@ -15,30 +15,46 @@ import Orchids from './geometry/Orchids';
 const controls = {
   tesselations: 5,
   iterations: 4,
-  'Radius': 0.3,
-  'Height': 0.3,
-  'Rotational Noise': 20,
-  'Length Decay': 0.3,
+  'Body Color 1': "#54cd7f",
+  'Body Color 2': "#4ecd82",
+  'Belly Color 1': "#cce8c8",
+  'Belly Color 2': "#bbdcb9",
+  'Eye Color': "#43423c",
+  'Body Size': 1.9,
+  'Head Size': 1.2,
+  'Eye Size': 0.3,
   'Radial Decay': 1.6,
   'Angle': 5,
   'Offset': -0.01,
   'Load Scene': loadScene, // A function pointer, essentially
 };
 
-let icosphere: Icosphere;
 let square: Square;
 let m_mesh: Mesh;
-let l_system: Orchids;
-let background_meshes : Array<Mesh>;
-
-let orchid : Orchids;
 function loadObjs() {
 }
 
-function changeIterations(i : number) {
-  l_system = new Orchids();
-  l_system.iterations = i;
 
+function getBodyColors() {
+  return hexToRGB(controls["Body Color 1"]).concat(hexToRGB(controls["Body Color 2"]))
+  .concat(hexToRGB(controls["Belly Color 1"]))
+  .concat(hexToRGB(controls["Belly Color 2"]))
+  .concat(hexToRGB(controls["Eye Color"]));
+  
+}
+
+
+function getBodySizes() {
+  return [controls["Body Size"], controls["Head Size"], controls["Eye Size"]];
+  
+}
+
+function hexToRGB(hex : any) {
+  if(typeof hex !== 'string') {
+    return hex;
+  }
+  let res = [parseInt(hex.substring(1, 3), 16), parseInt(hex.substring(3, 5), 16), parseInt(hex.substring(5), 16)];
+  return res;
 }
 
 
@@ -46,44 +62,9 @@ let xSubs = 5;
 let ySubs = 3;
 let zSubs = 3;
 
+
 function loadScene() {
-  background_meshes = new Array<Mesh>();
 
-  for(let x = 0; x < xSubs; x++) {
-    for(let y = 0; y < ySubs; y++) {
-      for(let z = 0; z < zSubs; z++) {
-      let mesh = new Mesh('/geo/orchid.obj', vec3.fromValues(0,0,0), vec3.fromValues(0.3,0.3,0.3), 
-      vec3.fromValues(0,0,0), vec4.fromValues(1,1,1,1))
-      let randX = (x + Math.random()) * 2;
-      let randY = (y + Math.random()) * 2;
-      let randZ = (z + Math.random() - zSubs / 2) * 2;
-      mesh.m_pos = vec3.fromValues(-randX,randY,randZ);
-      mesh.m_vel = vec3.fromValues(1.5,0,0);
-      mesh.m_angle = Math.random() * 180;
-
-      background_meshes.push(mesh);
-      mesh.load();
-    }
-  }
-}
-
-  l_system = new Orchids();
-  l_system.iterations = controls.iterations;
-  l_system.radius = controls["Radius"];
-  l_system.orientRand = controls["Rotational Noise"];
-  l_system.decay = controls["Radial Decay"] * 0.1;
-  l_system.stepDecay = controls["Length Decay"] * 0.1;
-  l_system.offset = controls["Offset"] * 0.1;
-  l_system.curvature = controls["Angle"];
-  l_system.height = controls["Height"];
-
-  l_system.expandAxiom();
-  l_system.moveTurtle();
-  l_system.createAll();
-  //console.log("SETNECE " + l_system.expandedSentence);
-
-  icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, controls.tesselations);
-  icosphere.create();
   m_mesh = new Mesh('/geo/feather.obj',vec3.fromValues(0, 1, 0), vec3.fromValues(1, 1, 1), vec3.fromValues(98, 0, 0));
   //m_mesh.create();
   //m_mesh.center = vec4.fromValues(0, 1, 2, 1);
@@ -103,16 +84,16 @@ function main() {
 
   // Add controls to the gui
   const gui = new DAT.GUI();
-  //gui.add(controls, 'tesselations', 0, 8).step(1);
-  gui.add(controls, 'iterations', 1, 8).step(1);
-  gui.add(controls, 'Rotational Noise', 0, 40).step(1);
-  gui.add(controls, 'Radial Decay', -1, 3).step(0.01);
-  gui.add(controls, 'Length Decay', -0.2, 2).step(0.01);
-  gui.add(controls, 'Angle', 0, 20).step(0.01);
-  gui.add(controls, 'Radius', 0.1, 4).step(0.01);
-  gui.add(controls, 'Height', 0.1, 4).step(0.01);
-  //gui.add(controls, 'Offset', -10, 10).step(0.01);
   gui.add(controls, 'Load Scene');
+  gui.addColor(controls, 'Body Color 1');
+
+  gui.addColor(controls, 'Body Color 2');
+  gui.addColor(controls, 'Belly Color 1');
+  gui.addColor(controls, 'Belly Color 2');
+  gui.addColor(controls, 'Eye Color');
+
+  gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
+  gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -163,82 +144,26 @@ function main() {
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
     renderer.clear();
 
-    renderer.render(camera, lambert, [
-      icosphere,
-      //m_mesh,
-    ]);
+  
 
     time += 1;
     background.setTime(time);
     sdf.setTime(time);
+
+    sdf.setBodyColors(getBodyColors());
+    sdf.setBodySizes(getBodySizes());
     sdf.setResolution(vec3.fromValues(window.innerWidth, window.innerHeight,1));
     sdf.setCamPos(camera.controls.eye);
 
     renderer.render(camera, sdf, [
       square,
     ],undefined, true);
- //console.log("w " + window.innerWidth);
- //console.log("h " + window.innerHeight);
-
-//   console.log("CAMdir " + camera.direction);
-  // console.log("cam " + camera);
-
-
-
-
-    // for(let mesh of l_system.meshes) {
-    //   renderer.render(camera, planet, [
-    //     mesh,
-    //   ]
-    // );}
+ 
 
 
     let ts = 0.01;
 
 
-
-  //   for(let x = 0; x < xSubs; x++) {
-  //     for(let y = 0; y < ySubs; y++) {
-  //       for(let z = 0; z < zSubs; z++) {
-  //         let i = x * ySubs * zSubs + y * zSubs + z;
-  //        // console.log(i);
-
-  //         let mesh = background_meshes[i];
-  //         let dx = vec3.create();
-  //         let dx2 = vec3.fromValues(0,-1 * ts,0);
-    
-  //         vec3.scale(dx, mesh.m_vel, ts);
-    
-  //         vec3.add(mesh.m_pos, mesh.m_pos, dx);
-  //         vec3.add(mesh.m_vel, mesh.m_vel, dx2);
-  //         let r = mat4.create();
-  //         r = mat4.identity(r);
-    
-  //         //console.log(mesh.m_pos);
-  //        // mesh.m_vel = vec3.fromValues(0,0,0);
-  //         //console.log(mesh.m_vel);
-  //         if(mesh.m_pos[1] < -2.0) {
-  //           let randX = (x + Math.random()) * 2;
-  //           let randY = (y + Math.random()) * 2;
-  //           let randZ = (z + Math.random() - zSubs / 2) * 2;
-  //           mesh.m_pos = vec3.fromValues(-randX,randY,randZ);
-  //           mesh.m_vel = vec3.fromValues(2,0,0);
-  //          // console.log(mesh.m_pos); 
-  //         }
-  //         let model = mat4.create();
-  //         mat4.identity(model);
-  //         mat4.translate(model, model, mesh.m_pos);
-  //         mesh.m_angle += 0.001;
-  //         mat4.rotateY(model, model, mesh.m_angle * 180 / Math.PI);
-  //        // console.log(model);
-    
-  //         renderer.render(camera, planet, [
-  //           mesh,
-  //         ],model
-  //       );
-  //     }
-  //   }
-  // }
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 40);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -119,44 +119,6 @@ function equals(a, b) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gl_matrix_common_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gl_matrix_mat2_js__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gl_matrix_mat2d_js__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3_js__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__gl_matrix_quat2_js__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec2_js__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__ = __webpack_require__(22);
-/* unused harmony reexport glMatrix */
-/* unused harmony reexport mat2 */
-/* unused harmony reexport mat2d */
-/* unused harmony reexport mat3 */
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__; });
-/* unused harmony reexport quat */
-/* unused harmony reexport quat2 */
-/* unused harmony reexport vec2 */
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports) {
 
 var g;
@@ -183,20 +145,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return gl; });
-/* harmony export (immutable) */ __webpack_exports__["b"] = setGL;
-var gl;
-function setGL(_gl) {
-    gl = _gl;
-}
-
-
-/***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -249,8 +198,8 @@ var util = Object.create(__webpack_require__(7));
 util.inherits = __webpack_require__(5);
 /*</replacement>*/
 
-var Readable = __webpack_require__(34);
-var Writable = __webpack_require__(16);
+var Readable = __webpack_require__(33);
+var Writable = __webpack_require__(14);
 
 util.inherits(Duplex, Readable);
 
@@ -331,6 +280,57 @@ Duplex.prototype._destroy = function (err, cb) {
 
   pna.nextTick(cb, err);
 };
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gl_matrix_common_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gl_matrix_mat2_js__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gl_matrix_mat2d_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3_js__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__gl_matrix_quat2_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec2_js__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__ = __webpack_require__(20);
+/* unused harmony reexport glMatrix */
+/* unused harmony reexport mat2 */
+/* unused harmony reexport mat2d */
+/* unused harmony reexport mat3 */
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__; });
+/* unused harmony reexport quat */
+/* unused harmony reexport quat2 */
+/* unused harmony reexport vec2 */
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return gl; });
+/* harmony export (immutable) */ __webpack_exports__["b"] = setGL;
+var gl;
+function setGL(_gl) {
+    gl = _gl;
+}
+
 
 /***/ }),
 /* 5 */
@@ -667,7 +667,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36).Buffer))
 
 /***/ }),
 /* 8 */
@@ -787,7 +787,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
-var buffer = __webpack_require__(37)
+var buffer = __webpack_require__(36)
 var Buffer = buffer.Buffer
 
 // alternative to using Object.keys for old browsers
@@ -852,89 +852,6 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(3);
-
-class Drawable {
-    constructor() {
-        this.count = 0;
-        this.idxBound = false;
-        this.posBound = false;
-        this.norBound = false;
-        this.uvBound = false;
-        this.colBound = false;
-    }
-    destory() {
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufIdx);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufPos);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufNor);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufUV);
-    }
-    generateIdx() {
-        this.idxBound = true;
-        this.bufIdx = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generatePos() {
-        this.posBound = true;
-        this.bufPos = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateNor() {
-        this.norBound = true;
-        this.bufNor = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateUV() {
-        this.uvBound = true;
-        this.bufUV = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateCol() {
-        this.colBound = true;
-        this.bufCol = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    bindIdx() {
-        if (this.idxBound) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
-        }
-        return this.idxBound;
-    }
-    bindPos() {
-        if (this.posBound) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
-        }
-        return this.posBound;
-    }
-    bindNor() {
-        if (this.norBound) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
-        }
-        return this.norBound;
-    }
-    bindUV() {
-        if (this.uvBound) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufUV);
-        }
-        return this.uvBound;
-    }
-    bindCol() {
-        if (this.colBound) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
-        }
-        return this.colBound;
-    }
-    elemCount() {
-        return this.count;
-    }
-    drawMode() {
-        return __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].TRIANGLES;
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (Drawable);
-
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = normalize;
@@ -962,107 +879,7 @@ function normalize(out, a) {
 }
 
 /***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(3);
-
-
-
-var ObjMtlLoader = __webpack_require__(87);
-var OBJ = __webpack_require__(108);
-class Mesh extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
-    constructor(filepath, center, scale = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), rotate = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), col = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(25, 86, 107, 255)) {
-        super(); // Call the constructor of the super class. This is required.
-        this.objMtlLoader = new ObjMtlLoader();
-        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
-        this.filepath = filepath;
-        this.scale = scale;
-        this.rotate = rotate;
-        this.m_color = col;
-    }
-    load() {
-        let f = (meshes) => {
-            this.loadMesh(meshes.mesh);
-            //console.log()
-            this.create();
-        };
-        //console.log("FILEPATH " + this.filepath);
-        OBJ.downloadMeshes({
-            'mesh': this.filepath,
-        }, f);
-    }
-    loadMesh(mesh) {
-        let numPos = mesh.vertices.length / 3 * 4;
-        this.positions = new Float32Array(numPos);
-        this.normals = new Float32Array(numPos);
-        this.colors = new Float32Array(numPos);
-        //console.log(numPos);
-        let v = 0;
-        let col1 = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(25, 86, 107, 255);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scale(col1, col1, 1 / 255);
-        let col2 = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(176, 182, 158, 255);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scale(col2, col2, 1 / 255);
-        for (let i = 0; i < mesh.vertices.length; i += 3) {
-            let pos = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(mesh.vertices[i], mesh.vertices[i + 1], mesh.vertices[i + 2], 1);
-            let nor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(mesh.vertexNormals[i], mesh.vertexNormals[i + 1], mesh.vertexNormals[i + 2], 0);
-            let col = this.m_color;
-            //console.log(pos[1]);
-            let scaleMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].scale(scaleMat, scaleMat, this.scale);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(pos, pos, scaleMat);
-            let rotMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateX(rotMat, rotMat, this.rotate[0] * Math.PI / 180);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateY(rotMat, rotMat, this.rotate[1] * Math.PI / 180);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateZ(rotMat, rotMat, this.rotate[2] * Math.PI / 180);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(pos, pos, rotMat);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(nor, nor, rotMat);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].add(pos, this.center, pos);
-            for (let j = 0; j < 4; j += 1) {
-                this.positions[v + j] = pos[j];
-                this.normals[v + j] = nor[j];
-                this.colors[v + j] = col[j];
-            }
-            v += 4;
-        }
-        this.indices = new Uint32Array(mesh.indices.length);
-        for (let i = 0; i < mesh.indices.length; i += 1) {
-            this.indices[i] = mesh.indices[i];
-        }
-        // console.log("MESH VERTS NUM " + this.positions.length);
-    }
-    create() {
-        //this.load();
-        //console.log("MESH VERTS NUM " + this.positions.length);
-        //console.log("MESH NORMS NUM " + this.normals.length);
-        //console.log("MESH INDICES NUM " + this.indices.length);
-        //console.log("MESH positions " + this.indices);
-        //console.log("MESH colors " + this.colors);
-        this.generateIdx();
-        this.generatePos();
-        this.generateNor();
-        this.generateCol();
-        this.count = this.indices.length;
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.indices, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.normals, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.positions, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.colors, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        //console.log(`Created mesh`);
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (Mesh);
-
-
-/***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1515,20 +1332,20 @@ function unwrapListeners(arr) {
 
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(34);
+exports = module.exports = __webpack_require__(33);
 exports.Stream = exports;
 exports.Readable = exports;
-exports.Writable = __webpack_require__(16);
-exports.Duplex = __webpack_require__(4);
-exports.Transform = __webpack_require__(39);
-exports.PassThrough = __webpack_require__(96);
+exports.Writable = __webpack_require__(14);
+exports.Duplex = __webpack_require__(2);
+exports.Transform = __webpack_require__(38);
+exports.PassThrough = __webpack_require__(95);
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1604,12 +1421,12 @@ util.inherits = __webpack_require__(5);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(95)
+  deprecate: __webpack_require__(94)
 };
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(36);
+var Stream = __webpack_require__(35);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -1625,14 +1442,14 @@ function _isUint8Array(obj) {
 
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(38);
+var destroyImpl = __webpack_require__(37);
 
 util.inherits(Writable, Stream);
 
 function nop() {}
 
 function WritableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(4);
+  Duplex = Duplex || __webpack_require__(2);
 
   options = options || {};
 
@@ -1782,7 +1599,7 @@ if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.protot
 }
 
 function Writable(options) {
-  Duplex = Duplex || __webpack_require__(4);
+  Duplex = Duplex || __webpack_require__(2);
 
   // Writable ctor is applied to Duplexes, too.
   // `realHasInstance` is necessary because using plain `instanceof`
@@ -2219,10 +2036,10 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(93).setImmediate, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(92).setImmediate, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2524,7 +2341,7 @@ function simpleEnd(buf) {
 }
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3373,7 +3190,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5269,7 +5086,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5309,9 +5126,9 @@ var sub = subtract;
 /* unused harmony export sqlerp */
 /* unused harmony export setAxes */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mat3_js__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vec3_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vec4_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mat3_js__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vec3_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vec4_js__ = __webpack_require__(20);
 
 
 
@@ -5975,7 +5792,7 @@ var setAxes = function () {
 }();
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6817,7 +6634,7 @@ var forEach = function () {
 }();
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7478,7 +7295,90 @@ var forEach = function () {
 }();
 
 /***/ }),
-/* 23 */
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(4);
+
+class Drawable {
+    constructor() {
+        this.count = 0;
+        this.idxBound = false;
+        this.posBound = false;
+        this.norBound = false;
+        this.uvBound = false;
+        this.colBound = false;
+    }
+    destory() {
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufIdx);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufPos);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufNor);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufUV);
+    }
+    generateIdx() {
+        this.idxBound = true;
+        this.bufIdx = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generatePos() {
+        this.posBound = true;
+        this.bufPos = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateNor() {
+        this.norBound = true;
+        this.bufNor = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateUV() {
+        this.uvBound = true;
+        this.bufUV = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateCol() {
+        this.colBound = true;
+        this.bufCol = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    bindIdx() {
+        if (this.idxBound) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
+        }
+        return this.idxBound;
+    }
+    bindPos() {
+        if (this.posBound) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
+        }
+        return this.posBound;
+    }
+    bindNor() {
+        if (this.norBound) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
+        }
+        return this.norBound;
+    }
+    bindUV() {
+        if (this.uvBound) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufUV);
+        }
+        return this.uvBound;
+    }
+    bindCol() {
+        if (this.colBound) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
+        }
+        return this.colBound;
+    }
+    elemCount() {
+        return this.count;
+    }
+    drawMode() {
+        return __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].TRIANGLES;
+    }
+}
+;
+/* harmony default export */ __webpack_exports__["a"] = (Drawable);
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7486,8 +7386,8 @@ var forEach = function () {
 
 module.exports = createFilteredVector
 
-var cubicHermite = __webpack_require__(57)
-var bsearch = __webpack_require__(24)
+var cubicHermite = __webpack_require__(55)
+var bsearch = __webpack_require__(23)
 
 function clamp(lo, hi, x) {
   return Math.min(hi, Math.max(lo, x))
@@ -7776,7 +7676,7 @@ function createFilteredVector(initState, initVelocity, initTime) {
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7843,7 +7743,7 @@ module.exports = {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = cross;
@@ -7867,7 +7767,7 @@ function cross(out, a, b) {
 }
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = dot;
@@ -7884,10 +7784,10 @@ function dot(a, b) {
 }
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var identity = __webpack_require__(28);
+var identity = __webpack_require__(27);
 
 module.exports = lookAt;
 
@@ -7979,7 +7879,7 @@ function lookAt(out, eye, center, up) {
 };
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = identity;
@@ -8011,7 +7911,7 @@ function identity(out) {
 };
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = translate;
@@ -8054,7 +7954,7 @@ function translate(out, a, v) {
 };
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = create;
@@ -8086,7 +7986,7 @@ function create() {
 };
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = scale;
@@ -8122,7 +8022,7 @@ function scale(out, a, v) {
 };
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = determinant;
@@ -8157,7 +8057,7 @@ function determinant(a) {
 };
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -8183,15 +8083,15 @@ function determinant(a) {
 
 module.exports = Stream;
 
-var EE = __webpack_require__(14).EventEmitter;
+var EE = __webpack_require__(12).EventEmitter;
 var inherits = __webpack_require__(5);
 
 inherits(Stream, EE);
-Stream.Readable = __webpack_require__(15);
-Stream.Writable = __webpack_require__(97);
-Stream.Duplex = __webpack_require__(98);
-Stream.Transform = __webpack_require__(99);
-Stream.PassThrough = __webpack_require__(100);
+Stream.Readable = __webpack_require__(13);
+Stream.Writable = __webpack_require__(96);
+Stream.Duplex = __webpack_require__(97);
+Stream.Transform = __webpack_require__(98);
+Stream.PassThrough = __webpack_require__(99);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -8290,7 +8190,7 @@ Stream.prototype.pipe = function(dest, options) {
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8325,7 +8225,7 @@ var pna = __webpack_require__(9);
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(35);
+var isArray = __webpack_require__(34);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -8335,7 +8235,7 @@ var Duplex;
 Readable.ReadableState = ReadableState;
 
 /*<replacement>*/
-var EE = __webpack_require__(14).EventEmitter;
+var EE = __webpack_require__(12).EventEmitter;
 
 var EElistenerCount = function (emitter, type) {
   return emitter.listeners(type).length;
@@ -8343,7 +8243,7 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(36);
+var Stream = __webpack_require__(35);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -8365,7 +8265,7 @@ util.inherits = __webpack_require__(5);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(90);
+var debugUtil = __webpack_require__(89);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -8374,8 +8274,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(91);
-var destroyImpl = __webpack_require__(38);
+var BufferList = __webpack_require__(90);
+var destroyImpl = __webpack_require__(37);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -8395,7 +8295,7 @@ function prependListener(emitter, event, fn) {
 }
 
 function ReadableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(4);
+  Duplex = Duplex || __webpack_require__(2);
 
   options = options || {};
 
@@ -8465,14 +8365,14 @@ function ReadableState(options, stream) {
   this.decoder = null;
   this.encoding = null;
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(17).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(15).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
 }
 
 function Readable(options) {
-  Duplex = Duplex || __webpack_require__(4);
+  Duplex = Duplex || __webpack_require__(2);
 
   if (!(this instanceof Readable)) return new Readable(options);
 
@@ -8621,7 +8521,7 @@ Readable.prototype.isPaused = function () {
 
 // backwards compatibility.
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(17).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(15).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -9313,10 +9213,10 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -9327,14 +9227,14 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(14).EventEmitter;
+module.exports = __webpack_require__(12).EventEmitter;
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9348,9 +9248,9 @@ module.exports = __webpack_require__(14).EventEmitter;
 
 
 
-var base64 = __webpack_require__(88)
-var ieee754 = __webpack_require__(89)
-var isArray = __webpack_require__(35)
+var base64 = __webpack_require__(87)
+var ieee754 = __webpack_require__(88)
+var isArray = __webpack_require__(34)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -11128,10 +11028,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11211,7 +11111,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11282,7 +11182,7 @@ module.exports = {
 
 module.exports = Transform;
 
-var Duplex = __webpack_require__(4);
+var Duplex = __webpack_require__(2);
 
 /*<replacement>*/
 var util = Object.create(__webpack_require__(7));
@@ -11431,26 +11331,22 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stats_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_dat_gui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__geometry_Icosphere__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__geometry_Square__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rendering_gl_OpenGLRenderer__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Camera__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__globals__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__geometry_Orchids__ = __webpack_require__(109);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__geometry_Square__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rendering_gl_OpenGLRenderer__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Camera__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__globals__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__geometry_Mesh__ = __webpack_require__(85);
 
 
 
@@ -11465,66 +11361,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const controls = {
     tesselations: 5,
     iterations: 4,
-    'Radius': 0.3,
-    'Height': 0.3,
-    'Rotational Noise': 20,
-    'Length Decay': 0.3,
+    'Body Color 1': "#54cd7f",
+    'Body Color 2': "#4ecd82",
+    'Belly Color 1': "#cce8c8",
+    'Belly Color 2': "#bbdcb9",
+    'Eye Color': "#43423c",
+    'Body Size': 1.9,
+    'Head Size': 1.2,
+    'Eye Size': 0.3,
     'Radial Decay': 1.6,
     'Angle': 5,
     'Offset': -0.01,
     'Load Scene': loadScene,
 };
-let icosphere;
 let square;
 let m_mesh;
-let l_system;
-let background_meshes;
-let orchid;
 function loadObjs() {
 }
-function changeIterations(i) {
-    l_system = new __WEBPACK_IMPORTED_MODULE_10__geometry_Orchids__["a" /* default */]();
-    l_system.iterations = i;
+function getBodyColors() {
+    return hexToRGB(controls["Body Color 1"]).concat(hexToRGB(controls["Body Color 2"]))
+        .concat(hexToRGB(controls["Belly Color 1"]))
+        .concat(hexToRGB(controls["Belly Color 2"]))
+        .concat(hexToRGB(controls["Eye Color"]));
+}
+function getBodySizes() {
+    return [controls["Body Size"], controls["Head Size"], controls["Eye Size"]];
+}
+function hexToRGB(hex) {
+    if (typeof hex !== 'string') {
+        return hex;
+    }
+    let res = [parseInt(hex.substring(1, 3), 16), parseInt(hex.substring(3, 5), 16), parseInt(hex.substring(5), 16)];
+    return res;
 }
 let xSubs = 5;
 let ySubs = 3;
 let zSubs = 3;
 function loadScene() {
-    background_meshes = new Array();
-    for (let x = 0; x < xSubs; x++) {
-        for (let y = 0; y < ySubs; y++) {
-            for (let z = 0; z < zSubs; z++) {
-                let mesh = new __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__["a" /* default */]('/geo/orchid.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0.3, 0.3, 0.3), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(1, 1, 1, 1));
-                let randX = (x + Math.random()) * 2;
-                let randY = (y + Math.random()) * 2;
-                let randZ = (z + Math.random() - zSubs / 2) * 2;
-                mesh.m_pos = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(-randX, randY, randZ);
-                mesh.m_vel = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1.5, 0, 0);
-                mesh.m_angle = Math.random() * 180;
-                background_meshes.push(mesh);
-                mesh.load();
-            }
-        }
-    }
-    l_system = new __WEBPACK_IMPORTED_MODULE_10__geometry_Orchids__["a" /* default */]();
-    l_system.iterations = controls.iterations;
-    l_system.radius = controls["Radius"];
-    l_system.orientRand = controls["Rotational Noise"];
-    l_system.decay = controls["Radial Decay"] * 0.1;
-    l_system.stepDecay = controls["Length Decay"] * 0.1;
-    l_system.offset = controls["Offset"] * 0.1;
-    l_system.curvature = controls["Angle"];
-    l_system.height = controls["Height"];
-    l_system.expandAxiom();
-    l_system.moveTurtle();
-    l_system.createAll();
-    //console.log("SETNECE " + l_system.expandedSentence);
-    icosphere = new __WEBPACK_IMPORTED_MODULE_3__geometry_Icosphere__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), 1, controls.tesselations);
-    icosphere.create();
-    m_mesh = new __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__["a" /* default */]('/geo/feather.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(98, 0, 0));
+    m_mesh = new __WEBPACK_IMPORTED_MODULE_8__geometry_Mesh__["a" /* default */]('/geo/feather.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(98, 0, 0));
     //m_mesh.create();
     //m_mesh.center = vec4.fromValues(0, 1, 2, 1);
-    square = new __WEBPACK_IMPORTED_MODULE_4__geometry_Square__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0));
+    square = new __WEBPACK_IMPORTED_MODULE_3__geometry_Square__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0));
     square.create();
 }
 function main() {
@@ -11537,16 +11414,14 @@ function main() {
     document.body.appendChild(stats.domElement);
     // Add controls to the gui
     const gui = new __WEBPACK_IMPORTED_MODULE_2_dat_gui__["GUI"]();
-    //gui.add(controls, 'tesselations', 0, 8).step(1);
-    gui.add(controls, 'iterations', 1, 8).step(1);
-    gui.add(controls, 'Rotational Noise', 0, 40).step(1);
-    gui.add(controls, 'Radial Decay', -1, 3).step(0.01);
-    gui.add(controls, 'Length Decay', -0.2, 2).step(0.01);
-    gui.add(controls, 'Angle', 0, 20).step(0.01);
-    gui.add(controls, 'Radius', 0.1, 4).step(0.01);
-    gui.add(controls, 'Height', 0.1, 4).step(0.01);
-    //gui.add(controls, 'Offset', -10, 10).step(0.01);
     gui.add(controls, 'Load Scene');
+    gui.addColor(controls, 'Body Color 1');
+    gui.addColor(controls, 'Body Color 2');
+    gui.addColor(controls, 'Belly Color 1');
+    gui.addColor(controls, 'Belly Color 2');
+    gui.addColor(controls, 'Eye Color');
+    gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
+    gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
     // get canvas and webgl context
     const canvas = document.getElementById('canvas');
     const gl = canvas.getContext('webgl2');
@@ -11555,28 +11430,28 @@ function main() {
     }
     // `setGL` is a function imported above which sets the value of `gl` in the `globals.ts` module.
     // Later, we can import `gl` from `globals.ts` to access it
-    Object(__WEBPACK_IMPORTED_MODULE_7__globals__["b" /* setGL */])(gl);
+    Object(__WEBPACK_IMPORTED_MODULE_6__globals__["b" /* setGL */])(gl);
     // Initial call to load scene
     loadScene();
-    const camera = new __WEBPACK_IMPORTED_MODULE_6__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 10), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0));
-    const renderer = new __WEBPACK_IMPORTED_MODULE_5__rendering_gl_OpenGLRenderer__["a" /* default */](canvas);
+    const camera = new __WEBPACK_IMPORTED_MODULE_5__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 10), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0));
+    const renderer = new __WEBPACK_IMPORTED_MODULE_4__rendering_gl_OpenGLRenderer__["a" /* default */](canvas);
     renderer.setClearColor(225 / 255, 240 / 255, 246 / 255, 1);
     gl.enable(gl.DEPTH_TEST);
-    const lambert = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(111)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(112)),
+    const lambert = new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(108)),
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(109)),
     ]);
-    const planet = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(113)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(114)),
+    const planet = new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(110)),
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(111)),
     ]);
-    const background = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(115)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(116)),
+    const background = new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(112)),
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(113)),
     ]);
-    const sdf = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(117)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(118)),
+    const sdf = new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(114)),
+        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(115)),
     ]);
     let time = 0.0;
     // This function will be called every frame
@@ -11585,64 +11460,17 @@ function main() {
         stats.begin();
         gl.viewport(0, 0, window.innerWidth, window.innerHeight);
         renderer.clear();
-        renderer.render(camera, lambert, [
-            icosphere,
-        ]);
         time += 1;
         background.setTime(time);
         sdf.setTime(time);
+        sdf.setBodyColors(getBodyColors());
+        sdf.setBodySizes(getBodySizes());
         sdf.setResolution(__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(window.innerWidth, window.innerHeight, 1));
         sdf.setCamPos(camera.controls.eye);
         renderer.render(camera, sdf, [
             square,
         ], undefined, true);
-        //console.log("w " + window.innerWidth);
-        //console.log("h " + window.innerHeight);
-        //   console.log("CAMdir " + camera.direction);
-        // console.log("cam " + camera);
-        // for(let mesh of l_system.meshes) {
-        //   renderer.render(camera, planet, [
-        //     mesh,
-        //   ]
-        // );}
         let ts = 0.01;
-        //   for(let x = 0; x < xSubs; x++) {
-        //     for(let y = 0; y < ySubs; y++) {
-        //       for(let z = 0; z < zSubs; z++) {
-        //         let i = x * ySubs * zSubs + y * zSubs + z;
-        //        // console.log(i);
-        //         let mesh = background_meshes[i];
-        //         let dx = vec3.create();
-        //         let dx2 = vec3.fromValues(0,-1 * ts,0);
-        //         vec3.scale(dx, mesh.m_vel, ts);
-        //         vec3.add(mesh.m_pos, mesh.m_pos, dx);
-        //         vec3.add(mesh.m_vel, mesh.m_vel, dx2);
-        //         let r = mat4.create();
-        //         r = mat4.identity(r);
-        //         //console.log(mesh.m_pos);
-        //        // mesh.m_vel = vec3.fromValues(0,0,0);
-        //         //console.log(mesh.m_vel);
-        //         if(mesh.m_pos[1] < -2.0) {
-        //           let randX = (x + Math.random()) * 2;
-        //           let randY = (y + Math.random()) * 2;
-        //           let randZ = (z + Math.random() - zSubs / 2) * 2;
-        //           mesh.m_pos = vec3.fromValues(-randX,randY,randZ);
-        //           mesh.m_vel = vec3.fromValues(2,0,0);
-        //          // console.log(mesh.m_pos); 
-        //         }
-        //         let model = mat4.create();
-        //         mat4.identity(model);
-        //         mat4.translate(model, model, mesh.m_pos);
-        //         mesh.m_angle += 0.001;
-        //         mat4.rotateY(model, model, mesh.m_angle * 180 / Math.PI);
-        //        // console.log(model);
-        //         renderer.render(camera, planet, [
-        //           mesh,
-        //         ],model
-        //       );
-        //     }
-        //   }
-        // }
         stats.end();
         // Tell the browser to call `tick` again whenever it renders a new frame
         requestAnimationFrame(tick);
@@ -11662,7 +11490,7 @@ main();
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12129,7 +11957,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12645,7 +12473,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12689,8 +12517,8 @@ var sub = subtract;
 /* unused harmony export exactEquals */
 /* unused harmony export equals */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quat_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mat4_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quat_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mat4_js__ = __webpack_require__(17);
 
 
 
@@ -13537,7 +13365,7 @@ function equals(a, b) {
 }
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14213,21 +14041,21 @@ var forEach = function () {
 }();
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Stats=t()}(this,function(){"use strict";var c=function(){var n=0,l=document.createElement("div");function e(e){return l.appendChild(e.dom),e}function t(e){for(var t=0;t<l.children.length;t++)l.children[t].style.display=t===e?"block":"none";n=e}l.style.cssText="position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000",l.addEventListener("click",function(e){e.preventDefault(),t(++n%l.children.length)},!1);var i=(performance||Date).now(),a=i,o=0,f=e(new c.Panel("FPS","#0ff","#002")),r=e(new c.Panel("MS","#0f0","#020"));if(self.performance&&self.performance.memory)var d=e(new c.Panel("MB","#f08","#201"));return t(0),{REVISION:16,dom:l,addPanel:e,showPanel:t,begin:function(){i=(performance||Date).now()},end:function(){o++;var e=(performance||Date).now();if(r.update(e-i,200),a+1e3<=e&&(f.update(1e3*o/(e-a),100),a=e,o=0,d)){var t=performance.memory;d.update(t.usedJSHeapSize/1048576,t.jsHeapSizeLimit/1048576)}return e},update:function(){i=this.end()},domElement:l,setMode:t}};return c.Panel=function(n,l,i){var a=1/0,o=0,f=Math.round,r=f(window.devicePixelRatio||1),d=80*r,e=48*r,c=3*r,p=2*r,u=3*r,s=15*r,m=74*r,h=30*r,y=document.createElement("canvas");y.width=d,y.height=e,y.style.cssText="width:80px;height:48px";var v=y.getContext("2d");return v.font="bold "+9*r+"px Helvetica,Arial,sans-serif",v.textBaseline="top",v.fillStyle=i,v.fillRect(0,0,d,e),v.fillStyle=l,v.fillText(n,c,p),v.fillRect(u,s,m,h),v.fillStyle=i,v.globalAlpha=.9,v.fillRect(u,s,m,h),{dom:y,update:function(e,t){a=Math.min(a,e),o=Math.max(o,e),v.fillStyle=i,v.globalAlpha=1,v.fillRect(0,0,d,s),v.fillStyle=l,v.fillText(f(e)+" "+n+" ("+f(a)+"-"+f(o)+")",c,p),v.drawImage(y,u+r,s,m-r,h,u,s,m-r,h),v.fillRect(u+m-r,s,r,h),v.fillStyle=i,v.globalAlpha=.9,v.fillRect(u+m-r,s,r,f((1-e/t)*h))}}},c});
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(47)
-module.exports.color = __webpack_require__(48)
+module.exports = __webpack_require__(46)
+module.exports.color = __webpack_require__(47)
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -17892,7 +17720,7 @@ dat.dom.dom,
 dat.utils.common);
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -18652,175 +18480,13 @@ dat.color.toString,
 dat.utils.common);
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(3);
-
-
-
-class Icosphere extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
-    constructor(center, radius, subdivisions) {
-        super(); // Call the constructor of the super class. This is required.
-        this.radius = radius;
-        this.subdivisions = subdivisions;
-        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
-    }
-    create() {
-        const X = 0.525731112119133606;
-        const Z = 0.850650808352039932;
-        const N = 0;
-        let maxIndexCount = 20 * Math.pow(4, this.subdivisions);
-        let maxVertexCount = 10 * Math.pow(4, this.subdivisions) + 2;
-        // Create buffers to back geometry data
-        // Index data will ping pong back and forth between buffer0 and buffer1 during creation
-        // All data will be in buffer0 at the end
-        const buffer0 = new ArrayBuffer(maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT +
-            maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT +
-            maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT);
-        const buffer1 = new ArrayBuffer(maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT);
-        const buffers = [buffer0, buffer1];
-        let b = 0;
-        const indexByteOffset = 0;
-        const vertexByteOffset = maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT;
-        const normalByteOffset = vertexByteOffset;
-        const positionByteOffset = vertexByteOffset + maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT;
-        // Create 3-uint buffer views into the backing buffer to represent triangles
-        // The C++ analogy to this would be something like:
-        // triangles[i] = reinterpret_cast<std::array<unsigned int, 3>*>(&buffer[offset]);
-        let triangles = new Array(20);
-        let nextTriangles = new Array();
-        for (let i = 0; i < 20; ++i) {
-            triangles[i] = new Uint32Array(buffers[b], indexByteOffset + i * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-        }
-        // Create 3-float buffer views into the backing buffer to represent positions
-        let vertices = new Array(12);
-        for (let i = 0; i < 12; ++i) {
-            vertices[i] = new Float32Array(buffer0, vertexByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-        }
-        // Initialize normals for a 20-sided icosahedron
-        vertices[0].set([-X, N, Z, 0]);
-        vertices[1].set([X, N, Z, 0]);
-        vertices[2].set([-X, N, -Z, 0]);
-        vertices[3].set([X, N, -Z, 0]);
-        vertices[4].set([N, Z, X, 0]);
-        vertices[5].set([N, Z, -X, 0]);
-        vertices[6].set([N, -Z, X, 0]);
-        vertices[7].set([N, -Z, -X, 0]);
-        vertices[8].set([Z, X, N, 0]);
-        vertices[9].set([-Z, X, N, 0]);
-        vertices[10].set([Z, -X, N, 0]);
-        vertices[11].set([-Z, -X, N, 0]);
-        // Initialize indices for a 20-sided icosahedron
-        triangles[0].set([0, 4, 1]);
-        triangles[1].set([0, 9, 4]);
-        triangles[2].set([9, 5, 4]);
-        triangles[3].set([4, 5, 8]);
-        triangles[4].set([4, 8, 1]);
-        triangles[5].set([8, 10, 1]);
-        triangles[6].set([8, 3, 10]);
-        triangles[7].set([5, 3, 8]);
-        triangles[8].set([5, 2, 3]);
-        triangles[9].set([2, 7, 3]);
-        triangles[10].set([7, 10, 3]);
-        triangles[11].set([7, 6, 10]);
-        triangles[12].set([7, 11, 6]);
-        triangles[13].set([11, 0, 6]);
-        triangles[14].set([0, 1, 6]);
-        triangles[15].set([6, 1, 10]);
-        triangles[16].set([9, 0, 11]);
-        triangles[17].set([9, 11, 2]);
-        triangles[18].set([9, 2, 5]);
-        triangles[19].set([7, 2, 11]);
-        // This loop subdivides the icosahedron
-        for (let s = 0; s < this.subdivisions; ++s) {
-            b = 1 - b;
-            nextTriangles.length = triangles.length * 4;
-            let triangleIdx = 0;
-            // edgeMap maps a pair of vertex indices to a vertex index at their midpoint
-            // The function `mid` will get that midpoint vertex if it has already been created
-            // or it will create the vertex and add it to the map
-            let edgeMap = new Map();
-            function mid(v0, v1) {
-                let key = [v0, v1].sort().join('_');
-                if (!edgeMap.has(key)) {
-                    let midpoint = new Float32Array(buffer0, vertexByteOffset + vertices.length * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].add(midpoint, vertices[v0], vertices[v1]);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].normalize(midpoint, midpoint);
-                    edgeMap.set(key, vertices.length);
-                    vertices.push(midpoint);
-                }
-                return edgeMap.get(key);
-            }
-            for (let t = 0; t < triangles.length; ++t) {
-                let v0 = triangles[t][0];
-                let v1 = triangles[t][1];
-                let v2 = triangles[t][2];
-                let v3 = mid(v0, v1); // Get or create a vertex between these two vertices
-                let v4 = mid(v1, v2);
-                let v5 = mid(v2, v0);
-                let t0 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t1 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t2 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t3 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let triangleOffset = nextTriangles.length;
-                t0.set([v0, v3, v5]);
-                t1.set([v3, v4, v5]);
-                t2.set([v3, v1, v4]);
-                t3.set([v5, v4, v2]);
-            }
-            // swap buffers
-            let temp = triangles;
-            triangles = nextTriangles;
-            nextTriangles = temp;
-        }
-        if (b === 1) {
-            // if indices did not end up in buffer0, copy them there now
-            let temp0 = new Uint32Array(buffer0, 0, 3 * triangles.length);
-            let temp1 = new Uint32Array(buffer1, 0, 3 * triangles.length);
-            temp0.set(temp1);
-        }
-        // Populate one position for each normal
-        for (let i = 0; i < vertices.length; ++i) {
-            let pos = new Float32Array(buffer0, positionByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scaleAndAdd(pos, this.center, vertices[i], this.radius);
-        }
-        this.buffer = buffer0;
-        this.indices = new Uint32Array(this.buffer, indexByteOffset, triangles.length * 3);
-        this.normals = new Float32Array(this.buffer, normalByteOffset, vertices.length * 4);
-        this.positions = new Float32Array(this.buffer, positionByteOffset, vertices.length * 4);
-        this.generateIdx();
-        this.generatePos();
-        this.generateNor();
-        this.count = this.indices.length;
-        //console.log("ISOSPHERE VERTS NUM " + mesh.vertices.length);
-        console.log("ISOSPHERE " + this.positions.length);
-        console.log("ISOSPHERE NORMS NUM " + this.normals.length);
-        console.log("ISOSPHERE INDICES NUM " + this.indices.length);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.indices, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.normals, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
-        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.positions, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        console.log(`Created icosphere with ${vertices.length} vertices`);
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (Icosphere);
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(4);
 
 
 
@@ -18861,12 +18527,12 @@ class Square extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /*
 
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(4);
 
 
 // In this file, `gl` is accessible because it is imported above
@@ -18909,13 +18575,13 @@ class OpenGLRenderer {
 
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
 //import * as CameraControls from '3d-view-controls';
-var CameraControls = __webpack_require__(53);
+var CameraControls = __webpack_require__(51);
 
 class Camera {
     constructor(position, target) {
@@ -18953,7 +18619,7 @@ class Camera {
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18961,12 +18627,12 @@ class Camera {
 
 module.exports = createCamera
 
-var now         = __webpack_require__(54)
-var createView  = __webpack_require__(55)
-var mouseChange = __webpack_require__(78)
-var mouseWheel  = __webpack_require__(80)
-var mouseOffset = __webpack_require__(83)
-var hasPassive  = __webpack_require__(84)
+var now         = __webpack_require__(52)
+var createView  = __webpack_require__(53)
+var mouseChange = __webpack_require__(76)
+var mouseWheel  = __webpack_require__(78)
+var mouseOffset = __webpack_require__(81)
+var hasPassive  = __webpack_require__(82)
 
 function createCamera(element, options) {
   element = element || document.body
@@ -19196,7 +18862,7 @@ function createCamera(element, options) {
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {module.exports =
@@ -19207,10 +18873,10 @@ function createCamera(element, options) {
     return +new Date
   }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19218,9 +18884,9 @@ function createCamera(element, options) {
 
 module.exports = createViewController
 
-var createTurntable = __webpack_require__(56)
-var createOrbit     = __webpack_require__(59)
-var createMatrix    = __webpack_require__(62)
+var createTurntable = __webpack_require__(54)
+var createOrbit     = __webpack_require__(57)
+var createMatrix    = __webpack_require__(60)
 
 function ViewController(controllers, mode) {
   this._controllerNames = Object.keys(controllers)
@@ -19338,7 +19004,7 @@ function createViewController(options) {
 }
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19346,12 +19012,12 @@ function createViewController(options) {
 
 module.exports = createTurntableController
 
-var filterVector = __webpack_require__(23)
+var filterVector = __webpack_require__(22)
 var invert44     = __webpack_require__(8)
-var rotateM      = __webpack_require__(58)
-var cross        = __webpack_require__(25)
-var normalize3   = __webpack_require__(12)
-var dot3         = __webpack_require__(26)
+var rotateM      = __webpack_require__(56)
+var cross        = __webpack_require__(24)
+var normalize3   = __webpack_require__(11)
+var dot3         = __webpack_require__(25)
 
 function len3(x, y, z) {
   return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
@@ -19916,7 +19582,7 @@ function createTurntableController(options) {
 }
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19961,7 +19627,7 @@ module.exports = cubicHermite
 module.exports.derivative = dcubicHermite
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, exports) {
 
 module.exports = rotate;
@@ -20030,7 +19696,7 @@ function rotate(out, a, rad, axis) {
 };
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20038,11 +19704,11 @@ function rotate(out, a, rad, axis) {
 
 module.exports = createOrbitController
 
-var filterVector  = __webpack_require__(23)
-var lookAt        = __webpack_require__(27)
-var mat4FromQuat  = __webpack_require__(60)
+var filterVector  = __webpack_require__(22)
+var lookAt        = __webpack_require__(26)
+var mat4FromQuat  = __webpack_require__(58)
 var invert44      = __webpack_require__(8)
-var quatFromFrame = __webpack_require__(61)
+var quatFromFrame = __webpack_require__(59)
 
 function len3(x,y,z) {
   return Math.sqrt(Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2))
@@ -20429,7 +20095,7 @@ function createOrbitController(options) {
 }
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = fromQuat;
@@ -20481,7 +20147,7 @@ function fromQuat(out, q) {
 };
 
 /***/ }),
-/* 61 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20528,22 +20194,22 @@ function quatFromFrame(
 }
 
 /***/ }),
-/* 62 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bsearch   = __webpack_require__(24)
-var m4interp  = __webpack_require__(63)
+var bsearch   = __webpack_require__(23)
+var m4interp  = __webpack_require__(61)
 var invert44  = __webpack_require__(8)
-var rotateX   = __webpack_require__(75)
-var rotateY   = __webpack_require__(76)
-var rotateZ   = __webpack_require__(77)
-var lookAt    = __webpack_require__(27)
-var translate = __webpack_require__(29)
-var scale     = __webpack_require__(31)
-var normalize = __webpack_require__(12)
+var rotateX   = __webpack_require__(73)
+var rotateY   = __webpack_require__(74)
+var rotateZ   = __webpack_require__(75)
+var lookAt    = __webpack_require__(26)
+var translate = __webpack_require__(28)
+var scale     = __webpack_require__(30)
+var normalize = __webpack_require__(11)
 
 var DEFAULT_CENTER = [0,0,0]
 
@@ -20733,15 +20399,15 @@ function createMatrixCameraController(options) {
 
 
 /***/ }),
-/* 63 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var lerp = __webpack_require__(64)
+var lerp = __webpack_require__(62)
 
-var recompose = __webpack_require__(65)
-var decompose = __webpack_require__(68)
-var determinant = __webpack_require__(32)
-var slerp = __webpack_require__(73)
+var recompose = __webpack_require__(63)
+var decompose = __webpack_require__(66)
+var determinant = __webpack_require__(31)
+var slerp = __webpack_require__(71)
 
 var state0 = state()
 var state1 = state()
@@ -20790,7 +20456,7 @@ function vec4() {
 }
 
 /***/ }),
-/* 64 */
+/* 62 */
 /***/ (function(module, exports) {
 
 module.exports = lerp;
@@ -20815,7 +20481,7 @@ function lerp(out, a, b, t) {
 }
 
 /***/ }),
-/* 65 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -20830,12 +20496,12 @@ From: http://www.w3.org/TR/css3-transforms/#recomposing-to-a-3d-matrix
 */
 
 var mat4 = {
-    identity: __webpack_require__(28),
-    translate: __webpack_require__(29),
-    multiply: __webpack_require__(66),
-    create: __webpack_require__(30),
-    scale: __webpack_require__(31),
-    fromRotationTranslation: __webpack_require__(67)
+    identity: __webpack_require__(27),
+    translate: __webpack_require__(28),
+    multiply: __webpack_require__(64),
+    create: __webpack_require__(29),
+    scale: __webpack_require__(30),
+    fromRotationTranslation: __webpack_require__(65)
 }
 
 var rotationMatrix = mat4.create()
@@ -20880,7 +20546,7 @@ module.exports = function recomposeMat4(matrix, translation, scale, skew, perspe
 }
 
 /***/ }),
-/* 66 */
+/* 64 */
 /***/ (function(module, exports) {
 
 module.exports = multiply;
@@ -20927,7 +20593,7 @@ function multiply(out, a, b) {
 };
 
 /***/ }),
-/* 67 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = fromRotationTranslation;
@@ -20985,7 +20651,7 @@ function fromRotationTranslation(out, q, v) {
 };
 
 /***/ }),
-/* 68 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*jshint unused:true*/
@@ -21005,18 +20671,18 @@ https://github.com/ChromiumWebApps/chromium/blob/master/ui/gfx/transform_util.cc
 http://www.w3.org/TR/css3-transforms/#decomposing-a-3d-matrix
 */
 
-var normalize = __webpack_require__(69)
+var normalize = __webpack_require__(67)
 
-var create = __webpack_require__(30)
-var clone = __webpack_require__(70)
-var determinant = __webpack_require__(32)
+var create = __webpack_require__(29)
+var clone = __webpack_require__(68)
+var determinant = __webpack_require__(31)
 var invert = __webpack_require__(8)
-var transpose = __webpack_require__(71)
+var transpose = __webpack_require__(69)
 var vec3 = {
-    length: __webpack_require__(72),
-    normalize: __webpack_require__(12),
-    dot: __webpack_require__(26),
-    cross: __webpack_require__(25)
+    length: __webpack_require__(70),
+    normalize: __webpack_require__(11),
+    dot: __webpack_require__(25),
+    cross: __webpack_require__(24)
 }
 
 var tmp = create()
@@ -21169,7 +20835,7 @@ function combine(out, a, b, scale1, scale2) {
 }
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports) {
 
 module.exports = function normalize(out, mat) {
@@ -21184,7 +20850,7 @@ module.exports = function normalize(out, mat) {
 }
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports) {
 
 module.exports = clone;
@@ -21217,7 +20883,7 @@ function clone(a) {
 };
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports) {
 
 module.exports = transpose;
@@ -21271,7 +20937,7 @@ function transpose(out, a) {
 };
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = length;
@@ -21290,13 +20956,13 @@ function length(a) {
 }
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(74)
+module.exports = __webpack_require__(72)
 
 /***/ }),
-/* 74 */
+/* 72 */
 /***/ (function(module, exports) {
 
 module.exports = slerp
@@ -21353,7 +21019,7 @@ function slerp (out, a, b, t) {
 
 
 /***/ }),
-/* 75 */
+/* 73 */
 /***/ (function(module, exports) {
 
 module.exports = rotateX;
@@ -21402,7 +21068,7 @@ function rotateX(out, a, rad) {
 };
 
 /***/ }),
-/* 76 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = rotateY;
@@ -21451,7 +21117,7 @@ function rotateY(out, a, rad) {
 };
 
 /***/ }),
-/* 77 */
+/* 75 */
 /***/ (function(module, exports) {
 
 module.exports = rotateZ;
@@ -21500,7 +21166,7 @@ function rotateZ(out, a, rad) {
 };
 
 /***/ }),
-/* 78 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21508,7 +21174,7 @@ function rotateZ(out, a, rad) {
 
 module.exports = mouseListen
 
-var mouse = __webpack_require__(79)
+var mouse = __webpack_require__(77)
 
 function mouseListen (element, callback) {
   if (!callback) {
@@ -21712,7 +21378,7 @@ function mouseListen (element, callback) {
 
 
 /***/ }),
-/* 79 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21779,13 +21445,13 @@ exports.y = mouseRelativeY
 
 
 /***/ }),
-/* 80 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var toPX = __webpack_require__(81)
+var toPX = __webpack_require__(79)
 
 module.exports = mouseWheelListen
 
@@ -21826,13 +21492,13 @@ function mouseWheelListen(element, callback, noScroll) {
 
 
 /***/ }),
-/* 81 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var parseUnit = __webpack_require__(82)
+var parseUnit = __webpack_require__(80)
 
 module.exports = toPX
 
@@ -21907,7 +21573,7 @@ function toPX(str, element) {
 
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = function parseUnit(str, out) {
@@ -21922,7 +21588,7 @@ module.exports = function parseUnit(str, out) {
 }
 
 /***/ }),
-/* 83 */
+/* 81 */
 /***/ (function(module, exports) {
 
 var rootPosition = { left: 0, top: 0 }
@@ -21953,13 +21619,13 @@ function getBoundingClientOffset (element) {
 
 
 /***/ }),
-/* 84 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isBrowser = __webpack_require__(85)
+var isBrowser = __webpack_require__(83)
 
 function detect() {
 	var supported = false
@@ -21984,18 +21650,18 @@ module.exports = isBrowser && detect()
 
 
 /***/ }),
-/* 85 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = true;
 
 /***/ }),
-/* 86 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(4);
 
 
 var activeProgram = null;
@@ -22029,6 +21695,9 @@ class ShaderProgram {
         this.unifModelInvTr = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ModelInvTr");
         this.unifViewProj = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ViewProj");
         this.unifColor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Color");
+        this.unifBodColor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_BodyColors");
+        this.unifBodySizes = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_BodySizes");
+        this.unifHeadSize = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_HeadSize");
         this.unifTime = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Time");
         this.unifCamPos = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_CamPos");
         this.unifRes = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Resolution");
@@ -22049,6 +21718,24 @@ class ShaderProgram {
             __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].transpose(modelinvtr, model);
             __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].invert(modelinvtr, modelinvtr);
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniformMatrix4fv(this.unifModelInvTr, false, modelinvtr);
+        }
+    }
+    setBodyColors(cols) {
+        this.use();
+        if (this.unifBodColor !== -1) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform3fv(this.unifBodColor, cols);
+        }
+    }
+    setBodySizes(s) {
+        this.use();
+        if (this.unifBodySizes !== -1) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform1fv(this.unifBodySizes, s);
+        }
+    }
+    setHeadSize(s) {
+        this.use();
+        if (this.unifHeadSize !== -1) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform1f(this.unifHeadSize, s);
         }
     }
     setTime(time) {
@@ -22108,12 +21795,112 @@ class ShaderProgram {
 
 
 /***/ }),
-/* 87 */
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(4);
+
+
+
+var ObjMtlLoader = __webpack_require__(86);
+var OBJ = __webpack_require__(107);
+class Mesh extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
+    constructor(filepath, center, scale = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), rotate = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), col = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(25, 86, 107, 255)) {
+        super(); // Call the constructor of the super class. This is required.
+        this.objMtlLoader = new ObjMtlLoader();
+        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
+        this.filepath = filepath;
+        this.scale = scale;
+        this.rotate = rotate;
+        this.m_color = col;
+    }
+    load() {
+        let f = (meshes) => {
+            this.loadMesh(meshes.mesh);
+            //console.log()
+            this.create();
+        };
+        //console.log("FILEPATH " + this.filepath);
+        OBJ.downloadMeshes({
+            'mesh': this.filepath,
+        }, f);
+    }
+    loadMesh(mesh) {
+        let numPos = mesh.vertices.length / 3 * 4;
+        this.positions = new Float32Array(numPos);
+        this.normals = new Float32Array(numPos);
+        this.colors = new Float32Array(numPos);
+        //console.log(numPos);
+        let v = 0;
+        let col1 = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(25, 86, 107, 255);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scale(col1, col1, 1 / 255);
+        let col2 = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(176, 182, 158, 255);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scale(col2, col2, 1 / 255);
+        for (let i = 0; i < mesh.vertices.length; i += 3) {
+            let pos = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(mesh.vertices[i], mesh.vertices[i + 1], mesh.vertices[i + 2], 1);
+            let nor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(mesh.vertexNormals[i], mesh.vertexNormals[i + 1], mesh.vertexNormals[i + 2], 0);
+            let col = this.m_color;
+            //console.log(pos[1]);
+            let scaleMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].scale(scaleMat, scaleMat, this.scale);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(pos, pos, scaleMat);
+            let rotMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateX(rotMat, rotMat, this.rotate[0] * Math.PI / 180);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateY(rotMat, rotMat, this.rotate[1] * Math.PI / 180);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateZ(rotMat, rotMat, this.rotate[2] * Math.PI / 180);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(pos, pos, rotMat);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].transformMat4(nor, nor, rotMat);
+            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].add(pos, this.center, pos);
+            for (let j = 0; j < 4; j += 1) {
+                this.positions[v + j] = pos[j];
+                this.normals[v + j] = nor[j];
+                this.colors[v + j] = col[j];
+            }
+            v += 4;
+        }
+        this.indices = new Uint32Array(mesh.indices.length);
+        for (let i = 0; i < mesh.indices.length; i += 1) {
+            this.indices[i] = mesh.indices[i];
+        }
+        // console.log("MESH VERTS NUM " + this.positions.length);
+    }
+    create() {
+        //this.load();
+        //console.log("MESH VERTS NUM " + this.positions.length);
+        //console.log("MESH NORMS NUM " + this.normals.length);
+        //console.log("MESH INDICES NUM " + this.indices.length);
+        //console.log("MESH positions " + this.indices);
+        //console.log("MESH colors " + this.colors);
+        this.generateIdx();
+        this.generatePos();
+        this.generateNor();
+        this.generateCol();
+        this.count = this.indices.length;
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.indices, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.normals, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.positions, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.colors, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        //console.log(`Created mesh`);
+    }
+}
+;
+/* harmony default export */ __webpack_exports__["a"] = (Mesh);
+
+
+/***/ }),
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var stream = __webpack_require__(33);
-var split = __webpack_require__(101);
-var xhr = __webpack_require__(103);
+var stream = __webpack_require__(32);
+var split = __webpack_require__(100);
+var xhr = __webpack_require__(102);
 
 
 function ObjLoader() {
@@ -22366,7 +22153,7 @@ module.exports = ObjLoader;
 
 
 /***/ }),
-/* 88 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22525,7 +22312,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -22615,13 +22402,13 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 90 */
+/* 89 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 91 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22630,7 +22417,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Buffer = __webpack_require__(10).Buffer;
-var util = __webpack_require__(92);
+var util = __webpack_require__(91);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -22706,13 +22493,13 @@ if (util && util.inspect && util.inspect.custom) {
 }
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -22768,7 +22555,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(94);
+__webpack_require__(93);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -22779,10 +22566,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -22972,10 +22759,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -23046,10 +22833,10 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23082,7 +22869,7 @@ function config (name) {
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(39);
+var Transform = __webpack_require__(38);
 
 /*<replacement>*/
 var util = Object.create(__webpack_require__(7));
@@ -23102,35 +22889,35 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(14);
+
+
+/***/ }),
 /* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(13).Transform
 
 
 /***/ }),
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(15).Transform
+module.exports = __webpack_require__(13).PassThrough
 
 
 /***/ }),
 /* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(15).PassThrough
-
-
-/***/ }),
-/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //filter will reemit the data if cb(err,pass) pass is truthy
@@ -23140,8 +22927,8 @@ module.exports = __webpack_require__(15).PassThrough
 // the most basic reduce just emits one 'data' event after it has recieved 'end'
 
 
-var through = __webpack_require__(102)
-var Decoder = __webpack_require__(17).StringDecoder
+var through = __webpack_require__(101)
+var Decoder = __webpack_require__(15).StringDecoder
 
 module.exports = split
 
@@ -23199,10 +22986,10 @@ function split (matcher, mapper, options) {
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {var Stream = __webpack_require__(33)
+/* WEBPACK VAR INJECTION */(function(process) {var Stream = __webpack_require__(32)
 
 // through
 //
@@ -23314,15 +23101,15 @@ function through (write, end, opts) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var window = __webpack_require__(104)
-var isFunction = __webpack_require__(105)
-var parseHeaders = __webpack_require__(106)
-var xtend = __webpack_require__(107)
+var window = __webpack_require__(103)
+var isFunction = __webpack_require__(104)
+var parseHeaders = __webpack_require__(105)
+var xtend = __webpack_require__(106)
 
 module.exports = createXHR
 // Allow use of default import syntax in TypeScript
@@ -23568,7 +23355,7 @@ function noop() {}
 
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var win;
@@ -23585,10 +23372,10 @@ if (typeof window !== "undefined") {
 
 module.exports = win;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = isFunction
@@ -23612,7 +23399,7 @@ function isFunction (fn) {
 
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports) {
 
 var trim = function(string) {
@@ -23650,7 +23437,7 @@ module.exports = function (headers) {
 
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -23675,7 +23462,7 @@ function extend() {
 
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){if(true)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var n=t();for(var a in n)("object"==typeof exports?exports:e)[a]=n[a]}}("undefined"!=typeof self?self:this,(function(){return function(e){var t={};function n(a){if(t[a])return t[a].exports;var s=t[a]={i:a,l:!1,exports:{}};return e[a].call(s.exports,s,s.exports,n),s.l=!0,s.exports}return n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var s in e)n.d(a,s,function(t){return e[t]}.bind(null,s));return a},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/",n(n.s=0)}({"./src/index.ts":
@@ -23705,366 +23492,52 @@ function extend() {
 /*! no static exports found */function(module,exports,__webpack_require__){eval('module.exports = __webpack_require__(/*! /home/aaron/google_drive/projects/webgl-obj-loader/src/index.ts */"./src/index.ts");\n\n\n//# sourceURL=webpack:///multi_./src/index.ts?')}})}));
 
 /***/ }),
-/* 109 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Mesh__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LSystem__ = __webpack_require__(110);
-
-
-
-class Turtle {
-    constructor() {
-        this.position = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0);
-        this.orientation = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0);
-        this.depth = 1;
-    }
-    copyshallow(t) {
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].copy(this.position, t.position);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].copy(this.orientation, t.orientation);
-        this.depth = t.depth;
-    }
-}
-class Orchids extends __WEBPACK_IMPORTED_MODULE_2__LSystem__["a" /* default */] {
-    constructor() {
-        super();
-        this.axiom = "X";
-        this.turtleStack = new Array();
-        this.meshes = new Array();
-        this.iterations = 3;
-        this.charExpansions = new Map();
-        this.charToAction = new Map();
-        this.expandedSentence = "";
-        this.currTurtle = new Turtle();
-        this.currTurtle.orientation = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0);
-        this.decay = 0.2;
-        this.stepDecay = 0.1;
-        this.orchidSize = 0.3;
-        this.radius = 0.2;
-        this.offset = -0.01;
-        this.charExpansions.clear();
-        ;
-        this.charToAction.clear();
-        this.fillCharExpansions();
-        this.fillCharToAction();
-    }
-    fillCharToAction() {
-        this.charToAction.set('F', () => {
-            this.advanceTurtle();
-        });
-        this.charToAction.set('A', () => {
-            this.advanceTurtle();
-        });
-        this.charToAction.set('B', () => {
-            this.advanceTurtle();
-        });
-        this.charToAction.set('>', () => {
-            this.rotateTurtleXBy(this.curvature);
-        });
-        this.charToAction.set('<', () => {
-            this.rotateTurtleXBy(-this.curvature);
-        });
-        this.charToAction.set('.', () => {
-            this.rotateTurtleZBy(this.curvature);
-        });
-        this.charToAction.set('-', () => {
-            this.rotateTurtleZBy(-this.curvature);
-        });
-        this.charToAction.set('+', () => {
-            this.rotateTurtleZBy(this.curvature);
-        });
-        this.charToAction.set('y', () => {
-            this.rotateTurtleYBy(-10);
-        });
-        this.charToAction.set('u', () => {
-            this.rotateTurtleYBy(10);
-        });
-        this.charToAction.set('[', () => {
-            this.pushTurtle();
-        });
-        this.charToAction.set(']', () => {
-            this.popTurtle();
-        });
-        this.charToAction.set('s', () => {
-            this.sproutBud();
-        });
-        this.charToAction.set('l', () => {
-            this.sproutLeaf();
-        });
-        0;
-    }
-    advanceTurtle() {
-        console.log("advancingturtle");
-        let sF = Math.exp(-this.currTurtle.depth * this.decay) * this.radius;
-        let sStep = Math.exp(-this.currTurtle.depth * this.stepDecay) * this.height;
-        let mesh = new __WEBPACK_IMPORTED_MODULE_1__Mesh__["a" /* default */]('/geo/stem.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.position), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(sF, sStep, sF), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.orientation), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(0.29, 0.17, 0.11, 1));
-        this.meshes.push(mesh);
-        let rotMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateX(rotMat, rotMat, this.currTurtle.orientation[0] * Math.PI / 180);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateY(rotMat, rotMat, this.currTurtle.orientation[1] * Math.PI / 180);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateZ(rotMat, rotMat, this.currTurtle.orientation[2] * Math.PI / 180);
-        let offset = this.height / 20;
-        let step = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, sStep - offset, 0);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].transformMat4(step, step, rotMat);
-        this.currTurtle.depth += 1;
-        //vec3.scaleAndAdd(this.currTurtle.position, this.currTurtle.position, step, this.currTurtle.depth);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].scaleAndAdd(this.currTurtle.position, this.currTurtle.position, step, 1);
-    }
-    sproutBud() {
-        let mesh = new __WEBPACK_IMPORTED_MODULE_1__Mesh__["a" /* default */]('/geo/orchid.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.position), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(this.orchidSize, this.orchidSize, this.orchidSize), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.orientation), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(1, 1, 1, 1));
-        this.meshes.push(mesh);
-    }
-    sproutLeaf() {
-        let sF = Math.exp(-this.currTurtle.depth);
-        let mesh = new __WEBPACK_IMPORTED_MODULE_1__Mesh__["a" /* default */]('/geo/leaf.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.position), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(sF, 1, sF), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.orientation), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(0.38, 0.51, 0.33, 1));
-        this.meshes.push(mesh);
-    }
-    rotateTurtleX() {
-        this.currTurtle.orientation[0] += 30;
-    }
-    rotateTurtleY() {
-        this.currTurtle.orientation[1] += 30;
-    }
-    rotateTurtleZ() {
-        this.currTurtle.orientation[2] += 30;
-    }
-    fillCharExpansions() {
-        console.log("orchids EXPANSION");
-        this.charExpansions.set('X', 'A+B>F-A<B+F-[>>>>>>Xs][++++++<<<<<<Xs][------<<<<<<Xs]');
-        this.charExpansions.set('F', '+A<');
-        this.charExpansions.set('A', '-B>');
-        this.charExpansions.set('B', '>+F<-');
-        this.charExpansions.set('s', 'Fs');
-        //this.charExpansions.set('+', '+F');
-        //this.charExpansions.set('-', '-F');
-        this.charExpansions.set('Y', '[yylyyyylyyy>>>ylY]');
-    }
-    pushTurtle() {
-        this.turtleStack.push(this.currTurtle);
-        let prevTurtle = this.currTurtle;
-        this.currTurtle = new Turtle();
-        this.currTurtle.copyshallow(prevTurtle);
-    }
-    popTurtle() {
-        this.currTurtle = this.turtleStack.pop();
-        //console.log(this.currTurtle);
-    }
-    expandAxiom() {
-        let prevAxiom = this.axiom;
-        for (let i = 0; i < this.iterations; i++) {
-            let sentence = "";
-            for (let c of prevAxiom) {
-                if (this.charExpansions.get(c) == undefined) {
-                    sentence = sentence.concat(c);
-                }
-                else {
-                    sentence = sentence.concat(this.charExpansions.get(c).toString());
-                }
-            }
-            prevAxiom = sentence;
-        }
-        this.expandedSentence = prevAxiom;
-    }
-    moveTurtle() {
-        for (let c of this.expandedSentence) {
-            if (this.charToAction.get(c) == undefined) {
-                continue;
-            }
-            this.charToAction.get(c)();
-        }
-    }
-    createAll() {
-        for (let mesh of this.meshes) {
-            mesh.load();
-        }
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (Orchids);
-
-
-/***/ }),
-/* 110 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Mesh__ = __webpack_require__(13);
-
-
-class Turtle {
-    constructor() {
-        this.position = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0);
-        this.orientation = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0);
-        this.depth = 2;
-    }
-    copyshallow(t) {
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].copy(this.position, t.position);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].copy(this.orientation, t.orientation);
-        this.depth = t.depth;
-    }
-}
-class LSystem {
-    constructor() {
-        this.axiom = "X";
-        this.turtleStack = new Array();
-        this.meshes = new Array();
-        this.iterations = 3;
-        this.charExpansions = new Map();
-        this.charToAction = new Map();
-        this.expandedSentence = "";
-        this.currTurtle = new Turtle();
-        this.currTurtle.orientation = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0);
-        this.orientRand = 0;
-        this.fillCharExpansions();
-        this.fillCharToAction();
-        this.curvature = 5;
-        this.height = 0.2;
-    }
-    fillCharToAction() {
-        this.charToAction.set('F', () => {
-            this.advanceTurtle();
-        });
-        this.charToAction.set('>', () => {
-            this.rotateTurtleX();
-        });
-        this.charToAction.set('.', () => {
-            this.rotateTurtleZ();
-        });
-        this.charToAction.set('[', () => {
-            this.pushTurtle();
-        });
-        this.charToAction.set(']', () => {
-            this.popTurtle();
-        });
-    }
-    advanceTurtle() {
-        let mesh = new __WEBPACK_IMPORTED_MODULE_1__Mesh__["a" /* default */]('/geo/feather.obj', __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.position), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(1, 1, 1), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].clone(this.currTurtle.orientation));
-        this.meshes.push(mesh);
-        let rotMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateX(rotMat, rotMat, this.currTurtle.orientation[0] * Math.PI / 180);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateY(rotMat, rotMat, this.currTurtle.orientation[1] * Math.PI / 180);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].rotateZ(rotMat, rotMat, this.currTurtle.orientation[2] * Math.PI / 180);
-        let step = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 1, 0);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].transformMat4(step, step, rotMat);
-        //vec3.scaleAndAdd(this.currTurtle.position, this.currTurtle.position, step, this.currTurtle.depth);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].scaleAndAdd(this.currTurtle.position, this.currTurtle.position, step, 1);
-    }
-    rotateTurtleX() {
-        this.currTurtle.orientation[0] += 30;
-    }
-    rotateTurtleXBy(angle) {
-        this.currTurtle.orientation[0] += angle + Math.random() * this.orientRand - 0.5 * this.orientRand;
-    }
-    rotateTurtleYBy(angle) {
-        this.currTurtle.orientation[1] += angle + Math.random() * this.orientRand - 0.5 * this.orientRand;
-    }
-    rotateTurtleY() {
-        this.currTurtle.orientation[1] += 30;
-    }
-    rotateTurtleZ() {
-        this.currTurtle.orientation[2] += 30;
-    }
-    rotateTurtleZBy(angle) {
-        this.currTurtle.orientation[2] += angle + Math.random() * this.orientRand - 0.5 * this.orientRand;
-    }
-    fillCharExpansions() {
-        console.log("regular EXPANSION");
-        this.charExpansions.set('X', 'X.>>[X[.F].>F.F[XF]FX]');
-    }
-    pushTurtle() {
-        this.turtleStack.push(this.currTurtle);
-        let prevTurtle = this.currTurtle;
-        this.currTurtle = new Turtle();
-        this.currTurtle.copyshallow(prevTurtle);
-    }
-    popTurtle() {
-        this.currTurtle = this.turtleStack.pop();
-        //console.log(this.currTurtle);
-    }
-    expandAxiom() {
-        let prevAxiom = this.axiom;
-        for (let i = 0; i < this.iterations; i++) {
-            let sentence = "";
-            for (let c of prevAxiom) {
-                if (this.charExpansions.get(c) == undefined) {
-                    sentence = sentence.concat(c);
-                }
-                else {
-                    sentence = sentence.concat(this.charExpansions.get(c).toString());
-                }
-            }
-            prevAxiom = sentence;
-        }
-        this.expandedSentence = prevAxiom;
-    }
-    moveTurtle() {
-        for (let c of this.expandedSentence) {
-            if (this.charToAction.get(c) == undefined) {
-                continue;
-            }
-            this.charToAction.get(c)();
-        }
-    }
-    createAll() {
-        for (let mesh of this.meshes) {
-            mesh.load();
-        }
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (LSystem);
-
-
-/***/ }),
-/* 111 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\n\nconst vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n\n\n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n\n    gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n}\n"
 
 /***/ }),
-/* 112 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\n\nvoid main()\n{\n    // Material base color (before shading)\n        vec4 diffuseColor = u_Color;\n\n        // Calculate the diffuse term for Lambert shading\n        float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        float ambientTerm = 0.2;\n\n        float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n                                                            //lit by our point light are not completely black.\n\n        // Compute final shaded color\n        out_Col = vec4(diffuseColor.rgb * lightIntensity, diffuseColor.a);\n}\n"
 
 /***/ }),
-/* 113 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Pos;\nconst vec4 lightPos = vec4(-4, 5, 5, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n                                                \n\n                                                          \n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n    \n   // modelposition.z = -0.1;\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n    \n    fs_Pos = u_ViewProj * modelposition;\n    gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n                                             \n}\n"
 
 /***/ }),
-/* 114 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\n\nvoid main()\n{\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n        \n         //diffuseColor = vec4(0.1,1,1,1);\n        // Calculate the diffuse term for Lambert shading\n        float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        float ambientTerm = 0.7;\n\n        float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n//        if(lightIntensity == 0f) {\n//            lightIntensity = 0.2f;\n//        }\n        // Compute final shaded color\n        out_Col = vec4(diffuseColor.rgb * lightIntensity, diffuseColor.a);\n        //out_Col = vec4(fs_Pos.z,fs_Pos.z,fs_Pos.z,1);\n\t//out_Col = diffuseColor;\n}\n"
 
 /***/ }),
-/* 115 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\nuniform float u_Time;\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Pos;\nconst vec4 lightPos = vec4(-4, 5, 5, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n                                        \n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n\n\n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n    \n    modelposition.z = 0.9999999;\n    vec4 offset =  vec4(0,-mod(u_Time, 100000.f),0,0) * 0.01;\n    fs_Pos = modelposition;\n    gl_Position = modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n}\n"
 
 /***/ }),
-/* 116 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nuniform float u_Time;\n\nconst vec3 bluegreen[5] = vec3[](\nvec3(254, 186, 98) / 255.0,\nvec3(255, 182, 192) / 255.0,\nvec3(177, 187, 187) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(142, 199, 230) / 255.0);\n\nconst vec3 sunset[5] = vec3[](\n    vec3(115, 120, 176) / 255.0, \n    vec3(142, 120, 184) / 255.0, \n\nvec3(142, 120, 184) / 255.0,\nvec3(252, 144, 168) / 255.0,\nvec3(255, 182, 192) / 255.0\n);\n\nconst float cutoffs[5] = float[](0.15,0.3,0.4,0.65,0.75);\n\nvec3 uvToSunset(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return sunset[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(sunset[0], sunset[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(sunset[1], sunset[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(sunset[2], sunset[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(sunset[3], sunset[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return sunset[4];\n}\n\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\n\nvoid main()\n{\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n         //diffuseColor = vec4(0.1,1,1,1);\n        vec2 uv = 0.5 * (fs_Pos.xy + vec2(1,1));\n\n        // Calculate the diffuse term for Lambert shading\n        float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        float ambientTerm = 0.7;\n\n        float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n\n        // Compute final shaded color\n       // out_Col = vec4(0,0.8,0.5,1);\n       out_Col = vec4(uvToSunset(uv),1);\n\t//out_Col = diffuseColor;\n}\n"
 
 /***/ }),
-/* 117 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Pos;\nconst vec4 lightPos = vec4(4, 5, 5, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n                                                \n\n                                                          \n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n    \n   // modelposition.z = -0.1;\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n    \n    fs_Pos = modelposition;\n    gl_Position = modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n                                             \n}\n"
 
 /***/ }),
-/* 118 */
+/* 115 */
 /***/ (function(module, exports) {
 
-module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\nconst float PI = 3.1415926535897932384626433832795;\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\nuniform vec3 u_Resolution;\n\nuniform float u_Time;\nuniform mat4 u_ViewProj;\nuniform vec3 u_CamPos;\n\nconst int numLights = 4;\nconst vec3 pointLights[numLights] = vec3[] (\n    vec3(5,6,7), vec3(0,10,10), vec3(8,5,-7), vec3(2,0,10)\n);\n\nconst float lightIntensities[numLights] = float[] (\n    0.8f, 1.6f, 1.2f, 0.2f\n);\n\nconst vec3 lightColors[numLights] = vec3[] (\n    vec3(1,1,1), vec3(0.3, 0.4, 1.0), vec3(1,0.7,0.5), vec3(1,1,0.9)\n);\n\nconst bool lightCastsShadow[numLights] = bool[] (\n    true, false, true, true\n);\n\nconst bool lightCastsSpecular[numLights] = bool[] (\n    true, true, true, true\n);\n\n//body, eye, white\nconst vec3 matColors[5] = vec3[](\nvec3(102, 138, 41) / 255.0,\nvec3(30, 20, 15) / 255.0,\nvec3(255, 255, 190) / 255.0,\nvec3(40, 30, 89) / 255.0,\nvec3(50, 56, 89) / 255.0);\n\nconst float matCosPow[5] = float[](\n20.0, \n8.0,\n8.0,\n6.0,\n6.0);\n\nconst float matSpec[5] = float[](\n1.2, \n1.0,\n0.3,\n0.2,\n1.2);\n\nconst float matDiff[5] = float[](\n0.5, \n0.3,\n0.9,\n0.4,\n1.0);\n\nconst vec3 bluegreen[5] = vec3[](\nvec3(142, 199, 230) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0);\n\nconst float cutoffs[5] = float[](0.0,0.5,0.6,0.8,0.9);\n\nvec2 hash (vec2 p) {\n    return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);\n}\n\nfloat cubic(float t) {\n    return t * t * (3.0 - 2.0 * t);\n}\n\nvec2 cubic2(vec2 t) {\n    return t * t * (3.0 - 2.0 * t);\n}\n\nfloat quintic(float t) {\n    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);\n}\n\nvec2 quintic2(vec2 t) {\n    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);\n}\n\n\nfloat noise(vec2 p) {\nfloat intX = floor(p.x);\nfloat fractX = fract(p.x);\n\nfloat intY = floor(p.y);\nfloat fractY = fract(p.y);\nfractX = cubic(fractX);\nfractY = cubic(fractY);\n\nfloat v1 = hash(vec2(intX,intY)).x;\nfloat v2 = hash(vec2(intX + 1.0,intY)).x;\nfloat v3 = hash(vec2(intX,intY + 1.0)).x;\nfloat v4 = hash(vec2(intX + 1.0,intY + 1.0)).x;\n\nfloat i1 = mix(v1, v2, fractX);\nfloat i2 = mix(v3, v4, fractX);\nreturn mix(i1, i2, fractY);\n}\n\nvec2 noise2(vec2 p) {\nfloat intX = floor(p.x);\nfloat fractX = fract(p.x);\n\nfloat intY = floor(p.y);\nfloat fractY = fract(p.y);\nfractX = quintic(fractX);\nfractY = quintic(fractY);\n\nvec2 v1 = hash(vec2(intX,intY));\nvec2 v2 = hash(vec2(intX + 1.0,intY));\nvec2 v3 = hash(vec2(intX,intY + 1.0));\nvec2 v4 = hash(vec2(intX + 1.0,intY + 1.0));\n\nvec2 i1 = mix(v1, v2, fractX);\nvec2 i2 = mix(v3, v4, fractX);\nreturn mix(i1, i2, fractY);\n}\n\nvec3 uvToSunset(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return bluegreen[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(bluegreen[0], bluegreen[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(bluegreen[1], bluegreen[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(bluegreen[2], bluegreen[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(bluegreen[3], bluegreen[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return bluegreen[4];\n}\n\nvec3 transRot(vec3 p, mat4 rot, vec3 trans) {\n    return (rot * vec4(p-trans, 1.f)).xyz;\n}\n\nmat4 rotateX( float angle ) {\n\treturn mat4(\t1.0,\t\t0,\t\t\t0,\t\t\t0,\n\t\t\t \t\t0, \tcos(angle),\t-sin(angle),\t\t0,\n\t\t\t\t\t0, \tsin(angle),\t cos(angle),\t\t0,\n\t\t\t\t\t0, \t\t\t0,\t\t\t  0, \t\t1);\n}\n\nmat4 rotateY( float angle ) {\n\treturn mat4(\tcos(angle),\t\t0,\t\tsin(angle),\t0,\n\t\t\t \t\t\t\t0,\t\t1.0,\t\t\t 0,\t0,\n\t\t\t\t\t-sin(angle),\t0,\t\tcos(angle),\t0,\n\t\t\t\t\t\t\t0, \t\t0,\t\t\t\t0,\t1);\n}\n\nmat4 rotateZ( float angle ) {\n\treturn mat4(\tcos(angle),\t\t-sin(angle),\t0,\t0,\n\t\t\t \t\tsin(angle),\t\tcos(angle),\t\t0,\t0,\n\t\t\t\t\t\t\t0,\t\t\t\t0,\t\t1,\t0,\n\t\t\t\t\t\t\t0,\t\t\t\t0,\t\t0,\t1);\n}\n\n\n\n\nvec3 uvToA(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return matColors[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(matColors[0], matColors[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(matColors[1], matColors[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(matColors[2], matColors[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(matColors[3], matColors[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return matColors[4];\n}\n\nvec3 twist(vec3 p) {\n    float k = 1.2f; // or some other amount\n    float c = cos(k*p.y);\n    float s = sin(k*p.y);\n    mat2  m = mat2(c,-s,s,c);\n    vec3  q = vec3(m*vec2(p.x, p.z),p.y);\n    return q;\n}\n//sdfs from Inigo Quilez https://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm\nfloat sphere(vec3 p, float s) {\n    return length(p) - s;\n}\n\nfloat plane(vec3 p) {\n    return p.y;\n}\n\nfloat box(vec3 p, vec3 b) {\n    vec3 q = abs(p) - b;\n    return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);\n\n}\n\nfloat stick(vec3 p, vec3 a, vec3 b, float r1, float r2)\n{\n    vec3 pa = p-a, ba = b-a;\n\tfloat h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );\n\treturn  length( pa - ba*h ) - mix(r1,r2,h*h*(3.0-2.0*h));\n}\n\nfloat roundBox( vec3 p, vec3 b, float r )\n{\n  vec3 q = abs(p) - b;\n  return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;\n}\n\n\nfloat surflet(vec2 p, vec2 gridPoint) {\n    vec2 t2 = abs(p - gridPoint);\n    vec2 t = vec2(1.f) - cubic2(t2);\n    vec2 gradient = hash(gridPoint) * 2.f - vec2(1,1);\n    vec2 diff = p - gridPoint;\n    float height = dot(diff, gradient);\n    return height * t.x * t.y;\n\n}\n\nfloat perlin(vec2 p) {\n    vec2 f = floor(p);\n    return surflet(p, f+vec2(0,0)) \n    + surflet(p, f+vec2(1,0))\n    +surflet(p, f+vec2(0,1))\n    +surflet(p, f+vec2(1,1));\n}\n\nvec2 fbm(vec3 p, float persistence, float octaves) {\n    //vec2 res = vec2(0);\n    float timefactor = abs((sin(u_Time * 0.01) + 3.f) * 0.25f);\n    vec2 inp = p.xy;\n    float res = 0.f;\n    for(float i = 0.f; i < octaves; i++) {\n        res += pow(2.f, -i) * perlin(pow(persistence, i) * inp);\n    }\n    return vec2(res);\n}\n\n\nvec3 getMatColor(vec3 q, int i) {\n    if(i == 0) {\n        vec2 uv = q.xy * q.z - 0.04;\n        uv.x *= 2.f;\n        float n = 3.f * perlin(0.5f * uv);\n        float off = clamp(n * 5.f * n, 0.0, 1.0);\n        vec3 res = mix(vec3(0.5, 0.6, 0.15), vec3(0.4, 0.5, 0.2), off);\n        off = clamp(n * n, 0.0, 1.0);\n        res = mix(res, vec3(0.59, 0.75, 0.3), off);\n        res = mix(res, vec3(0.87, 0.9, 0.2), 1.f - clamp(abs(q.y - 0.5), 0.f, 1.f));\n\n        return res;\n    }\n    else if(i == 2) {\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 5.f * perlin(2.f * uv);\n        float off = 1.0f - clamp(n * n, 0.0, 1.0);\n        vec3 res =  mix(vec3(1, 1, 0.7), vec3(0.8, 0.8, 0.5), off);\n        res = mix(res, vec3(0.7, 0.6, 0.4), clamp(1.0 - abs(q.y), 0.f, 1.f));\n        return res;\n    }\n    else if(i == 4) {\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 8.f * perlin(10.f * uv);\n\n        float off = 1.0f - clamp(n, 0.0, 1.0);\n\n        return mix(vec3(0.3, 0.25, 0.05), vec3(0.4, 0.3, 0.2), off);\n    } else {\n        return matColors[i];\n    }\n}\n\n\nvec3 getMatDisp(vec3 q, int i) {\n    if(i == 0) {\n        vec2 uv = q.xy;\n        float off = -0.001 * clamp(3.0 * perlin(50.0 * uv), 0.0, 1.0);\n\n        return vec3(off);\n\n    } else if (i == 2) {\n        vec2 uv = q.xy;\n        float off = -0.003 * clamp(4.0 *  perlin(38.0 * uv), 0.0, 1.0);\n        return vec3(off);\n    }\n    else if ( i == 4) {\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 4.f * perlin(10.f * uv);\n        float off = -0.001 * clamp(n * n, 0.0, 1.0);\n        return vec3(off);\n\n    } else {\n        return vec3(0.f);\n    }\n}\n\nfloat displace(vec3 p, float freq, float octaves) {\n    //return sin(5.f * sin(20.f * p.x) + sin(20*p.y) + sin(20*p.z));\n    \n    float res = 0.f;\n    float expV =2.f;\n    octaves = 3.f;\n    float timefactor = abs((sin(u_Time * 0.01) + 3.f) * 0.25f);\n    for(float i = 0.f; i <= octaves; i++) {\n        float amp = pow(2.f, -i);\n        res += amp * sin(freq * pow(expV, i) * p.x +timefactor)\n        + amp * sin(freq * pow(expV, i) * p.y + timefactor) +\n        amp * sin(freq * pow(expV, i) * p.z + timefactor);\n    }\n    return res;\n\n    /*\n    return sin(3.f* p.x) + sin(3.f*p.y) + sin(3.f*p.z) +\n            0.5f * (sin(6.f * p.x) + sin(6.f * p.y) + sin(6.f * p.z))\n            + 0.25f * (sin(12.f * p.x) + sin(12.f * p.y) + sin(12.f * p.z))\n            +0.125f * (sin(24.f * p.x) + sin(24.f * p.y) + sin(24.f * p.z));*/\n}\n\nvec2 unionCSG(vec2 d1, vec2 d2) {\n    if (d1.x > d2.x)  {\n        return d2;\n    }\n    else{\n        return d1;\n    }\n}\n\n//preserves the geometry of d1, but changes color to d2\nvec2 unionColor(vec2 d1, vec2 d2) {\n    if (d1.x > d2.x)  {\n        return vec2(d1.x, d2.y);\n    }\n    else{\n        return d1;\n    }\n}\n\nvec2 intersectionCSG(vec2 d1, vec2 d2) {\n    if (d1.x < d2.x)  {\n        return d2;\n    }\n    else{\n        return d1;\n    }\n}\n\nvec2 differenceCSG(vec2 d1, vec2 d2) {\n    if (-d1.x < d2.x)  {\n        return d2;\n    }\n    else{\n        return vec2(-d1.x,d1.y);\n    }\n}\n\nvec2 lightVis(vec3 p) {\n    vec2 res = vec2(9e10, 0.f);\n    for (int i = 0; i < numLights; i++) {\n        vec3 transP = p - pointLights[i];\n        vec2 sphere1 = vec2(sphere(transP,0.5f),0.f);\n        res = unionCSG(res, sphere1);\n    }\n    return res;\n}\n\nvec2 smin( vec2 a, vec2 b, float k )\n{\n    float h = clamp( 0.5+0.5*(b.x-a.x)/k, 0.0, 1.0 );\n    if(h < 0.5) {\n        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), b.y);\n    } else {\n        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), a.y);\n    }\n}\n//taken from http://iquilezles.org/www/articles/smin/smin.htm\n//intersect\nvec2 smax( vec2 a, vec2 b, float k )\n{\n    float h = max(k-abs(a.x-b.x),0.0);\n    return (a.x > b.x ? vec2((a.x + h*h*0.25/k), a.y) : vec2((b.x + h*h*0.25/k), b.y));\n}\n\nvec2 scene(vec3 p) {\n    if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {\n        return vec2(9e10, 0.f);\n    }\n    float throatsize = 0.4 * abs(sin(u_Time * 0.4));\n    vec3 q = p; \n\n    vec3 bodOffset = vec3(0,-0.1,0.9) + vec3(0, throatsize * 0.2, throatsize * 0.5);\n    vec2 body = vec2(sphere(p - bodOffset,1.9f - 0.2 * throatsize),0.f);\n    bodOffset = vec3(0,0.3,3) + vec3(0, throatsize * 0.1, throatsize * 0.1);\n    vec2 head = vec2(sphere(p - bodOffset,1.3f),0.f);\n\n    vec2 smoothy = smin(body, head, 0.4f);\n    \n    vec2 box = vec2(roundBox(p - vec3(0,0,-1),vec3(0.3,0.3,0.3), 0.3f),0.f);\n    vec3 rot = (rotateX(5.f) * vec4(p - vec3(0,0.3,3.8),1)).xyz;\n    vec2 snout = vec2(roundBox(rot,vec3(0.2,0.2,0.2), 0.4f),0.f);\n    smoothy = smin(smoothy, box, 1.f);\n    smoothy = smin(smoothy, snout, 1.f);\n\n    vec2 bodColor = vec2(sphere(p -  vec3(0.f,-2.4f,2.9f),3.2f),2.f);\n\n    smoothy = unionColor(smoothy, bodColor);\n\n        //eyes\n        {\n            float ifloat = 1.f;\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 ridge = vec3(0.86,1.2,3.42);\n            vec2 eyeridge1 = vec2(sphere(sp -ridge,0.45f),0.f);\n            smoothy = smin(smoothy, eyeridge1, 0.09f);\n            //vec2 eyeposridge + (0.03, 0, 0.05);\n            vec2 eyeball1 = vec2(sphere(sp - vec3(0.93,1.2,3.47),0.41f),1.f);\n            vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),4.f);\n            vec2 slitA = vec2(sphere(sp - vec3(1.03,1.35,3.63),0.32f),1.f);\n            vec2 slitB = vec2(sphere(sp - vec3(1.03,1.10,3.63),0.32f),1.f);\n            vec2 slit = smax(slitA, slitB, 0.05);\n            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),0.4f),1.f);\n\n            sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);\n            sclera = smax(vec2(-slit.x, slit.y), sclera, 0.04);\n\n            //smoothy = smin(smoothy, slit, 0.01);\n            smoothy = smin(smoothy, eyeball1, 0.01);\n            smoothy = smin(smoothy, sclera, 0.02);\n\n        }\n\n        //arms\n        {\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 shoulder = vec3(1.3,-0.3,2.5);\n            vec3 elbow = shoulder + vec3(0.6,-0.7,-0.3);\n            vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);\n            vec3 f1 = wrist + vec3(-0.8,-0.1,1.1);\n            //vec3 f2 = wrist + vec3(-0.3,-0.1,1.6);\n           // vec3 f3 = wrist + vec3(0.2,-0.1,1.3);\n\n            vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f, 0.34f), 0.f);\n            vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f, 0.4f), 0.f);\n            wrist -= vec3(0.2,0.3,0);\n            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);\n\n            smoothy = smin(smoothy, sticky, 0.1);\n            smoothy = smin(smoothy, forearm, 0.1);\n            smoothy = smin(smoothy, finger, 0.15);\n            f1 = wrist + vec3(-0.3,-0.1,1.6);\n            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.15);\n            f1 = wrist + vec3(0.2,-0.1,1.3);\n            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.15);\n\n\n        }\n\n        //legs\n        {\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 hip = vec3(1.0,-0.2,-1.3);\n            vec3 knee = hip + vec3(0.4,-0.7,1.3);\n            vec3 wrist = knee + vec3(-0.5,-0.7, -1.3);\n            vec3 f1 = wrist + vec3(-0.3,-0.1,1.7);\n            vec3 f2 = wrist + vec3(0.2,-0.1,2.2);\n            vec3 f3 = wrist + vec3(1.0,-0.1,1.9);\n\n            vec2 upleg = vec2(stick(sp, hip, knee, 0.55f, 0.42f), 0.f);\n            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.5f, 0.45f), 0.f);\n            wrist -= vec3(0.2,0.3,0);\n            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);\n\n            smoothy = smin(smoothy, upleg, 0.3);\n            smoothy = smin(smoothy, lowleg, 0.1);\n            smoothy = smin(smoothy, finger, 0.2);\n            finger = vec2(stick(sp, wrist, f2, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.2);\n\n            finger = vec2(stick(sp, wrist, f3, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.2);\n\n        }\n\n        vec2 throat = vec2(sphere(p - vec3(0,-0.6,3.0),1.1f + throatsize),2.f);\n\n    smoothy = smin(smoothy, throat, 0.2f);\n    vec2 spine = vec2(stick(p, vec3(0,2.0,4.1), vec3(0,2.4,2.1) , 0.9f, 0.6f), 0.f);\n    smoothy = smax(smoothy, vec2(-spine.x, spine.y), 0.2f);\n\n    vec2 plane = vec2(plane(p + vec3(0,2,0)),3.f);\n    vec3 off = getMatDisp(p, int(smoothy.y));\n    smoothy.x += off.x;\n    vec2 res = vec2(smoothy.x * 0.9, smoothy.y);\n\n    return res;\n\n\n}\n\nvec2 sceneA(vec3 p) {\n    if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {\n        return vec2(9e10, 0.f);\n    }\n    vec3 twisted = twist(p);\n    float sphere2 = sphere(twisted,3.f);\n    float boxy = box(twisted,vec3(2,2,2));\n\n    vec2 box1 = vec2(box(p + vec3(0,2,0), vec3(2,4,2)), 0.f);\n    vec2 box2 = vec2(box(p + vec3(0,7,0), vec3(2,4,2)), 0.f);\n\n\n    vec2 normSphere = vec2(sphere(p - vec3(0,0,2), 2.f),2.f);\n\n    vec2 twisty = vec2(sphere2 + 0.3 * displace(twisted, 2.f, 2.f), 1.f);\n    vec2 plane = vec2(plane(p + vec3(0,5,0)),3.f);\n    p.x += 4.f;\n    p.y += -3.f;\n\n    float s3 = sphere(p, 1.5f);\n    vec2 sphere3 = vec2(s3,2.f);\n\n    vec2 world = differenceCSG(normSphere, twisty);\n    //world = differenceCSG(sphere3, world);\n    vec2 cutout = differenceCSG(normSphere, box1);\n\n    // world = twisty;\n\n    vec2 res = world;//unionCSG(world, plane);\n    res = unionCSG(res, box2);\n    res.x *= 0.2;\n    return res;\n}\n\n\nfloat epsilon = 0.0001;\nvec3 estimateNormal(vec3 p) {\n    return normalize(vec3(scene(vec3(p.x + epsilon, p.y, p.z)).x - scene(vec3(p.x - epsilon, p.y, p.z)).x,\n                                   scene(vec3(p.x, p.y  + epsilon, p.z)).x - scene(vec3(p.x, p.y - epsilon, p.z)).x,\n                                   scene(vec3(p.x, p.y, p.z  + epsilon)).x - scene(vec3(p.x, p.y, p.z - epsilon)).x));\n}\nfloat precis = 0.002;\nvec4 raymarch(vec3 rayDir, vec3 rayOrigin)\n{\n    //p is the far clip position we are casting to\n    float tmax = 100.f;\n    float t = 0.f;\n    int maxSteps = 250;\n    for(int i = 0; i < maxSteps; i++) {\n        vec3 p = rayOrigin + rayDir * t;\n        vec2 res = (scene(p));\n        //res = unionCSG(lightVis(p), scene(p));\n        float dist = res.x;\n        int col = int(res.y);\n        if (dist <precis) {\n            if(dist < 0.f) {\n               return vec4(p - rayDir * dist, col);\n            }\n            //final term is color index\n            return vec4(p,col);\n        }\n       // dist = clamp(dist, 0.1f,4.f);\n        t += dist;\n        if(t > tmax) {\n            //return vec4(0.f,0.f,0.f,-1.f);\n        }\n\n    }\n    return vec4(0.f,0.f,0.f,-1.f);\n}\n\n//x: light intensity, y: reflected color index, if applicable\nvec2 shadow (vec3 lightDir, vec3 rayOrigin, float tmax) {\n    float penumbraK = 8.f;\n    float t = 0.f;\n    int maxSteps = 200;\n    float sol = 1.0f;\n    for(int i = 0; i < maxSteps; i++) {\n        vec3 p = rayOrigin + lightDir * t;\n        vec2 res = scene(p);\n        float dist = res.x;\n\n        if (dist < precis) {\n            return vec2(0.0f,res.y) ;\n        }\n        float s = clamp(penumbraK * dist / t, 0.f, 1.f);\n        sol = min( sol, s);\n        t += clamp(dist,0.04,0.1);\n        if(t > tmax) {\n            break;\n        }\n    }\n    return vec2(sol,-1.f);\n}\n\nvec3 squareToHemisphere(vec2 s) {\n    float z = s.x;\n    float x = cos(2.f * PI * s.y) * sqrt(1.f - z * z);\n    float y = sin(2.f * PI * s.y) * sqrt(1.f - z * z);\n    return vec3(x,y,z);\n}\nfloat ao(vec3 p, vec3 nor) {\n    int numSteps = 5;\n    float intensity = 0.6f;\n    float decay = 0.5f;\n    //larger res means more occlusion\n    float res = 0.f;\n    vec3 tangent = normalize(cross(vec3(0,1,0),nor));\n    vec3 bitangent = normalize(cross(nor, tangent));\n    mat4 trans = mat4(vec4(tangent,0), vec4(bitangent, 0), vec4(nor,0), vec4(0,0,0,1));\n    for(int i = 0; i < numSteps; i++) {\n        for(int j = 0; j < numSteps; j++) {\n            vec2 s = vec2(i,j);\n            vec4 pos = trans * vec4(squareToHemisphere(s),1);\n            //vec3 pos = p + sHem.xyz;\n            vec3 rayDir = normalize(pos.xyz);\n            rayDir *= sign(dot(rayDir, nor));\n            //t is distance from current object\n            float radius = 0.01;\n\n            float dist = scene(p + nor * 0.04 + rayDir * radius).x;\n            res += max((dist + 0.001)* 100.0,0.0);\n            \n            vec3 offP = p + nor * 0.01 + rayDir * radius;\n            //farther away, less ao\n            //float dist = scene(offP).x;\n            //if (dist < 0.0) break;\n            //if(t - dist)\n            //res += intensity * (t - dist);\n            //intensity *= decay;\n            //if(res > 0.1) break;\n        }\n    }\n    res /= 25.f;\n    res = 1.f;\n    return clamp(res * res, 0.0f, 1.0f);\n\n}\nvec4 render(vec4 isect) {\n\n    vec3 nor = estimateNormal(isect.xyz);\n    vec3 res = vec3(0.f);\n    vec3 test = vec3(0.f);\n    for(int i = 0; i < numLights; i ++) {\n        vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );\n\n        vec3 lightOrigin = pointLights[i];\n        vec3 lightCol = lightColors[i];\n        vec3 lightDir = normalize(lightOrigin-isect.xyz);\n        float lightDist = length(lightOrigin-isect.xyz) * 0.1f;\n\n        float lightIntensity = lightIntensities[i] / lightDist;\n        test = lightDir;\n        float ambientTerm =1.f;// ao(isect.xyz,nor);\n        vec2 lighting = vec2(1.f,1.f);\n\n        if(lightCastsShadow[i]) {\n            lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);\n        }\n         \n        float intensity = lighting.x;\n        int geom = int(isect.w);\n        //material values\n        vec3 albedo = getMatColor(isect.xyz, geom);\n        float kd = matDiff[geom];\n        float ks = matSpec[geom];\n\n        vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;\n        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.f);\n        vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);\n        vec3 refCol = vec3(1.f); \n\n        if(reflected.y > -0.5f) {\n            refCol = matColors[int(reflected.y)];\n        }\n\n        specularIntensity *= reflected.x;\n\n        float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));\n        diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);\n        res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);\n        if(lightCastsSpecular[i]) {\n            res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;\n        }\n       // res = nor;\n       // res = albedo;\n\n    }\n\n    return vec4(res.xyz,1.f);\n    \n}\n\n\n\nvoid main()\n{\n    vec2 ndc = (gl_FragCoord.xy / u_Resolution.xy) * 2.0 - 1.0; // -1 to 1 NDC\n    //vec2 ndc = (vec2(1) + fs_Pos.xy) *0.5f;\n    //ndc.y = 1.f - ndc.y;\n    //ndc = vec2(1,1);\n    //    outColor = vec3(ndc * 0.5 + 0.5, 1);\n    vec3 blankCol = uvToSunset(ndc);\n    vec4 p = vec4(ndc.xy, 1, 1); // Pixel at the far clip plane\n    p *= 1000.0; // Times far clip plane value\n    p = u_ViewProj  * p; // Convert from unhomogenized screen to world\n\n    //determine the ray between the camera and the viewing frustum at the specific pixel\n    //because it is normalized, we are essentially projecting a circle of radius 1 against the plane\n    vec3 rayDir = normalize(p.xyz - u_CamPos);\n\n    vec3 p1 = u_CamPos;\n    vec4 isect = raymarch(rayDir,u_CamPos);\n    if(isect.w > -0.5f) {\n        //diffuseTerm += specularIntensity;\n        vec3 col = render(isect).xyz;\n        //float fogLerp = clamp(length(isect.xz) / 30.f - 0.5,0.f,1.f);\n        //col = mix(col.xyz, blankCol.xyz, fogLerp);\n        out_Col = vec4(col,1);\n\n    } else {\n        out_Col = vec4(blankCol, 1);\n       // out_Col = vec4(p.xyz * 0.001f, 1);\n\n    }\n\n    //out_Col = 90.0 * vec4(getMatDisp(gl_FragCoord.xyz * 0.0005, 2),1);\n   // out_Col = vec4(rayDir,1);\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n        \n         //diffuseColor = vec4(0.1,1,1,1);\n        // Calculate the diffuse term for Lambert shading\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        //float ambientTerm = 0.7;\n\n       // float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n//        if(lightIntensity == 0f) {\n//            lightIntensity = 0.2f;\n//        }\n        // Compute final shaded color\n}\n"
+module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\nconst float PI = 3.1415926535897932384626433832795;\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\nuniform vec3 u_Resolution;\n\nuniform float u_Time;\nuniform mat4 u_ViewProj;\nuniform vec3 u_CamPos;\n\n//body, head, eye, arm, leg\nuniform float u_BodySizes[4];\n\n//0 - 2 are upper body, 3 - 5 are lower body, 6 - 7 eyes\nuniform vec3 u_BodyColors[8];\n//uniform vec3 stomachColors[3];\n\nconst int numLights = 4;\nconst vec3 pointLights[numLights] = vec3[] (\n    vec3(5,6,7), vec3(0,20,10), vec3(8,5,-7), vec3(2,0,10)\n);\n\nconst float lightIntensities[numLights] = float[] (\n    0.8f, 1.9f, 1.2f, 0.2f\n);\n\nconst vec3 lightColors[numLights] = vec3[] (\n    vec3(1,1,1), vec3(0.78, 0.9, 1.0), vec3(1,0.7,0.5), vec3(1,1,0.9)\n);\n\nconst bool lightCastsShadow[numLights] = bool[] (\n    true, false, true, true\n);\n\nconst bool lightCastsSpecular[numLights] = bool[] (\n    true, true, true, true\n);\n\n//body, eye, white\nconst vec3 matColors[5] = vec3[](\nvec3(102, 138, 41) / 255.0,\nvec3(120, 40, 35) / 255.0,\nvec3(255, 255, 190) / 255.0,\nvec3(40, 30, 89) / 255.0,\nvec3(50, 56, 89) / 255.0);\n\nconst float matCosPow[5] = float[](\n20.0, \n49.0,\n8.0,\n49.0,\n6.0);\n\nconst float matSpec[5] = float[](\n1.2, \n2.5,\n0.3,\n0.4,\n1.2);\n\nconst float matDiff[5] = float[](\n0.5, \n0.2,\n0.9,\n0.8,\n1.0);\n\nconst vec3 bluegreen[5] = vec3[](\nvec3(142, 199, 230) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0,\nvec3(195, 232, 213) / 255.0);\n\nconst float cutoffs[5] = float[](0.0,0.5,0.6,0.8,0.9);\n\nvec2 hash (vec2 p) {\n    return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);\n}\n\nfloat cubic(float t) {\n    return t * t * (3.0 - 2.0 * t);\n}\n\nvec2 cubic2(vec2 t) {\n    return t * t * (3.0 - 2.0 * t);\n}\n\nfloat quintic(float t) {\n    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);\n}\n\nvec2 quintic2(vec2 t) {\n    return t * t * t * (t * (t * 6.0 + 15.0) - 10.0);\n}\n\n\nfloat noise(vec2 p) {\nfloat intX = floor(p.x);\nfloat fractX = fract(p.x);\n\nfloat intY = floor(p.y);\nfloat fractY = fract(p.y);\nfractX = cubic(fractX);\nfractY = cubic(fractY);\n\nfloat v1 = hash(vec2(intX,intY)).x;\nfloat v2 = hash(vec2(intX + 1.0,intY)).x;\nfloat v3 = hash(vec2(intX,intY + 1.0)).x;\nfloat v4 = hash(vec2(intX + 1.0,intY + 1.0)).x;\n\nfloat i1 = mix(v1, v2, fractX);\nfloat i2 = mix(v3, v4, fractX);\nreturn mix(i1, i2, fractY);\n}\n\nvec2 noise2(vec2 p) {\nfloat intX = floor(p.x);\nfloat fractX = fract(p.x);\n\nfloat intY = floor(p.y);\nfloat fractY = fract(p.y);\nfractX = quintic(fractX);\nfractY = quintic(fractY);\n\nvec2 v1 = hash(vec2(intX,intY));\nvec2 v2 = hash(vec2(intX + 1.0,intY));\nvec2 v3 = hash(vec2(intX,intY + 1.0));\nvec2 v4 = hash(vec2(intX + 1.0,intY + 1.0));\n\nvec2 i1 = mix(v1, v2, fractX);\nvec2 i2 = mix(v3, v4, fractX);\nreturn mix(i1, i2, fractY);\n}\n\nvec3 uvToSunset(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return bluegreen[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(bluegreen[0], bluegreen[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(bluegreen[1], bluegreen[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(bluegreen[2], bluegreen[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(bluegreen[3], bluegreen[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return bluegreen[4];\n}\n\nvec3 transRot(vec3 p, mat4 rot, vec3 trans) {\n    return (rot * vec4(p-trans, 1.f)).xyz;\n}\n\nmat4 rotateX( float angle ) {\n\treturn mat4(\t1.0,\t\t0,\t\t\t0,\t\t\t0,\n\t\t\t \t\t0, \tcos(angle),\t-sin(angle),\t\t0,\n\t\t\t\t\t0, \tsin(angle),\t cos(angle),\t\t0,\n\t\t\t\t\t0, \t\t\t0,\t\t\t  0, \t\t1);\n}\n\nmat4 rotateY( float angle ) {\n\treturn mat4(\tcos(angle),\t\t0,\t\tsin(angle),\t0,\n\t\t\t \t\t\t\t0,\t\t1.0,\t\t\t 0,\t0,\n\t\t\t\t\t-sin(angle),\t0,\t\tcos(angle),\t0,\n\t\t\t\t\t\t\t0, \t\t0,\t\t\t\t0,\t1);\n}\n\nmat4 rotateZ( float angle ) {\n\treturn mat4(\tcos(angle),\t\t-sin(angle),\t0,\t0,\n\t\t\t \t\tsin(angle),\t\tcos(angle),\t\t0,\t0,\n\t\t\t\t\t\t\t0,\t\t\t\t0,\t\t1,\t0,\n\t\t\t\t\t\t\t0,\t\t\t\t0,\t\t0,\t1);\n}\n\n\n\n\nvec3 uvToA(vec2 uv) {\n    if(uv.y < cutoffs[0]) {\n        return matColors[0];\n    }\n    else if(uv.y < cutoffs[1]) {\n        return mix(matColors[0], matColors[1], (uv.y - cutoffs[0]) / (cutoffs[1] - cutoffs[0]));\n    }\n    else if(uv.y < cutoffs[2]) {\n        return mix(matColors[1], matColors[2], (uv.y - cutoffs[1]) / (cutoffs[2] - cutoffs[1]));\n    }\n    else if(uv.y < cutoffs[3]) {\n        return mix(matColors[2], matColors[3], (uv.y - cutoffs[2]) / (cutoffs[3] - cutoffs[2]));\n    }\n    else if(uv.y < cutoffs[4]) {\n        return mix(matColors[3], matColors[4], (uv.y - cutoffs[3]) / (cutoffs[4] - cutoffs[3]));\n    }\n    return matColors[4];\n}\n\nvec3 twist(vec3 p) {\n    float k = 1.2f; // or some other amount\n    float c = cos(k*p.y);\n    float s = sin(k*p.y);\n    mat2  m = mat2(c,-s,s,c);\n    vec3  q = vec3(m*vec2(p.x, p.z),p.y);\n    return q;\n}\n//sdfs from Inigo Quilez https://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm\nfloat sphere(vec3 p, float s) {\n    return length(p) - s;\n}\n\nfloat plane(vec3 p) {\n    return p.y;\n}\n\nfloat box(vec3 p, vec3 b) {\n    vec3 q = abs(p) - b;\n    return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);\n\n}\n\nfloat stick(vec3 p, vec3 a, vec3 b, float r1, float r2)\n{\n    vec3 pa = p-a, ba = b-a;\n\tfloat h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );\n\treturn  length( pa - ba*h ) - mix(r1,r2,h*h*(3.0-2.0*h));\n}\n\nfloat roundBox( vec3 p, vec3 b, float r )\n{\n  vec3 q = abs(p) - b;\n  return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;\n}\n\n\nfloat surflet(vec2 p, vec2 gridPoint) {\n    vec2 t = vec2(1.f) - cubic2(abs(p - gridPoint));\n    vec2 gradient = hash(gridPoint) * 2.f - vec2(1,1);\n    vec2 diff = p - gridPoint;\n    float height = dot(diff, gradient);\n    return height * t.x * t.y;\n\n}\n\nfloat perlin(vec2 p) {\n    vec2 f = floor(p);\n    return surflet(p, f+vec2(0,0)) \n    + surflet(p, f+vec2(1,0))\n    + surflet(p, f+vec2(0,1))\n    + surflet(p, f+vec2(1,1));\n}\n\nvec2 fbm(vec3 p, float persistence, float octaves) {\n    //vec2 res = vec2(0);\n    float timefactor = abs((sin(u_Time * 0.01) + 3.f) * 0.25f);\n    vec2 inp = p.xy;\n    float res = 0.f;\n    for(float i = 0.f; i < octaves; i++) {\n        res += pow(2.f, -i) * perlin(pow(persistence, i) * inp);\n    }\n    return vec2(res);\n}\n\n\nvec3 getMatColor(vec3 q, int i) {\n    if(i == 0) {\n        vec2 uv = q.xy * q.z - 0.04;\n        uv.x *= 2.f;\n        float n = 3.f * perlin(2.5f * uv);\n        float off = clamp(n * 5.f * n, 0.0, 1.0);\n        //vec3 f = vec3(0.5, 0.6, 0.15);\n        vec3 a = u_BodyColors[0] / 255.0;\n        vec3 b = u_BodyColors[1] / 255.0;\n        vec3 c = u_BodyColors[2] / 255.0;\n        vec3 d = u_BodyColors[3] / 255.0;\n\n        vec3 res1 = mix(a, b, off);\n\n        float n2 = 5.f * perlin(2.f * uv);\n        float off2 = 1.0f - clamp(n2 * n2, 0.0, 1.0);\n        vec3 res2 =  mix(c, d, off2);\n        //res2 = mix(res2, c + vec3(0.1,0.1,0), clamp(1.0 - abs(q.y), 0.f, 1.f));\n        //belly\n        float lerpy = sphere(q -  vec3(0.f,-2.4f,2.9f),3.2f) + 1.5 * pow(q.x * 0.6, 2.0) - 0.5;\n       //yellow graident\n       res1 = mix(res1, b + vec3(0.37, 0.3, 0.1), 1.0 - smoothstep(-0.8, 1.0, lerpy));\n\n        vec3 res = mix(res2, res1, smoothstep(-0.8, 0.0, lerpy));\n        //lerpy = smoothstep(-0.1, 0.01, -0.1 * q.x * q.x + 0.5);\n\n        \n        //res = mix(res, res1, lerpy);\n\n        return res;\n    }\n    else if(i == 2) {\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 5.f * perlin(2.f * uv);\n        float off = 1.0f - clamp(n * n, 0.0, 1.0);\n        vec3 res =  mix(vec3(1, 1, 0.7), vec3(0.8, 0.8, 0.5), off);\n        res = mix(res, vec3(0.7, 0.6, 0.4), clamp(1.0 - abs(q.y), 0.f, 1.f));\n        return res;\n    }\n    else if(i == 4) {\n        vec3 a = u_BodyColors[4] / 255.0;\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 8.f * perlin(10.f * uv);\n        float off = 1.0f - clamp(n, 0.0, 1.0);\n        //return mix(vec3(0.3, 0.25, 0.05), vec3(0.4, 0.3, 0.2), off);\n        return mix(a  - vec3(0.05, 0.05, 0.05), a, off);\n\n    } else {\n        return matColors[i];\n    }\n}\n\n\nvec3 getMatDisp(vec3 q, int i) {\n    if(i == 0) {\n        vec2 uv = q.xy;\n        float off = -0.001 * clamp(3.0 * perlin(50.0 * uv), 0.0, 1.0);\n        return vec3(off);\n\n    } else if (i == 2) {\n        vec2 uv = q.xy;\n        float off = -0.003 * clamp(4.0 *  perlin(38.0 * uv), 0.0, 1.0);\n        return vec3(off);\n    }\n    else if ( i == 4) {\n        vec2 uv = q.xy * q.z;\n        uv.x *= 2.f;\n        float n = 4.f * perlin(10.f * uv);\n        float off = -0.001 * clamp(n * n, 0.0, 1.0);\n        return vec3(off);\n    } else {\n        return vec3(0.f);\n    }\n}\n\nfloat displace(vec3 p, float freq, float octaves) {\n    //return sin(5.f * sin(20.f * p.x) + sin(20*p.y) + sin(20*p.z));\n    float res = 0.f;\n    float expV =2.f;\n    octaves = 3.f;\n    float timefactor = abs((sin(u_Time * 0.01) + 3.f) * 0.25f);\n    for(float i = 0.f; i <= octaves; i++) {\n        float amp = pow(2.f, -i);\n        res += amp * sin(freq * pow(expV, i) * p.x +timefactor)\n        + amp * sin(freq * pow(expV, i) * p.y + timefactor) +\n        amp * sin(freq * pow(expV, i) * p.z + timefactor);\n    }\n    return res;\n\n    /*\n    return sin(3.f* p.x) + sin(3.f*p.y) + sin(3.f*p.z) +\n            0.5f * (sin(6.f * p.x) + sin(6.f * p.y) + sin(6.f * p.z))\n            + 0.25f * (sin(12.f * p.x) + sin(12.f * p.y) + sin(12.f * p.z))\n            +0.125f * (sin(24.f * p.x) + sin(24.f * p.y) + sin(24.f * p.z));*/\n}\n\nvec2 unionCSG(vec2 d1, vec2 d2) {\n    if (d1.x > d2.x)  {\n        return d2;\n    }\n    else{\n        return d1;\n    }\n}\n\n//preserves the geometry of d1, but changes color to d2\nvec2 unionColor(vec2 d1, vec2 d2) {\n    if (d1.x > d2.x)  {\n        return vec2(d1.x, d2.y);\n    }\n    else{\n        return d1;\n    }\n}\n\nvec2 intersectionCSG(vec2 d1, vec2 d2) {\n    if (d1.x < d2.x)  {\n        return d2;\n    }\n    else{\n        return d1;\n    }\n}\n\nvec2 differenceCSG(vec2 d1, vec2 d2) {\n    if (-d1.x < d2.x)  {\n        return d2;\n    }\n    else{\n        return vec2(-d1.x,d1.y);\n    }\n}\n\nvec2 lightVis(vec3 p) {\n    vec2 res = vec2(9e10, 0.f);\n    for (int i = 0; i < numLights; i++) {\n        vec3 transP = p - pointLights[i];\n        vec2 sphere1 = vec2(sphere(transP,0.5f),0.f);\n        res = unionCSG(res, sphere1);\n    }\n    return res;\n}\n\nvec2 smin( vec2 a, vec2 b, float k )\n{\n    float h = clamp( 0.5+0.5*(b.x-a.x)/k, 0.0, 1.0 );\n    if(h < 0.5) {\n        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), b.y);\n    } else {\n        return vec2(mix( b.x, a.x, h ) - k*h*(1.0-h), a.y);\n    }\n}\n//taken from http://iquilezles.org/www/articles/smin/smin.htm\n//intersect\nvec2 smax( vec2 a, vec2 b, float k )\n{\n    float h = max(k-abs(a.x-b.x),0.0);\n    return (a.x > b.x ? vec2((a.x + h*h*0.25/k), a.y) : vec2((b.x + h*h*0.25/k), b.y));\n}\n\nvec2 scene(vec3 p) {\n    if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {\n        return vec2(9e10, 0.f);\n    }\n    float throatsize = 0.5 * abs(sin(u_Time * 0.4));\n    vec3 q = p; \n    float bs = u_BodySizes[0];\n    float hs = u_BodySizes[1];\n    //hs = 1.3;\n    vec3 bodOffset = vec3(0,-0.1,0.9) + vec3(0, throatsize * 0.2, throatsize * 0.5);\n    vec2 body = vec2(sphere(p - bodOffset, bs - 0.2 * throatsize),0.f);\n    bodOffset = vec3(0,0.3,3) + vec3(0, throatsize * 0.1, throatsize * 0.1);\n    vec2 head = vec2(sphere(p - bodOffset,hs),0.f);\n\n    //mouth \n    {\n        vec2 m = p.yz + vec2(-0.21, -7.1);\n\n        float a = 0.8;\n        float offZ = 0.03 * sin(15.0 * m.x + 4.6 * m.y) \n        * smoothstep(0.01, 0.06,-m.x * m.x + 0.04) * \n        smoothstep(-5.0, 10.0, -m.y * m.y + 20.0);\n        head.x += offZ;\n    }\n\n    vec2 smoothy = smin(body, head, 0.4f);\n    \n    vec2 tail = vec2(stick(p,vec3(0,0,-1.3), vec3(0,0,-0.5), 0.45f, 0.6f),0.f);\n    \n    //wrinkles \n    {\n        vec2 m = p.xz + vec2(0.0, -0.1);\n        float offZ = 0.019 * cos(8.2 * p.x);\n        smoothy.x += offZ;\n    }\n    vec3 rot = (rotateX(5.f) * vec4(p - vec3(0,0.3,3.8),1)).xyz;\n    vec2 snout = vec2(roundBox(rot,vec3(0.2,0.2,0.2), 0.4f),0.f);\n    smoothy = smin(smoothy, tail, 1.f);\n    smoothy = smin(smoothy, snout, 1.f);\n\n   // vec2 bodColor = vec2(sphere(p -  vec3(0.f,-2.4f,2.9f),3.2f),2.f);\n\n    //smoothy = unionColor(smoothy, bodColor);\n\n\n\n\n        //eyes\n        {\n            float ifloat = 1.f;\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 ridge = bodOffset + vec3(0.86,hs-0.4,0.42);\n            //bodOffset = vec3(0,0.3,3)\n\n            //ridge = (0.86, 1.2, 3.42)\n\n            vec2 eyeridge1 = vec2(sphere(sp - ridge,0.45f),0.f);\n            smoothy = smin(smoothy, eyeridge1, 0.09f);\n            //vec2 eyeposridge + (0.03, 0, 0.05);\n            \n            ridge += vec3(0.03, 0.0, 0.05);\n           // vec2 eyeball1 = vec2(sphere(sp - vec3(0.93,1.2,3.47),0.41f),1.f);\n            vec2 eyeball1 = vec2(sphere(sp - ridge,0.41f),1.f);\n            ridge += vec3(0.015, 0, 0.025);\n            //vec2 sclera = vec2(sphere(sp - vec3(0.945,1.2,3.495),0.39f),4.f);\n            vec2 sclera = vec2(sphere(sp - ridge,0.39f),4.f);\n            \n            vec2 slitA = vec2(sphere(sp - (ridge + vec3(0.085, 0.15, 0.135)),0.32f),1.f);\n            vec2 slitB = vec2(sphere(sp - (ridge + vec3(0.085, -0.15, 0.135)),0.32f),1.f);\n            vec2 slit = smax(slitA, slitB, 0.05);\n            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),0.4f),1.f);\n\n            sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);\n            sclera = smax(vec2(-slit.x, slit.y), sclera, 0.04);\n\n            //smoothy = smin(smoothy, slit, 0.01);\n            smoothy = smin(smoothy, eyeball1, 0.01);\n            smoothy = smin(smoothy, sclera, 0.02);\n\n        }\n\n        //arms\n        {\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 shoulder = vec3(1.3,-0.3,2.5);\n            vec3 elbow = shoulder + vec3(0.6,-0.7,-0.3);\n            vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);\n            vec3 f1 = wrist + vec3(-0.8,-0.1,1.5);\n\n            vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f, 0.34f), 0.f);\n            vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f, 0.4f), 0.f);\n            wrist -= vec3(0.2,0.3,0);\n            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 0.f);\n            vec3 w = (sp - wrist);\n            //float offZ = -0.01 * (sin(w.z * 30.3) + 1.0) + wz;   \n            float offZ = -0.05 * (clamp(cubic(((-length(w) + 0.7) * 3.7) * 0.15), -2.0, 3.0));         \n            float sz = sin(w.z * w.z * 3.3);\n            offZ += -0.01 * (sz * sz);   \n            finger.x += offZ;\n            //finger.x += 0.2;\n\n            smoothy = smin(smoothy, sticky, 0.1);\n            smoothy = smin(smoothy, forearm, 0.1);\n           smoothy = smin(smoothy, finger, 0.2);\n            f1 = wrist + vec3(-0.3,-0.1,1.7);\n            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 0.f);\n            finger.x += offZ;\n\n            smoothy = smin(smoothy, finger, 0.2);\n            f1 = wrist + vec3(0.2,-0.1,1.6);\n            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 0.f);\n            finger.x += offZ;\n\n            smoothy = smin(smoothy, finger, 0.2);\n\n        }\n\n        //legs\n        {\n            vec3 sp = vec3(abs(p.x), p.yz);\n            vec3 hip = vec3(1.0,-0.2,-1.3);\n            vec3 knee = hip + vec3(0.4,-0.7,1.3);\n            vec3 wrist = knee + vec3(-0.5,-0.7, -1.3);\n            vec3 f1 = wrist + vec3(-0.3,-0.1,1.7);\n            vec3 f2 = wrist + vec3(0.2,-0.1,2.2);\n            vec3 f3 = wrist + vec3(1.0,-0.1,1.9);\n\n            vec2 upleg = vec2(stick(sp, hip, knee, 0.55f, 0.42f), 0.f);\n            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.5f, 0.45f), 0.f);\n            wrist -= vec3(0.2,0.3,0);\n            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.2f), 0.f);\n\n            smoothy = smin(smoothy, upleg, 0.3);\n            smoothy = smin(smoothy, lowleg, 0.1);\n            smoothy = smin(smoothy, finger, 0.2);\n            finger = vec2(stick(sp, wrist, f2, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.2);\n\n            finger = vec2(stick(sp, wrist, f3, 0.2f, 0.2f), 0.f);\n            smoothy = smin(smoothy, finger, 0.2);\n\n            \n        }\n\n    vec2 throat = vec2(sphere(p - vec3(0,-0.6,3.0),1.1f + throatsize),0.f);\n\n    smoothy = smin(smoothy, throat, 0.2f);\n\n    vec2 plane = vec2(plane(p + vec3(0,2,0)),3.f);\n    vec3 off = getMatDisp(p, int(smoothy.y));\n    smoothy.x += off.x;\n    vec2 res = vec2(smoothy.x * 0.9, smoothy.y);\n\n    return res;\n\n\n}\n\nvec2 sceneA(vec3 p) {\n    if(abs(p.x) > 40.f || abs(p.z) > 40.f || abs(p.y) < -40.f) {\n        return vec2(9e10, 0.f);\n    }\n    vec3 twisted = twist(p);\n    float sphere2 = sphere(twisted,3.f);\n    float boxy = box(twisted,vec3(2,2,2));\n\n    vec2 box1 = vec2(box(p + vec3(0,2,0), vec3(2,4,2)), 0.f);\n    vec2 box2 = vec2(box(p + vec3(0,7,0), vec3(2,4,2)), 0.f);\n\n\n    vec2 normSphere = vec2(sphere(p - vec3(0,0,2), 2.f),2.f);\n\n    vec2 twisty = vec2(sphere2 + 0.3 * displace(twisted, 2.f, 2.f), 1.f);\n    vec2 plane = vec2(plane(p + vec3(0,5,0)),3.f);\n    p.x += 4.f;\n    p.y += -3.f;\n\n    float s3 = sphere(p, 1.5f);\n    vec2 sphere3 = vec2(s3,2.f);\n\n    vec2 world = differenceCSG(normSphere, twisty);\n    //world = differenceCSG(sphere3, world);\n    vec2 cutout = differenceCSG(normSphere, box1);\n\n    // world = twisty;\n\n    vec2 res = world;//unionCSG(world, plane);\n    res = unionCSG(res, box2);\n    res.x *= 0.2;\n    return res;\n}\n\n\nfloat epsilon = 0.0001;\nvec3 estimateNormal(vec3 p) {\n    return normalize(vec3(scene(vec3(p.x + epsilon, p.y, p.z)).x - scene(vec3(p.x - epsilon, p.y, p.z)).x,\n                                   scene(vec3(p.x, p.y  + epsilon, p.z)).x - scene(vec3(p.x, p.y - epsilon, p.z)).x,\n                                   scene(vec3(p.x, p.y, p.z  + epsilon)).x - scene(vec3(p.x, p.y, p.z - epsilon)).x));\n}\nfloat precis = 0.002;\nvec4 raymarch(vec3 rayDir, vec3 rayOrigin)\n{\n    //p is the far clip position we are casting to\n    float tmax = 100.f;\n    float t = 0.f;\n    int maxSteps = 250;\n    for(int i = 0; i < maxSteps; i++) {\n        vec3 p = rayOrigin + rayDir * t;\n        vec2 res = (scene(p));\n        //res = unionCSG(lightVis(p), scene(p));\n        float dist = res.x;\n        int col = int(res.y);\n        if (dist <precis) {\n            if(dist < 0.f) {\n               return vec4(p - rayDir * dist, col);\n            }\n            //final term is color index\n            return vec4(p,col);\n        }\n       // dist = clamp(dist, 0.1f,4.f);\n        t += dist;\n        if(t > tmax) {\n            //return vec4(0.f,0.f,0.f,-1.f);\n        }\n\n    }\n    return vec4(0.f,0.f,0.f,-1.f);\n}\n\n//x: light intensity, y: reflected color index, if applicable\nvec2 shadow (vec3 lightDir, vec3 rayOrigin, float tmax) {\n    float penumbraK = 8.f;\n    float t = 0.f;\n    int maxSteps = 200;\n    float sol = 1.0f;\n    for(int i = 0; i < maxSteps; i++) {\n        vec3 p = rayOrigin + lightDir * t;\n        vec2 res = scene(p);\n        float dist = res.x;\n\n        if (dist < precis) {\n            return vec2(0.0f,res.y) ;\n        }\n        float s = clamp(penumbraK * dist / t, 0.f, 1.f);\n        sol = min( sol, s);\n        t += clamp(dist,0.04,0.1);\n        if(t > tmax) {\n            break;\n        }\n    }\n    return vec2(sol,-1.f);\n}\n\nvec3 squareToHemisphere(vec2 s) {\n    float z = s.x;\n    float x = cos(2.f * PI * s.y) * sqrt(1.f - z * z);\n    float y = sin(2.f * PI * s.y) * sqrt(1.f - z * z);\n    return vec3(x,y,z);\n}\nfloat ao(vec3 p, vec3 nor) {\n    int numSteps = 5;\n    float intensity = 0.6f;\n    float decay = 0.5f;\n    //larger res means more occlusion\n    float res = 0.f;\n    vec3 tangent = normalize(cross(vec3(0,1,0),nor));\n    vec3 bitangent = normalize(cross(nor, tangent));\n    mat4 trans = mat4(vec4(tangent,0), vec4(bitangent, 0), vec4(nor,0), vec4(0,0,0,1));\n    for(int i = 0; i < numSteps; i++) {\n        for(int j = 0; j < numSteps; j++) {\n            vec2 s = vec2(i,j);\n            vec4 pos = trans * vec4(squareToHemisphere(s),1);\n            //vec3 pos = p + sHem.xyz;\n            vec3 rayDir = normalize(pos.xyz);\n            rayDir *= sign(dot(rayDir, nor));\n            //t is distance from current object\n            float radius = 0.01;\n\n            float dist = scene(p + nor * 0.04 + rayDir * radius).x;\n            res += max((dist + 0.001)* 100.0,0.0);\n            \n            vec3 offP = p + nor * 0.01 + rayDir * radius;\n        }\n    }\n    res /= 25.f;\n    res = 1.f;\n    return clamp(res * res, 0.0f, 1.0f);\n\n}\nvec4 render(vec4 isect) {\n\n    vec3 nor = estimateNormal(isect.xyz);\n    vec3 res = vec3(0.f);\n    vec3 test = vec3(0.f);\n    for(int i = 0; i < numLights; i ++) {\n        vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );\n\n        vec3 lightOrigin = pointLights[i];\n        vec3 lightCol = lightColors[i];\n        vec3 lightDir = normalize(lightOrigin-isect.xyz);\n        float lightDist = length(lightOrigin-isect.xyz) * 0.1f;\n\n        float lightIntensity = lightIntensities[i] / lightDist;\n        test = lightDir;\n        float ambientTerm =1.f;// ao(isect.xyz,nor);\n        vec2 lighting = vec2(1.f,1.f);\n\n        if(lightCastsShadow[i]) {\n            lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);\n        }\n         \n        float intensity = lighting.x;\n        int geom = int(isect.w);\n        //material values\n        vec3 albedo = getMatColor(isect.xyz, geom);\n        float kd = matDiff[geom];\n        float ks = matSpec[geom];\n\n        vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;\n        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.f);\n        vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);\n        vec3 refCol = vec3(1.f); \n\n        if(reflected.y > -0.5f) {\n            refCol = matColors[int(reflected.y)];\n        }\n\n        specularIntensity *= reflected.x;\n\n        float diffuseTerm = 1.f - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));\n        diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);\n        res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);\n        if(lightCastsSpecular[i]) {\n            res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;\n        }\n       // res = nor;\n       // res = albedo;\n\n    }\n\n    return vec4(res.xyz,1.f);\n    \n}\n\n\n\nvoid main()\n{\n    vec2 ndc = (gl_FragCoord.xy / u_Resolution.xy) * 2.0 - 1.0; // -1 to 1 NDC\n    //vec2 ndc = (vec2(1) + fs_Pos.xy) *0.5f;\n    //ndc.y = 1.f - ndc.y;\n    //ndc = vec2(1,1);\n    //    outColor = vec3(ndc * 0.5 + 0.5, 1);\n    vec3 blankCol = uvToSunset(ndc);\n    vec4 p = vec4(ndc.xy, 1, 1); // Pixel at the far clip plane\n    p *= 1000.0; // Times far clip plane value\n    p = u_ViewProj  * p; // Convert from unhomogenized screen to world\n\n    //determine the ray between the camera and the viewing frustum at the specific pixel\n    //because it is normalized, we are essentially projecting a circle of radius 1 against the plane\n    vec3 rayDir = normalize(p.xyz - u_CamPos);\n\n    vec3 p1 = u_CamPos;\n    \n    vec4 isect = raymarch(rayDir,u_CamPos);\n    if(isect.w > -0.5f) {\n        \n        //diffuseTerm += specularIntensity;\n        vec3 col = render(isect).xyz;\n        //float fogLerp = clamp(length(isect.xz) / 30.f - 0.5,0.f,1.f);\n        //col = mix(col.xyz, blankCol.xyz, fogLerp);\n        out_Col = vec4(col,1);\n\n    } else {\n        out_Col = vec4(blankCol, 1);\n       // out_Col = vec4(p.xyz * 0.001f, 1);\n\n    }\n    //out_Col = 90.0 * vec4(getMatDisp(gl_FragCoord.xyz * 0.0005, 2),1);\n   // out_Col = vec4(rayDir,1);\n    // Material base color (before shading)\n        vec4 diffuseColor = fs_Col;\n        \n         //diffuseColor = vec4(0.1,1,1,1);\n        // Calculate the diffuse term for Lambert shading\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        //float ambientTerm = 0.7;\n\n       // float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n//                                                            //lit by our point light are not completely black.\n//        if(lightIntensity == 0f) {\n//            lightIntensity = 0.2f;\n//        }\n        // Compute final shaded color\n}\n"
 
 /***/ })
 /******/ ]);
