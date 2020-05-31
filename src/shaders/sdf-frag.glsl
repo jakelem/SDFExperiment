@@ -740,6 +740,66 @@ vec3 renderDiff(vec4 isect) {
 vec4 render(vec4 isect) {
 
     vec3 nor = estimateNormal(isect.xyz);
+
+    if(u_Colored[2] == 1) {
+        return vec4(nor.xyz,1.0);
+    }
+    vec3 res = vec3(0.0);
+    vec3 test = vec3(0.0);
+    int geom = int(isect.w);
+    vec3 albedo = getMatColor(isect.xyz, geom);
+
+    if(u_Colored[0] == 0) {
+        return vec4(albedo.xyz,1.0);
+    }
+
+    float kd = matDiff[geom];
+    float ks = matSpec[geom];
+    vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );
+
+    {
+        vec3 lightOrigin = vec3(0,20,10);
+        vec3 lightCol = vec3(0.78, 0.9, 1.0);
+        vec3 lightDir = normalize(lightOrigin-isect.xyz);
+        float lightDist = length(lightOrigin-isect.xyz) * 0.1f;
+        float lightIntensity = 2.0 / lightDist;
+        float ambientTerm = 1.0;// ao(isect.xyz,nor);
+        vec2 lighting = vec2(1.0,1.0);
+        if(u_Colored[1] == 1) {
+            lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);
+        }
+        
+        vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
+        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
+        vec3 refCol = vec3(1.0); 
+
+        if(u_Colored[1] == 1) {
+            vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);
+            if(reflected.y > -0.5f) {
+                refCol = matColors[int(reflected.y)];
+            }
+            specularIntensity *= reflected.x;
+        }
+
+        float diffuseTerm = 1.0 - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
+        diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
+        res += kd * ((lightCol * lightIntensity  * lighting.x * diffuseTerm) * albedo);
+        res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;
+    
+    }  
+
+
+    // res = nor;
+    // res = albedo;
+
+    
+    return vec4(res.xyz,1.0);
+}
+
+
+vec4 renderA(vec4 isect) {
+
+    vec3 nor = estimateNormal(isect.xyz);
     vec3 res = vec3(0.0);
     vec3 test = vec3(0.0);
     int geom = int(isect.w);
@@ -783,6 +843,7 @@ vec4 render(vec4 isect) {
         float diffuseTerm = 1.0 - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
         diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
         res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);
+
         if(lightCastsSpecular[i]) {
             res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;
         }
@@ -792,6 +853,7 @@ vec4 render(vec4 isect) {
     }
     return vec4(res.xyz,1.0);
 }
+
 
 
 
@@ -818,11 +880,8 @@ void main()
         
         //diffuseTerm += specularIntensity;
         vec3 col = vec3(0);
-        if(u_Colored[0] == 1) {
-            col = render(isect).xyz;
-        } else {
-            col = renderDiff(isect).xyz;
-        }
+        col = render(isect).xyz;
+        
          
         //float fogLerp = clamp(length(isect.xz) / 30.0 - 0.5,0.0,1.0);
         //col = mix(col.xyz, blankCol.xyz, fogLerp);

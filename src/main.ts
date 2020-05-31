@@ -28,6 +28,7 @@ const controls = {
   'Pupil Size': 0.15,
   'Shaded': true,
   'Shadows': true,
+  'Show Normals': false,
   'Offset': -0.01,
   'Load Scene': loadScene, // A function pointer, essentially
 };
@@ -59,7 +60,7 @@ controls['Belly Texture']];
 
 
 function getFlags() {
-  return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0];
+  return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0, controls["Show Normals"] ? 1 : 0];
 }
 
 function hexToRGB(hex : any) {
@@ -119,6 +120,7 @@ function main() {
   gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
   gui.add(controls, 'Shaded');
   gui.add(controls, 'Shadows');
+  gui.add(controls, 'Show Normals');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
