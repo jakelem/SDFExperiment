@@ -762,7 +762,11 @@ vec4 render(vec4 isect) {
         vec3 lightCol = vec3(0.78, 0.9, 1.0);
         vec3 lightDir = normalize(lightOrigin-isect.xyz);
         float lightDist = length(lightOrigin-isect.xyz) * 0.1f;
-        float lightIntensity = 2.0 / lightDist;
+        float lightIntensity = 2.0;
+
+        if(u_Colored[3] == 1) {
+            lightIntensity /= lightDist;
+        }
         float ambientTerm = 1.0;// ao(isect.xyz,nor);
         vec2 lighting = vec2(1.0,1.0);
         if(u_Colored[1] == 1) {
@@ -821,7 +825,7 @@ vec4 renderA(vec4 isect) {
          
         float intensity = lighting.x;
         
-        vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
+        vec3 h = normalize(isect.xyz - u_CamPos - lightDir);
         float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
         vec3 refCol = vec3(1.0); 
 
@@ -835,7 +839,7 @@ vec4 renderA(vec4 isect) {
             specularIntensity *= reflected.x;
         }
 
-        float diffuseTerm = 1.0 - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
+        float diffuseTerm = dot(normalize(nor), normalize(lightOrigin));
         diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
         res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);
 

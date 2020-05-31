@@ -29,7 +29,7 @@ const controls = {
   'Shaded': true,
   'Shadows': true,
   'Show Normals': false,
-  'Offset': -0.01,
+  'Light Falloff': true,
   'Load Scene': loadScene, // A function pointer, essentially
 };
 
@@ -60,7 +60,8 @@ controls['Belly Texture']];
 
 
 function getFlags() {
-  return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0, controls["Show Normals"] ? 1 : 0];
+  return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0
+  , controls["Show Normals"] ? 1 : 0 , controls["Light Falloff"] ? 1 : 0];
 }
 
 function hexToRGB(hex : any) {
@@ -118,9 +119,10 @@ function main() {
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
   gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
   gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
-  gui.add(controls, 'Shaded');
+  //gui.add(controls, 'Shaded');
   gui.add(controls, 'Shadows');
   gui.add(controls, 'Show Normals');
+  gui.add(controls, 'Light Falloff');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
