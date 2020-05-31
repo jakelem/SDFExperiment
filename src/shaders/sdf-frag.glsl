@@ -785,8 +785,9 @@ vec4 render(vec4 isect) {
         
         //vec3 h = normalize(isect.xyz - u_CamPos - lightDir);
         vec3 h = normalize(lightDir - rd);
+        float specularIntensity = max(pow(clamp(dot(h, nor), 0.0, 1.0), matCosPow[geom]), 0.0);
+       //specularIntensity = max(dot(h, nor) * dot(h, nor), 0.0);
 
-        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
         vec3 refCol = vec3(1.0); 
 
         if(u_Colored[1] == 1) {
