@@ -26,7 +26,7 @@ const controls = {
   'Head Size': 1.2,
   'Eye Size': 0.45,
   'Pupil Size': 0.15,
-  'Radial Decay': 1.6,
+  'Shaded': true,
   'Angle': 5,
   'Offset': -0.01,
   'Load Scene': loadScene, // A function pointer, essentially
@@ -81,6 +81,10 @@ function loadScene() {
   square.create();
 }
 
+function loadRandom() {
+
+}
+
 function main() {
   // Initial display for framerate
   const stats = Stats();
@@ -108,6 +112,7 @@ function main() {
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
   gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
   gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
+  gui.add(controls, 'Shaded');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -168,6 +173,7 @@ function main() {
     sdf.setBodySizes(getBodySizes());
     sdf.setResolution(vec3.fromValues(window.innerWidth, window.innerHeight,1));
     sdf.setCamPos(camera.controls.eye);
+    sdf.setColored(controls["Shaded"] ? 1 : 0);
 
     renderer.render(camera, sdf, [
       square,

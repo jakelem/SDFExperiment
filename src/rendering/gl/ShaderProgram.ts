@@ -29,6 +29,7 @@ class ShaderProgram {
   unifModelInvTr: WebGLUniformLocation;
   unifViewProj: WebGLUniformLocation;
   unifColor: WebGLUniformLocation;
+  unifColored: WebGLUniformLocation;
 
   unifBodySizes: WebGLUniformLocation;
   unifHeadSize: WebGLUniformLocation;
@@ -57,6 +58,8 @@ class ShaderProgram {
     this.unifModelInvTr = gl.getUniformLocation(this.prog, "u_ModelInvTr");
     this.unifViewProj   = gl.getUniformLocation(this.prog, "u_ViewProj");
     this.unifColor      = gl.getUniformLocation(this.prog, "u_Color");
+    this.unifColored      = gl.getUniformLocation(this.prog, "u_Colored");
+
     this.unifBodColor      = gl.getUniformLocation(this.prog, "u_BodyColors");
     this.unifBodySizes      = gl.getUniformLocation(this.prog, "u_BodySizes");
     this.unifHeadSize     = gl.getUniformLocation(this.prog, "u_HeadSize");
@@ -85,6 +88,13 @@ class ShaderProgram {
       mat4.transpose(modelinvtr, model);
       mat4.invert(modelinvtr, modelinvtr);
       gl.uniformMatrix4fv(this.unifModelInvTr, false, modelinvtr);
+    }
+  }
+
+  setColored(cold : number) {
+    this.use();
+    if (this.unifColored !== -1) {
+      gl.uniform1i(this.unifColored, cold);
     }
   }
 
