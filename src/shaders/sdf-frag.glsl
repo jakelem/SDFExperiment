@@ -757,7 +757,7 @@ vec4 render(vec4 isect) {
     float ks = matSpec[geom];
     vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );
 
-    {
+    { // skylight
         vec3 lightOrigin = vec3(0,20,10);
         vec3 lightCol = vec3(0.78, 0.9, 1.0);
         vec3 lightDir = normalize(lightOrigin-isect.xyz);
@@ -769,7 +769,7 @@ vec4 render(vec4 isect) {
             lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);
         }
         
-        vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
+        vec3 h = normalize(isect.xyz - u_CamPos - lightDir);
         float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
         vec3 refCol = vec3(1.0); 
 
@@ -781,18 +781,13 @@ vec4 render(vec4 isect) {
             specularIntensity *= reflected.x;
         }
 
-        float diffuseTerm = 1.0 - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
+        float diffuseTerm = dot(normalize(nor), normalize(lightOrigin));
         diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
+        
         res += kd * ((lightCol * lightIntensity  * lighting.x * diffuseTerm) * albedo);
         res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;
     
     }  
-
-
-    // res = nor;
-    // res = albedo;
-
-    
     return vec4(res.xyz,1.0);
 }
 
