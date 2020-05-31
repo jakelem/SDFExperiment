@@ -1,14 +1,5 @@
 #version 300 es
 
-// This is a fragment shader. If you've opened this file first, please
-// open and read lambert.vert.glsl before reading on.
-// Unlike the vertex shader, the fragment shader actually does compute
-// the shading of geometry. For every pixel in your program's output
-// screen, the fragment shader is run for every bit of geometry that
-// particular pixel overlaps. By implicitly interpolating the position
-// data passed into the fragment shader by the vertex shader, the fragment shader
-// can compute what color to apply to its pixel based on things like vertex
-// position, light position, and vertex color.
 precision highp float;
 
 uniform vec4 u_Color; // The color with which to render this instance of geometry.
@@ -31,7 +22,7 @@ uniform vec3 u_CamPos;
 
 //body, head, eye, arm, leg
 uniform float u_BodySizes[6];
-uniform int u_Colored;
+uniform int u_Colored[5];
 
 //0 - 2 are upper body, 3 - 5 are lower body, 6 - 7 eyes
 uniform vec3 u_BodyColors[8];
@@ -642,7 +633,7 @@ vec2 sceneA(vec3 p) {
 }
 
 
-float epsilon = 0.0001;
+float epsilon = 0.001;
 vec3 estimateNormal(vec3 p) {
     return normalize(vec3(scene(vec3(p.x + epsilon, p.y, p.z)).x - scene(vec3(p.x - epsilon, p.y, p.z)).x,
                                    scene(vec3(p.x, p.y  + epsilon, p.z)).x - scene(vec3(p.x, p.y - epsilon, p.z)).x,
@@ -751,6 +742,11 @@ vec4 render(vec4 isect) {
     vec3 nor = estimateNormal(isect.xyz);
     vec3 res = vec3(0.0);
     vec3 test = vec3(0.0);
+    int geom = int(isect.w);
+    vec3 albedo = getMatColor(isect.xyz, geom);
+    float kd = matDiff[geom];
+    float ks = matSpec[geom];
+
     for(int i = 0; i < numLights; i ++) {
         vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );
 
@@ -764,28 +760,25 @@ vec4 render(vec4 isect) {
         float ambientTerm =1.0;// ao(isect.xyz,nor);
         vec2 lighting = vec2(1.0,1.0);
 
-        if(lightCastsShadow[i]) {
+        if(lightCastsShadow[i] && u_Colored[1] == 1) {
             lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);
         }
          
         float intensity = lighting.x;
-        int geom = int(isect.w);
-        //material values
-        vec3 albedo = getMatColor(isect.xyz, geom);
         
-        float kd = matDiff[geom];
-        float ks = matSpec[geom];
-
         vec3 h = (normalize(isect.xyz - u_CamPos) - lightDir) * 0.5f;
         float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
-        vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);
         vec3 refCol = vec3(1.0); 
 
-        if(reflected.y > -0.5f) {
-            refCol = matColors[int(reflected.y)];
-        }
+        if(u_Colored[1] == 1) {
+            vec2 reflected = shadow(ref, isect.xyz + nor * 0.03f, 2.5f);
 
-        specularIntensity *= reflected.x;
+            if(reflected.y > -0.5f) {
+                refCol = matColors[int(reflected.y)];
+            }
+
+            specularIntensity *= reflected.x;
+        }
 
         float diffuseTerm = 1.0 - dot(normalize(vec4(nor,1)), normalize(vec4(-lightDir,1)));
         diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
@@ -825,7 +818,7 @@ void main()
         
         //diffuseTerm += specularIntensity;
         vec3 col = vec3(0);
-        if(u_Colored == 1) {
+        if(u_Colored[0] == 1) {
             col = render(isect).xyz;
         } else {
             col = renderDiff(isect).xyz;
@@ -840,23 +833,4 @@ void main()
        // out_Col = vec4(p.xyz * 0.001f, 1);
 
     }
-    //out_Col = 90.0 * vec4(getMatDisp(gl_FragCoord.xyz * 0.0005, 2),1);
-   // out_Col = vec4(rayDir,1);
-    // Material base color (before shading)
-        vec4 diffuseColor = fs_Col;
-        
-         //diffuseColor = vec4(0.1,1,1,1);
-        // Calculate the diffuse term for Lambert shading
-        // Avoid negative lighting values
-        // diffuseTerm = clamp(diffuseTerm, 0, 1);
-
-        //float ambientTerm = 0.7;
-
-       // float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier
-                                                            //to simulate ambient lighting. This ensures that faces that are not
-//                                                            //lit by our point light are not completely black.
-//        if(lightIntensity == 0f) {
-//            lightIntensity = 0.2f;
-//        }
-        // Compute final shaded color
 }

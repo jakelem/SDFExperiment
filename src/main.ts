@@ -27,7 +27,7 @@ const controls = {
   'Eye Size': 0.45,
   'Pupil Size': 0.15,
   'Shaded': true,
-  'Angle': 5,
+  'Shadows': true,
   'Offset': -0.01,
   'Load Scene': loadScene, // A function pointer, essentially
 };
@@ -55,6 +55,11 @@ function getBodySizes() {
 controls['Body Texture'],
 controls['Belly Texture']];
   
+}
+
+
+function getFlags() {
+  return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0];
 }
 
 function hexToRGB(hex : any) {
@@ -113,6 +118,7 @@ function main() {
   gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
   gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
   gui.add(controls, 'Shaded');
+  gui.add(controls, 'Shadows');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -173,7 +179,7 @@ function main() {
     sdf.setBodySizes(getBodySizes());
     sdf.setResolution(vec3.fromValues(window.innerWidth, window.innerHeight,1));
     sdf.setCamPos(camera.controls.eye);
-    sdf.setColored(controls["Shaded"] ? 1 : 0);
+    sdf.setColored(getFlags());
 
     renderer.render(camera, sdf, [
       square,

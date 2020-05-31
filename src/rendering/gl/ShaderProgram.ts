@@ -91,10 +91,10 @@ class ShaderProgram {
     }
   }
 
-  setColored(cold : number) {
+  setColored(cold : number[]) {
     this.use();
     if (this.unifColored !== -1) {
-      gl.uniform1i(this.unifColored, cold);
+      gl.uniform1iv(this.unifColored, cold);
     }
   }
 
