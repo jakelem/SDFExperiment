@@ -741,6 +741,9 @@ vec4 render(vec4 isect) {
 
     vec3 nor = estimateNormal(isect.xyz);
 
+    if(u_Colored[3] == 1) {
+        nor = -nor;
+    }
     if(u_Colored[2] == 1) {
         return vec4(nor.xyz,1.0);
     }
@@ -759,14 +762,13 @@ vec4 render(vec4 isect) {
 
     { // skylight
         vec3 lightOrigin = vec3(0,20,10);
-        vec3 lightCol = vec3(0.78, 0.9, 1.0);
+        vec3 lightCol = vec3(1.0, 1.0, 1.0);
         vec3 lightDir = normalize(lightOrigin-isect.xyz);
         float lightDist = length(lightOrigin-isect.xyz) * 0.1f;
-        float lightIntensity = 2.0;
+        float lightIntensity = 3.0;
 
-        if(u_Colored[3] == 1) {
-            lightIntensity /= lightDist;
-        }
+           // lightIntensity /= lightDist;
+        
         float ambientTerm = 1.0;// ao(isect.xyz,nor);
         vec2 lighting = vec2(1.0,1.0);
         if(u_Colored[1] == 1) {
