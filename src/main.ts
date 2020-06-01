@@ -21,11 +21,12 @@ const controls = {
   'Belly Color 1': "#cce8c8",
   'Belly Color 2': "#bbdcb9",
   'Belly Texture': 2.0,
-  'Eye Color': "#43423c",
+  'Eye Color': "#beb26a",
   'Body Size': 1.9,
   'Head Size': 1.2,
-  'Eye Size': 0.45,
-  'Pupil Size': 0.15,
+  'Eye Size': 0.43,
+  'Pupil Size': 0.26,
+  'Pupil Shape': 0.1,
   'Shaded': true,
   'Shadows': false,
   'Show Normals': false,
@@ -55,6 +56,7 @@ function getBodySizes() {
   controls["Head Size"], 
   controls["Eye Size"], 
   0.3 - controls["Pupil Size"],
+  controls["Pupil Shape"],
 controls['Body Texture'],
 controls['Belly Texture']];
   
@@ -120,7 +122,9 @@ function main() {
   gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
   gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
-  gui.add(controls, 'Pupil Size', 0.0, 0.3).step(0.01);
+  gui.add(controls, 'Pupil Size', 0.2, 0.3).step(0.01);
+  gui.add(controls, 'Pupil Shape', -0.1, 0.1).step(0.01);
+
   //gui.add(controls, 'Shaded');
   gui.add(controls, 'Shadows');
   gui.add(controls, 'Show Normals');

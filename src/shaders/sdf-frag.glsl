@@ -21,7 +21,7 @@ uniform mat4 u_ViewProj;
 uniform vec3 u_CamPos;
 
 //body, head, eye, arm, leg
-uniform float u_BodySizes[6];
+uniform float u_BodySizes[7];
 uniform int u_Colored[5];
 
 //0 - 2 are upper body, 3 - 5 are lower body, 6 - 7 eyes
@@ -29,12 +29,14 @@ uniform vec3 u_BodyColors[8];
 //uniform vec3 stomachColors[3];
 
 const int numLights = 4;
+
+//left, sky, sun, frontal
 const vec3 pointLights[numLights] = vec3[] (
-    vec3(5,6,7), vec3(0,20,10), vec3(8,5,-7), vec3(2,0,10)
+    vec3(-10,25,10), vec3(10,25,10), vec3(7,10,20), vec3(5,2,10)
 );
 
 const float lightIntensities[numLights] = float[] (
-    0.8f, 1.9f, 1.2f, 0.2f
+    1.4f, 1.4f, 0.4f, 0.3f
 );
 
 const vec3 lightColors[numLights] = vec3[] (
@@ -46,34 +48,34 @@ const bool lightCastsShadow[numLights] = bool[] (
 );
 
 const bool lightCastsSpecular[numLights] = bool[] (
-    true, true, true, true
+    false, false, true, true
 );
 
-//body, eye, white
+//body, eye black, na, eye sclera
 const vec3 matColors[5] = vec3[](
 vec3(102, 138, 41) / 255.0,
-vec3(120, 40, 35) / 255.0,
+vec3(40, 20, 10) / 255.0,
 vec3(255, 255, 190) / 255.0,
 vec3(40, 30, 89) / 255.0,
 vec3(50, 56, 89) / 255.0);
 
 const float matCosPow[5] = float[](
-20.0, 
-49.0,
+29.0, 
+36.0,
 8.0,
-49.0,
-6.0);
+9.0,
+19.0);
 
 const float matSpec[5] = float[](
-1.2, 
-2.5,
+0.6, 
+1.9,
 0.3,
-0.4,
-1.2);
+1.5,
+1.7);
 
 const float matDiff[5] = float[](
-0.5, 
-0.2,
+0.7, 
+1.0,
 0.9,
 0.8,
 1.0);
@@ -282,7 +284,7 @@ vec3 getMatColor(vec3 q, int i) {
     if(i == 0) {
         vec2 uv = q.xy * q.z - 0.04;
         uv.x *= 2.0;
-        float bodtex = u_BodySizes[4];
+        float bodtex = u_BodySizes[5];
         float n = 3.0 * perlin(bodtex * uv);
         float off = clamp(n * 5.0 * n, 0.0, 1.0);
         //vec3 f = vec3(0.5, 0.6, 0.15);
@@ -292,7 +294,7 @@ vec3 getMatColor(vec3 q, int i) {
         vec3 d = u_BodyColors[3] / 255.0;
 
         vec3 res1 = mix(a, b, off);
-        float beltex = u_BodySizes[5];
+        float beltex = u_BodySizes[6];
 
         float n2 = 5.0 * perlin(beltex * uv);
         float off2 = 1.0f - clamp(n2 * n2, 0.0, 1.0);
@@ -467,7 +469,9 @@ vec2 scene(vec3 p) {
         head.x += offZ;
     }
 
-    vec2 smoothy = smin(body, head, 0.4f);
+
+    float blend = (1.0 - bs - hs) * 0.25;
+    vec2 smoothy = smin(body, head, clamp(2.4f - 0.55 * (bs + hs), 0.45, 1.1));
     
     vec2 tail = vec2(stick(p,vec3(0,0,-1.3), vec3(0,0,-0.5), 0.45f, 0.6f),0.0);
     
@@ -498,20 +502,24 @@ vec2 scene(vec3 p) {
 
             float es = u_BodySizes[2];
             float ps = u_BodySizes[3];
+            float psh = u_BodySizes[4];
 
             vec2 eyeridge1 = vec2(sphere(sp - ridge,es),0.0);
             smoothy = smin(smoothy, eyeridge1, 0.09f);
-            //vec2 eyeposridge + (0.03, 0, 0.05);
             float esf = es / 0.45;
-            ridge += vec3(0.03, 0.0, 0.05);
+            ridge += vec3(0.05, 0.0, 0.04);
             vec2 eyeball1 = vec2(sphere(sp - ridge,es-0.04),1.0);
-            ridge += vec3(0.015, 0, 0.025);
+            ridge += vec3(0.02, 0, 0.02);
             vec2 sclera = vec2(sphere(sp - ridge,es-0.06),4.0);
-            vec2 slitA = vec2(sphere(sp - (ridge + vec3(0.085, ps, 0.135)),es - 0.13),1.0);
-            vec2 slitB = vec2(sphere(sp - (ridge + vec3(0.085, -ps, 0.135)),es - 0.13),1.0);
+            //pupil shape x component
+            float pshx = max(-psh,0.0);
+            psh = max(psh, 0.0);
+            vec2 slitA = vec2(sphere(sp - (ridge + vec3(0.16 + pshx, psh, 0.15)),es - ps - 0.14),1.0);
+            vec2 slitB = vec2(sphere(sp - (ridge + vec3(0.16 - pshx, -psh, 0.15)),es - ps - 0.14),1.0);
             vec2 slit = smax(slitA, slitB, 0.05);
-            vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),es - 0.05),1.0);
-
+            //vec2 cut1 = vec2(sphere(sp - vec3(0.89,1.18,3.4),es - 0.05),1.0);
+            vec2 cut1 = vec2(sphere(sp - (ridge - vec3(0.1, 0.1, 0.1)),es - 0.05),1.0);
+            
             sclera = smax(vec2(-cut1.x, cut1.y), sclera, 0.04);
             sclera = smax(vec2(-slit.x, slit.y), sclera, 0.04);
 
@@ -743,7 +751,7 @@ vec3 orientate(vec3 inp, vec3 nor) {
     }
 }
 
-vec4 render(vec4 isect) {
+vec4 renderA(vec4 isect) {
 
     vec3 nor = estimateNormal(isect.xyz);
 
@@ -813,19 +821,31 @@ vec4 render(vec4 isect) {
 }
 
 
-vec4 renderA(vec4 isect) {
+vec4 render(vec4 isect) {
 
     vec3 nor = estimateNormal(isect.xyz);
+
+    if(u_Colored[3] == 1) {
+                nor = -nor;
+            }
+    if(u_Colored[2] == 1) {
+        return vec4(nor.xyz,1.0);
+    }
     vec3 res = vec3(0.0);
     vec3 test = vec3(0.0);
     int geom = int(isect.w);
     vec3 albedo = getMatColor(isect.xyz, geom);
+
+    if(u_Colored[0] == 0) {
+        return vec4(albedo.xyz,1.0);
+    }
+
     float kd = matDiff[geom];
     float ks = matSpec[geom];
+    vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );
+    vec3 rd = normalize(isect.xyz - u_CamPos);
 
     for(int i = 0; i < numLights; i ++) {
-        vec3 ref = reflect( normalize(isect.xyz - u_CamPos.xyz), nor );
-
         vec3 lightOrigin = pointLights[i];
         vec3 lightCol = lightColors[i];
         vec3 lightDir = normalize(lightOrigin-isect.xyz);
@@ -839,11 +859,9 @@ vec4 renderA(vec4 isect) {
         if(lightCastsShadow[i] && u_Colored[1] == 1) {
             lighting = shadow(lightDir,isect.xyz + nor * 0.03f, lightDist);
         }
-         
-        float intensity = lighting.x;
-        
-        vec3 h = normalize(isect.xyz - u_CamPos - lightDir);
-        float specularIntensity = max(pow(dot(h, nor), matCosPow[geom]), 0.0);
+                
+        vec3 h = normalize(lightDir - rd);
+        float specularIntensity = max(pow(clamp(dot(h, nor), 0.0, 1.0), matCosPow[geom]), 0.0);
         vec3 refCol = vec3(1.0); 
 
         if(u_Colored[1] == 1) {
@@ -856,13 +874,16 @@ vec4 renderA(vec4 isect) {
             specularIntensity *= reflected.x;
         }
 
-        float diffuseTerm = dot(normalize(nor), normalize(lightOrigin));
+        float diffuseTerm = dot(nor, normalize(lightDir));
         diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
-        res += kd * ((lightCol * lightIntensity  * intensity * diffuseTerm) * albedo);
+
+        res += kd * ((lightCol * lightIntensity  * lighting.x * diffuseTerm) * albedo);
 
         if(lightCastsSpecular[i]) {
             res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;
         }
+        res+= lighting.x * albedo * 0.075;
+
        // res = nor;
        // res = albedo;
 
