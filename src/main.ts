@@ -15,24 +15,33 @@ import Orchids from './geometry/Orchids';
 const controls = {
   tesselations: 5,
   iterations: 4,
-  'Body Color 1': "#54cd7f",
-  'Body Color 2': "#4ecd82",
-  'Body Texture': 2.0,
-  'Belly Color 1': "#cce8c8",
-  'Belly Color 2': "#bbdcb9",
-  'Belly Texture': 2.0,
+  'Color A 1': "#54cd7f",
+  'Color A 2': "#4ecd82",
+  'Texture A': 2.0,
+  'Texture A Shape': 1.0,
+
+  'Color B 1': "#cce8c8",
+  'Color B 2': "#bbdcb9",
+  'Texture B': 2.0,
+  'Texture B Shape': 1.0,
+
   'Eye Color': "#beb26a",
   'Body Size': 1.9,
   'Head Size': 1.2,
+  'Limb Size': 1.2,
+
+  'Head Sharpness': 1.0,
+
   'Eye Size': 0.43,
-  'Pupil Size': 0.26,
+  'Pupil Size': 0.28,
   'Pupil Shape': 0.1,
   'Shaded': true,
   'Shadows': false,
   'Show Normals': false,
   'Flip Normals': false,
-  'Orientate': false,
-
+  'Debug': {
+    'Orientate': false,
+  },
   'Load Scene': loadScene, // A function pointer, essentially
 };
 
@@ -43,9 +52,9 @@ function loadObjs() {
 
 
 function getBodyColors() {
-  return hexToRGB(controls["Body Color 1"]).concat(hexToRGB(controls["Body Color 2"]))
-  .concat(hexToRGB(controls["Belly Color 1"]))
-  .concat(hexToRGB(controls["Belly Color 2"]))
+  return hexToRGB(controls["Color A 1"]).concat(hexToRGB(controls["Color A 2"]))
+  .concat(hexToRGB(controls["Color B 1"]))
+  .concat(hexToRGB(controls["Color B 2"]))
   .concat(hexToRGB(controls["Eye Color"]));
   
 }
@@ -57,15 +66,19 @@ function getBodySizes() {
   controls["Eye Size"], 
   0.3 - controls["Pupil Size"],
   controls["Pupil Shape"],
-controls['Body Texture'],
-controls['Belly Texture']];
-  
+controls['Texture A'],
+controls['Texture B'], 
+controls['Texture A Shape'],
+controls['Texture B Shape'], 
+controls["Limb Size"]];
+
+
 }
 
 
 function getFlags() {
   return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0
-  , controls["Show Normals"] ? 1 : 0 , controls["Flip Normals"] ? 1 : 0, controls["Orientate"] ? 1 : 0];
+  , controls["Show Normals"] ? 1 : 0 , controls["Flip Normals"] ? 1 : 0, controls["Debug"]["Orientate"] ? 1 : 0];
 }
 
 function hexToRGB(hex : any) {
@@ -107,29 +120,37 @@ function main() {
 
   // Add controls to the gui
   const gui = new DAT.GUI();
-  gui.add(controls, 'Load Scene');
-  gui.addColor(controls, 'Body Color 1');
-
-  gui.addColor(controls, 'Body Color 2');
-  gui.add(controls, 'Body Texture', 0.2, 4).step(0.1);
-
-  gui.addColor(controls, 'Belly Color 1');
-  gui.addColor(controls, 'Belly Color 2');
-  gui.add(controls, 'Belly Texture', 0.0, 4).step(0.1);
-
-  gui.addColor(controls, 'Eye Color');
-
+  //gui.add(controls, 'Load Scene');
   gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
-  gui.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
-  gui.add(controls, 'Pupil Size', 0.2, 0.3).step(0.01);
-  gui.add(controls, 'Pupil Shape', -0.1, 0.1).step(0.01);
+  gui.add(controls, 'Limb Size', 0.6, 2).step(0.1);
+
+  let upbody = gui.addFolder("Upper Body Texture");
+
+  upbody.addColor(controls, 'Color A 1');
+  upbody.addColor(controls, 'Color A 2');
+  upbody.add(controls, 'Texture A', 0.2, 4).step(0.1);
+  upbody.add(controls, 'Texture A Shape', 0.0, 2.0).step(0.05);
+
+  let loBod = gui.addFolder("Lower Body Texture");
+
+  loBod.addColor(controls, 'Color B 1');
+  loBod.addColor(controls, 'Color B 2');
+  loBod.add(controls, 'Texture B', 0.0, 4).step(0.05);
+  loBod.add(controls, 'Texture B Shape', 0.0, 2.0).step(0.05);
+
+  let eyes = gui.addFolder("Eyes");
+  eyes.addColor(controls, 'Eye Color');
+  eyes.add(controls, 'Eye Size', 0.3, 0.7).step(0.1);
+  eyes.add(controls, 'Pupil Size', 0.2, 0.3).step(0.01);
+  eyes.add(controls, 'Pupil Shape', -0.1, 0.1).step(0.01);
+
+  let deb = gui.addFolder("Debug");
 
   //gui.add(controls, 'Shaded');
-  gui.add(controls, 'Shadows');
-  gui.add(controls, 'Show Normals');
-  gui.add(controls, 'Flip Normals');
-  gui.add(controls, 'Orientate');
+  deb.add(controls, 'Shadows');
+  deb.add(controls, 'Show Normals');
+  deb.add(controls, 'Flip Normals');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
