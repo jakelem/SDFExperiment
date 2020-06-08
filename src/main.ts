@@ -25,7 +25,7 @@ const controls = {
   'Texture B': 2.0,
   'Texture B Shape': 1.0,
 
-  'Eye Color': "#beb26a",
+  'Eye Color': "#89856e",
   'Body Size': 1.9,
   'Head Size': 1.2,
   'Limb Size': 1.2,
@@ -36,7 +36,7 @@ const controls = {
   'Pupil Size': 0.28,
   'Pupil Shape': 0.1,
   'Shaded': true,
-  'Shadows': false,
+  'Shadows': true,
   'Show Normals': false,
   'Flip Normals': false,
   'Debug': {
