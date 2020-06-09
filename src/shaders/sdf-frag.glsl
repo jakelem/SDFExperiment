@@ -32,11 +32,11 @@ const int numLights = 4;
 
 //frontal, sky, sun, frontal2
 const vec3 pointLights[numLights] = vec3[] (
-    vec3(-2,29,30), vec3(-10,25,10), vec3(7,10,20), vec3(5,2,10)
+    vec3(-2,29,36), vec3(-10,25,10), vec3(7,10,20), vec3(5,2,10)
 );
 
 const float lightIntensities[numLights] = float[] (
-    1.4f, 1.4f, 0.4f, 0.3f
+    2.0f, 1.4f, 0.4f, 0.3f
 );
 
 const vec3 lightColors[numLights] = vec3[] (
@@ -60,9 +60,9 @@ vec3(200, 200, 206) / 255.0,
 vec3(50, 56, 89) / 255.0);
 
 const float matCosPow[5] = float[](
-39.0, 
+89.0, 
 150.0,
-39.0,
+89.0,
 10.0,
 150.0);
 
@@ -93,11 +93,21 @@ vec2 hash (vec2 p) {
     return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);
 }
 
+vec3 hash3 (vec3 p) {
+    return fract(sin(vec3(dot(p, vec3(127.1, 311.7, 841.3)), 
+    dot(p, vec3(269.5, 183.3, 417.2)), 
+    dot(p, vec3(564.7, 299.1, 603.6)))) * 43758.5453);
+}
+
 float cubic(float t) {
     return t * t * (3.0 - 2.0 * t);
 }
 
 vec2 cubic2(vec2 t) {
+    return t * t * (3.0 - 2.0 * t);
+}
+
+vec3 cubic3(vec3 t) {
     return t * t * (3.0 - 2.0 * t);
 }
 
@@ -232,6 +242,29 @@ float surflet(vec2 p, vec2 gridPoint, float v) {
 
 }
 
+
+float surflet3(vec3 p, vec3 gridPoint, float v) {
+    vec3 t = vec3(1.0) - cubic3(abs(p - gridPoint));
+    vec3 gradient = v * hash3(gridPoint) * 2.0 - vec3(1);
+    vec3 diff = p - gridPoint;
+    float height = dot(diff, gradient);
+    return height * t.x * t.y * t.z;
+
+}
+
+float perlin3(vec3 p, float v) {
+    vec3 f = floor(p);
+    float res = 0.0;
+    for(int i = 0; i <= 1; i++) {
+        for(int j = 0; j <= 1; j++) {
+            for(int k = 0; k <= 1; k++) {
+                res += surflet3(p, f+vec3(i,j,k), v);
+            }
+        }
+    }
+    return res;
+}
+
 float perlin(vec2 p, float v) {
     vec2 f = floor(p);
     return surflet(p, f+vec2(0,0), v) 
@@ -262,6 +295,8 @@ vec3 jitterColor(vec3 a, vec3 q) {
     return a + res;
 
 }
+
+
 vec3 getMatColor(vec3 q, vec3 nor, int i) {
     if(i == 0 || i == 2) { //body and legs
         vec3 qn = normalize(q);
@@ -270,8 +305,12 @@ vec3 getMatColor(vec3 q, vec3 nor, int i) {
         float bodtex = u_BodySizes[5];
         float bodtexSh = u_BodySizes[7];
 
-        float n = 3.0 * perlin(bodtex * uv, bodtexSh);
+        float n = perlin3(bodtex * qn, bodtexSh);
+        //float m =  0.33 * (sin(bodtex * (q.x)) + sin(bodtex * (q.y)) + sin(bodtex * (q.z)));
+        //m*=m;
         float off = clamp(n * 5.0 * n, 0.0, 1.0);
+        off = clamp(n * 5.0, 0.0, 1.0);
+        //off = smoothstep(-bodtexSh * 0.5, bodtexSh * 0.5, m);
         //vec3 f = vec3(0.5, 0.6, 0.15);
         vec3 a = u_BodyColors[0] / 255.0;
         a = jitterColor(a, q);
@@ -282,12 +321,17 @@ vec3 getMatColor(vec3 q, vec3 nor, int i) {
         vec3 d = u_BodyColors[3] / 255.0;
 
         vec3 res1 = mix(a, b, off);
+        off = clamp(n * 0.5, 0.0, 1.0);
+
+        //res1 = mix(res1, vec3(0.59, 0.75, 0.3), off);
         res1 = mix(res1 * 1.1, res1 * 0.9, smoothstep(0.0, 1.0, uv.y));
+
+
         float beltex = u_BodySizes[6];
         float beltexSh = u_BodySizes[8];
+        float n2 = perlin3(beltex * qn, beltexSh);
 
-        float n2 = 5.0 * perlin(beltex * uv, beltexSh);
-        float off2 = 1.0f - clamp(n2 * n2, 0.0, 1.0);
+        float off2 = 1.0f - clamp(n2, 0.0, 1.0);
         vec3 res2 =  mix(c, d, off2);
         //res2 = mix(res2, c + vec3(0.1,0.1,0), clamp(1.0 - abs(q.y), 0.0, 1.0));
         //belly
@@ -317,7 +361,8 @@ vec3 getMatColor(vec3 q, vec3 nor, int i) {
         vec3 a = u_BodyColors[4] / 255.0;
         vec2 uv = q.xy * q.z;
         uv.x *= 2.0;
-        float n = 8.0 * perlin(10.0 * uv, 1.0);
+        float n = 8.0 * perlin3(40.0 * q, 1.0);
+        n*=n;
         float off = 1.0f - clamp(n, 0.0, 1.0);
         //return mix(vec3(0.3, 0.25, 0.05), vec3(0.4, 0.3, 0.2), off);
         vec3 res =  mix(a  - vec3(0.05, 0.05, 0.05), a, off);
@@ -333,7 +378,7 @@ vec3 getMatColor(vec3 q, vec3 nor, int i) {
 vec3 getMatDisp(vec3 q, int i) {
     if(i == 0 || i == 2) {
         vec2 uv = q.xy;
-        float off = -0.0005 * clamp(3.0 * perlin(50.0 * uv, 1.0), 0.0, 1.0);
+        float off = -0.0005 * clamp(3.0 * perlin3(50.0 * q, 1.0), 0.0, 1.0);
         return vec3(off);
 
     } 
@@ -507,6 +552,9 @@ vec2 scene(vec3 p) {
         //arms
         {
             float ls = u_BodySizes[9];
+            float ds1 = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.1;
+            float ds2 = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.2;
+
             vec3 shoulder = vec3(1.1,-0.3,2.5);
             vec3 elbow = shoulder + vec3(1.0,-0.7,-0.3);
             vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);
@@ -515,7 +563,7 @@ vec2 scene(vec3 p) {
             vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f * max(ls, 0.8), 0.34f * ls), 2.0);
             vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f * ls, 0.35f * ls), 2.0);
             wrist -= vec3(0.2,0.3,0);
-            vec2 finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 2.0);
+            vec2 finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             vec3 w = (sp - wrist);
             float offZ = -0.05 * (clamp(cubic(((-length(w) + 0.7) * 3.7) * 0.15), -2.0, 3.0));         
             float sz = sin(w.z * w.z * 3.3);
@@ -526,12 +574,12 @@ vec2 scene(vec3 p) {
             smoothy = smin(smoothy, forearm, 0.1);
             smoothy = smin(smoothy, finger, 0.2);
             f1 = wrist + vec3(-0.3,-0.1,1.7);
-            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 2.0);
+            finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             finger.x += offZ;
 
             smoothy = smin(smoothy, finger, 0.2);
             f1 = wrist + vec3(0.2,-0.1,1.6);
-            finger = vec2(stick(sp, wrist, f1, 0.2f, 0.1f), 2.0);
+            finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             finger.x += offZ;
 
             smoothy = smin(smoothy, finger, 0.2);
@@ -540,22 +588,25 @@ vec2 scene(vec3 p) {
 
         //legs
         {
-            vec3 hip = vec3(1.0,-0.2,-1.3);
+            float ls = 1.0 + (u_BodySizes[9] - 1.0) * 0.5;
+            float ds = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.2;
+
+            vec3 hip = vec3(0.9,-0.2,-1.3);
             vec3 knee = hip + vec3(0.4,-0.7,1.3);
             vec3 wrist = knee + vec3(-0.5,-0.7, -1.3);
 
-            vec2 upleg = vec2(stick(sp, hip, knee, 0.55f, 0.42f), 2.0);
-            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.5f, 0.45f), 2.0);
+            vec2 upleg = vec2(stick(sp, hip, knee, 0.5 * ls, 0.38 * ls), 2.0);
+            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.4f * ls, 0.38 * ls), 2.0);
             wrist -= vec3(0.2,0.3,0);
-            vec2 finger = vec2(stick(sp, wrist, wrist + vec3(-0.3,-0.1,1.7), 0.2f, 0.2f), 2.0);
+            vec2 finger = vec2(stick(sp, wrist, wrist + vec3(-0.3,-0.1,1.7), ds, ds), 2.0);
 
             smoothy = smin(smoothy, upleg, 0.3);
             smoothy = smin(smoothy, lowleg, 0.1);
             smoothy = smin(smoothy, finger, 0.2);
-            finger = vec2(stick(sp, wrist, wrist + vec3(0.2,-0.1,2.2), 0.2f, 0.2f), 2.0);
+            finger = vec2(stick(sp, wrist, wrist + vec3(0.2,-0.1,2.2), ds, ds), 2.0);
             smoothy = smin(smoothy, finger, 0.2);
 
-            finger = vec2(stick(sp, wrist, wrist + vec3(1.0,-0.1,1.9), 0.2f, 0.2f), 2.0);
+            finger = vec2(stick(sp, wrist, wrist + vec3(1.0,-0.1,1.9), ds, ds), 2.0);
             smoothy = smin(smoothy, finger, 0.2);
 
             
@@ -691,9 +742,7 @@ vec4 render(vec4 isect) {
 
     vec3 nor = estimateNormal(isect.xyz);
 
-    if(u_Colored[3] == 1) {
-                nor = -nor;
-            }
+
     if(u_Colored[2] == 1) {
         return vec4(nor.xyz,1.0);
     }
@@ -701,6 +750,10 @@ vec4 render(vec4 isect) {
     vec3 test = vec3(0.0);
     int geom = int(isect.w);
     vec3 albedo = getMatColor(isect.xyz, nor, geom);
+
+    if(u_Colored[3] == 0) {
+        albedo = vec3(0.6);
+    }
 
     if(u_Colored[0] == 0) {
         return vec4(albedo.xyz,1.0);
@@ -749,11 +802,11 @@ vec4 render(vec4 isect) {
             res +=  ks * lightCol * lightIntensity * specularIntensity * refCol;
 
             //source : https://www.shadertoy.com/view/lslXRj
-            //float transmissionRange = 0.2; // this really should be constant... right?
-	        //float transmission1 = scene( isect.xyz + lightDir*transmissionRange ).x/transmissionRange;
-	        //vec3 sslight = lightCol * smoothstep(0.0,1.0,transmission1);
-	        //vec3 subsurface = 0.15 * vec3(1,.8,.5) * sslight;
-            //res += subsurface;
+            float transmissionRange = 0.2; // this really should be constant... right?
+	        float transmission1 = scene( isect.xyz + lightDir*transmissionRange ).x/transmissionRange;
+	        vec3 sslight = lightCol * smoothstep(0.0,1.0,transmission1);
+	        vec3 subsurface = 0.15 * vec3(1,.8,.5) * sslight;
+            res += subsurface;
 
         }
         res+= lighting.x * albedo * 0.075;

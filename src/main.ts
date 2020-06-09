@@ -29,6 +29,7 @@ const controls = {
   'Body Size': 1.9,
   'Head Size': 1.2,
   'Limb Size': 1.2,
+  'Digit Size': 1.0,
 
   'Head Sharpness': 1.0,
 
@@ -38,15 +39,16 @@ const controls = {
   'Shaded': true,
   'Shadows': true,
   'Show Normals': false,
-  'Flip Normals': false,
+  'Colored': true,
   'Debug': {
     'Orientate': false,
   },
-  'Load Scene': loadScene, // A function pointer, essentially
+  'Randomize!': loadRandom, // A function pointer, essentially
 };
 
 let square: Square;
 let m_mesh: Mesh;
+let gui : DAT.GUI;
 function loadObjs() {
 }
 
@@ -70,7 +72,8 @@ controls['Texture A'],
 controls['Texture B'], 
 controls['Texture A Shape'],
 controls['Texture B Shape'], 
-controls["Limb Size"]];
+controls["Limb Size"],
+controls["Digit Size"]];
 
 
 }
@@ -78,7 +81,7 @@ controls["Limb Size"]];
 
 function getFlags() {
   return [controls["Shaded"] ? 1 :0,controls["Shadows"] ? 1 : 0
-  , controls["Show Normals"] ? 1 : 0 , controls["Flip Normals"] ? 1 : 0, controls["Debug"]["Orientate"] ? 1 : 0];
+  , controls["Show Normals"] ? 1 : 0 , controls["Colored"] ? 1 : 0, controls["Debug"]["Orientate"] ? 1 : 0];
 }
 
 function hexToRGB(hex : any) {
@@ -105,9 +108,53 @@ function loadScene() {
   square.create();
 }
 
-function loadRandom() {
+function randomRange(m1 : number, m2 : number) {
+  let range = m2 - m1;
+  return m1 + range * Math.random();
+}
+
+function randomColor() {
+  return '#' + Math.floor(Math.random()*16777215).toString(16);
 
 }
+
+
+function updateGUI(g : DAT.GUI) {
+  for (let i in g.__controllers) {
+    g.__controllers[i].updateDisplay();
+  }
+
+  for (let i in g.__folders) {
+    updateGUI(g.__folders[i]);
+  }
+}
+
+function loadRandom() {
+  controls['Body Size'] = randomRange(1.4, 2.6);
+  controls['Head Size'] = randomRange(1.0, 1.7);
+  controls['Limb Size'] = randomRange(0.9, 1.7);
+  controls['Digit Size'] = randomRange(0.2, 1.2);
+
+  controls['Eye Size'] = randomRange(0.35, 0.6);
+  controls['Pupil Size'] = randomRange(0.2, 0.3);
+  controls['Pupil Shape'] = randomRange(-0.1, 0.1);
+
+
+  controls['Color A 1'] = randomColor();
+  controls['Color A 2'] = randomColor();
+  controls['Color B 1'] = randomColor();
+  controls['Color B 2'] = randomColor();
+  controls['Eye Color'] = randomColor();
+
+  controls['Texture A'] = randomRange(0.2, 15);
+  controls['Texture A Shape'] = randomRange(0.5, 2.0);
+  controls['Texture B'] = randomRange(0.2, 15);
+  controls['Texture B Shape'] = randomRange(0.5, 2.0);
+
+  updateGUI(gui);
+
+}
+
 
 function main() {
   // Initial display for framerate
@@ -119,25 +166,26 @@ function main() {
   document.body.appendChild(stats.domElement);
 
   // Add controls to the gui
-  const gui = new DAT.GUI();
-  //gui.add(controls, 'Load Scene');
+  gui = new DAT.GUI();
+  gui.add(controls, 'Randomize!');
   gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
   gui.add(controls, 'Limb Size', 0.6, 2).step(0.1);
+  gui.add(controls, 'Digit Size', 0.2, 1.2).step(0.1);
 
   let upbody = gui.addFolder("Upper Body Texture");
 
   upbody.addColor(controls, 'Color A 1');
   upbody.addColor(controls, 'Color A 2');
-  upbody.add(controls, 'Texture A', 0.2, 4).step(0.1);
-  upbody.add(controls, 'Texture A Shape', 0.0, 2.0).step(0.05);
+  upbody.add(controls, 'Texture A', 0.2, 15.0).step(0.1);
+  upbody.add(controls, 'Texture A Shape', 0.0, 5.0).step(0.05);
 
   let loBod = gui.addFolder("Lower Body Texture");
 
   loBod.addColor(controls, 'Color B 1');
   loBod.addColor(controls, 'Color B 2');
-  loBod.add(controls, 'Texture B', 0.0, 4).step(0.05);
-  loBod.add(controls, 'Texture B Shape', 0.0, 2.0).step(0.05);
+  loBod.add(controls, 'Texture B', 0.0, 15.0).step(0.05);
+  loBod.add(controls, 'Texture B Shape', 0.0, 5.0).step(0.05);
 
   let eyes = gui.addFolder("Eyes");
   eyes.addColor(controls, 'Eye Color');
@@ -150,7 +198,7 @@ function main() {
   //gui.add(controls, 'Shaded');
   deb.add(controls, 'Shadows');
   deb.add(controls, 'Show Normals');
-  deb.add(controls, 'Flip Normals');
+  deb.add(controls, 'Colored');
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
