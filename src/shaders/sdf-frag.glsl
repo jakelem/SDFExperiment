@@ -249,7 +249,6 @@ float surflet3(vec3 p, vec3 gridPoint, float v) {
     vec3 diff = p - gridPoint;
     float height = dot(diff, gradient);
     return height * t.x * t.y * t.z;
-
 }
 
 float perlin3(vec3 p, float v) {
@@ -320,7 +319,10 @@ vec3 getMatColor(vec3 q, vec3 nor, int i) {
         vec3 c = u_BodyColors[2] / 255.0;
         vec3 d = u_BodyColors[3] / 255.0;
 
+        float grad = smoothstep(0.0, 1.0, abs(uv.y));
         vec3 res1 = mix(a, b, off);
+        res1 = mix(a, res1, grad);
+        //res1 = mix(a, b, off);
         off = clamp(n * 0.5, 0.0, 1.0);
 
         //res1 = mix(res1, vec3(0.59, 0.75, 0.3), off);
@@ -459,12 +461,12 @@ vec2 smax( vec2 a, vec2 b, float k )
 }
 
 vec2 scene(vec3 p) {
-    if(abs(p.x) > 40.0 || abs(p.z) > 40.0 || abs(p.y) < -40.0) {
+    if(abs(p.x) > 20.0 || abs(p.z) > 20.0 || abs(p.y) > 20.0) {
         return vec2(9e10, 0.0);
     }
     //return vec2(9e10, 0.0);
 
-    float throatsize = 0.2 * abs(sin(u_Time * 0.2));
+    float throatsize = 0.2 * abs(sin(u_Time * 0.5));
     float bs = u_BodySizes[0];
     float hs = u_BodySizes[1];
     //hs = 1.3;
@@ -473,15 +475,22 @@ vec2 scene(vec3 p) {
     vec3 headOffset = vec3(0,0.3,3) + vec3(0, throatsize * 0.05, throatsize * 0.1);
     vec2 head = vec2(sphere(p - headOffset,hs),0.0);
 
-    //mouth 
+//mouth 
     {
-        vec2 m = p.yz + vec2(-0.21, -7.1);
+        vec2 m = p.yz + vec2(-0.34, -3.6);
         float a = 0.8;
-        float offZ = 0.03 * sin(15.0 * m.x + 4.6 * m.y) 
-        * smoothstep(0.01, 0.06,-m.x * m.x + 0.04) * 
-        smoothstep(-5.0, 10.0, -m.y * m.y + 20.0);
+        float bell = exp(-(pow((m.x) * 8.6,2.0)) );
+        float bellz = exp(-(pow((m.y) * 0.9,2.0)) );
+
+        float offZ = 0.03 * sin(-abs(p.x) * 4.0 + 25.0 * m.x + 2.6 * m.y) * bell * bellz;
+       
+        //offZ = 0.025 * sin(20.0 * m.x + 2.6 * m.y) 
+        //* smoothstep(0.01, 0.06,-m.x * m.x + 0.04);
         head.x += offZ;
     }
+
+
+
 
 
     float blend = (1.0 - bs - hs) * 0.25;
@@ -493,6 +502,8 @@ vec2 scene(vec3 p) {
     smoothy = smin(smoothy, snout, 1.0);
     vec3 sp = vec3(abs(p.x), p.yz);
 
+
+    
     //nose 
     {
         // + vec3(0.2,hs-0.8,1.6)
@@ -516,10 +527,40 @@ vec2 scene(vec3 p) {
         vec2 m = p.xz + vec2(0.0, -0.1);
         float offZ = 0.019 * cos(8.2 * p.x) / max(abs(p.x), 1.0);
         smoothy.x += offZ;
+
+    }
+
+
+    {
+        vec2 m = p.yz + vec2(-0.27, -2.5);
+        float a = 0.8;
+        float belly = exp(-(pow((m.x) * 6.5,2.0)) );
+        float bellz = exp(-(pow((m.y) * 1.9,2.0)) );
+
+        float offZ = 0.02 * sin(25.0 * m.x + 10.6 * m.y)* belly* bellz;
+       
+        //offZ = 0.025 * sin(20.0 * m.x + 2.6 * m.y) 
+        //* smoothstep(0.01, 0.06,-m.x * m.x + 0.04);
+        smoothy.x += offZ;
+    }
+
+
+    {
+        float per = 5.0 * perlin3(p * 8.0, 1.0);
+        vec2 m = p.yz + vec2(-0.27, -2.5);
+        float a = 0.8;
+        float belly = exp(-(pow((m.x) * 6.5,2.0)) );
+        float bellz = exp(-(pow((m.y) * 1.9,2.0)) );
+
+        float offZ = 0.0005 * sin(30.0 * m.x + per + 10.6 * m.y);
+       
+        //offZ = 0.025 * sin(20.0 *  * m.x + 2.6 * m.y) 
+        //* smoothstep(0.01, 0.06,-m.x * m.x + 0.04);
+        smoothy.x += offZ;
     }
         //eyes
     {
-        vec3 ridge = headOffset + vec3(0.73,hs-0.3,0.42);
+        vec3 ridge = headOffset + vec3(0.69,hs-0.29,0.42);
         //bodOffset = vec3(0,0.3,3)
 
         float es = u_BodySizes[2];
@@ -553,16 +594,20 @@ vec2 scene(vec3 p) {
         {
             float ls = u_BodySizes[9];
             float ds1 = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.1;
-            float ds2 = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.2;
+            float ds2 = (1.0 + (ls - 1.0) * 0.5) * 0.2;
 
-            vec3 shoulder = vec3(1.1,-0.3,2.5);
-            vec3 elbow = shoulder + vec3(1.0,-0.7,-0.3);
+
+            vec3 shoulder = vec3(max(bs - 0.9, 1.1),-0.3,2.5);
+            vec3 elbow = shoulder + vec3(0.6,-0.4,-0.4);
             vec3 wrist = elbow + vec3(-0.5,-0.6,0.6);
-            vec3 f1 = wrist + vec3(-0.8,-0.1,1.5);
+
+            float midf = -0.55;
 
             vec2 sticky = vec2(stick(sp, shoulder, elbow, 0.4f * max(ls, 0.8), 0.34f * ls), 2.0);
             vec2 forearm = vec2(stick(sp, elbow, wrist, 0.3f * ls, 0.35f * ls), 2.0);
             wrist -= vec3(0.2,0.3,0);
+            vec3 f1 = wrist + vec3(midf - 0.45,-0.1,1.5);
+
             vec2 finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             vec3 w = (sp - wrist);
             float offZ = -0.05 * (clamp(cubic(((-length(w) + 0.7) * 3.7) * 0.15), -2.0, 3.0));         
@@ -573,12 +618,12 @@ vec2 scene(vec3 p) {
             smoothy = smin(smoothy, sticky, 0.1);
             smoothy = smin(smoothy, forearm, 0.1);
             smoothy = smin(smoothy, finger, 0.2);
-            f1 = wrist + vec3(-0.3,-0.1,1.7);
+            f1 = wrist + vec3(midf,-0.1,1.7);
             finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             finger.x += offZ;
 
             smoothy = smin(smoothy, finger, 0.2);
-            f1 = wrist + vec3(0.2,-0.1,1.6);
+            f1 = wrist + vec3(midf + 0.5,-0.1,1.6);
             finger = vec2(stick(sp, wrist, f1, ds2, ds1), 2.0);
             finger.x += offZ;
 
@@ -590,35 +635,40 @@ vec2 scene(vec3 p) {
         {
             float ls = 1.0 + (u_BodySizes[9] - 1.0) * 0.5;
             float ds = (1.0 + (u_BodySizes[10] - 1.0) * 0.5) * 0.2;
+            //float bs = u_BodySizes[0];
 
-            vec3 hip = vec3(0.9,-0.2,-1.3);
-            vec3 knee = hip + vec3(0.4,-0.7,1.3);
-            vec3 wrist = knee + vec3(-0.5,-0.7, -1.3);
+            float legpos = bs * 0.9;
+            vec3 hip = vec3(legpos - 0.8,-0.2,-1.1);
+            vec3 knee = hip + vec3(1.4,-0.7,2.2);
+            vec3 wrist = knee + vec3(-0.8,0.1, -2.5);
 
-            vec2 upleg = vec2(stick(sp, hip, knee, 0.5 * ls, 0.38 * ls), 2.0);
-            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.4f * ls, 0.38 * ls), 2.0);
+            vec2 upleg = vec2(stick(sp, hip, knee, 0.5 * ls, 0.3 * ls), 2.0);
+            vec2 lowleg = vec2(stick(sp, knee, wrist, 0.3f * ls, 0.3 * ls), 2.0);
             wrist -= vec3(0.2,0.3,0);
-            vec2 finger = vec2(stick(sp, wrist, wrist + vec3(-0.3,-0.1,1.7), ds, ds), 2.0);
+
+            vec2 finger = vec2(stick(sp, wrist, wrist + vec3(-0.3,-0.6,2.3), 0.3 * ls, ds), 2.0);
 
             smoothy = smin(smoothy, upleg, 0.3);
             smoothy = smin(smoothy, lowleg, 0.1);
-            smoothy = smin(smoothy, finger, 0.2);
-            finger = vec2(stick(sp, wrist, wrist + vec3(0.2,-0.1,2.2), ds, ds), 2.0);
-            smoothy = smin(smoothy, finger, 0.2);
+            smoothy = smin(smoothy, finger, 0.3);
+            finger = vec2(stick(sp, wrist, wrist + vec3(0.2,-0.6,2.8), 0.3 * ls, ds), 2.0);
+            smoothy = smin(smoothy, finger, 0.3);
 
-            finger = vec2(stick(sp, wrist, wrist + vec3(1.0,-0.1,1.9), ds, ds), 2.0);
-            smoothy = smin(smoothy, finger, 0.2);
+            finger = vec2(stick(sp, wrist, wrist + vec3(1.0,-0.6,2.5), 0.3 * ls, ds), 2.0);
+            smoothy = smin(smoothy, finger, 0.3);
 
             
         }
 
-    vec2 throat = vec2(sphere(p - vec3(0,-0.6,3.3),1.1f + throatsize),0.0);
 
-    smoothy = smin(smoothy, throat, 0.2f);
+    vec2 throat = vec2(sphere(p - vec3(0,-0.32,3.1),0.9f + throatsize * 0.5),0.0);
+    //vec2 throat = vec2(sphere(p - vec3(0,-0.6,3.3),1.1f + throatsize),0.0);
+
+    smoothy = smin(smoothy, throat, 0.3f);
 
     vec3 off = getMatDisp(p, int(smoothy.y));
     smoothy.x += off.x;
-    vec2 plane = vec2(box(p + vec3(0,3.1,-1.0), vec3(3.0, 0.5, 3.0)),3.0);
+    vec2 plane = vec2(box(p + vec3(0,2.2,-1.0), vec3(4.0, 0.5, 4.0)),3.0);
     //smoothy = unionCSG(smoothy, plane);
     smoothy.x *= 0.9;
 

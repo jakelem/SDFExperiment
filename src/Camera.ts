@@ -21,6 +21,13 @@ class Camera {
     this.controls = CameraControls(document.getElementById('canvas'), {
       eye: position,
       center: target,
+      zoomMin : 8.0,
+      zoomMax : 18.0,
+      translateSpeed : 0.5,
+      rotateSpeed : 0.5,
+      zoomSpeed : 0.5,
+
+
     });
     vec3.add(this.target, this.position, this.direction);
     mat4.lookAt(this.viewMatrix, this.controls.eye, this.controls.center, this.controls.up);

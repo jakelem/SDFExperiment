@@ -29,7 +29,7 @@ const controls = {
   'Body Size': 1.9,
   'Head Size': 1.2,
   'Limb Size': 1.2,
-  'Digit Size': 1.0,
+  'Digit Size': 0.6,
 
   'Head Sharpness': 1.0,
 
@@ -37,12 +37,13 @@ const controls = {
   'Pupil Size': 0.28,
   'Pupil Shape': 0.1,
   'Shaded': true,
-  'Shadows': true,
+  'Shadows': false,
   'Show Normals': false,
   'Colored': true,
   'Debug': {
     'Orientate': false,
   },
+  'Species' : "White's Tree Frog",
   'Randomize!': loadRandom, // A function pointer, essentially
 };
 
@@ -156,6 +157,171 @@ function loadRandom() {
 }
 
 
+/** 
+ * 
+ * 
+ * 
+ *   'Color A 1': "#54cd7f",
+  'Color A 2': "#4ecd82",
+  'Texture A': 2.0,
+  'Texture A Shape': 1.0,
+
+  'Color B 1': "#cce8c8",
+  'Color B 2': "#bbdcb9",
+  'Texture B': 2.0,
+  'Texture B Shape': 1.0,
+
+  'Eye Color': "#89856e",
+  'Body Size': 1.9,
+  'Head Size': 1.2,
+  'Limb Size': 1.2,
+  'Digit Size': 0.6,
+
+  'Head Sharpness': 1.0,
+
+  'Eye Size': 0.43,
+  'Pupil Size': 0.28,
+  'Pupil Shape': 0.1,
+
+*/
+function whitesTree() {
+  controls['Body Size'] = 1.9;
+  controls['Head Size'] = 1.2;
+  controls['Limb Size'] = 1.2;
+  controls['Digit Size'] = 0.6;
+
+  controls['Eye Size'] = 0.43;
+  controls['Pupil Size'] = 0.28;
+  controls['Pupil Shape'] = 0.1;
+
+
+  controls['Color A 1'] = "#54cd7f";
+  controls['Color A 2'] = "#6eff98";
+  controls['Color B 1'] = "#cce8c8";
+  controls['Color B 2'] = "#bbdcb9";
+  controls['Eye Color'] = "#89856e";
+
+  controls['Texture A'] = 2.0;
+  controls['Texture A Shape'] = 1;
+  controls['Texture B'] = 2.0;
+  controls['Texture B Shape'] = 1;
+
+}
+
+
+
+function tomato() {
+  controls['Body Size'] = 2.2;
+  controls['Head Size'] = 1.2;
+  controls['Limb Size'] = 1.2;
+  controls['Digit Size'] = 0.2;
+
+  controls['Color A 1'] = "#980000";
+  controls['Color A 2'] = "#af3300";
+  controls['Texture A'] = 3.3;
+  controls['Texture A Shape'] = 0.5;
+
+  controls['Color B 1'] = "#de1a00";
+  controls['Color B 2'] = "#5c0707";
+  controls['Texture B'] = 5.6;
+  controls['Texture B Shape'] = 0.9;
+
+  controls['Eye Color'] = "#66510e";
+  controls['Eye Size'] = 0.45;
+  controls['Pupil Size'] = 0.21;
+  controls['Pupil Shape'] = 0.0;
+
+}
+
+function blueDart() {
+  controls['Body Size'] = 1.6;
+  controls['Head Size'] = 1;
+  controls['Limb Size'] = 0.9;
+  controls['Digit Size'] = 0.62;
+
+  controls['Color A 1'] = "#004787";
+  controls['Color A 2'] = "#000000";
+  controls['Texture A'] = 6.1;
+  controls['Texture A Shape'] = 2.2;
+
+  controls['Color B 1'] = "#0b1c46";
+  controls['Color B 2'] = "#054093";
+  controls['Texture B'] = 6.5;
+  controls['Texture B Shape'] = 2.6;
+
+  controls['Eye Color'] = "#000000";
+  controls['Eye Size'] = 0.35;
+  controls['Pupil Size'] = 0.3;
+  controls['Pupil Shape'] = 0.0;
+
+}
+
+
+function redEyed() {
+  controls['Body Size'] = 1.4;
+  controls['Head Size'] = 1.1;
+  controls['Limb Size'] = 0.7;
+  controls['Digit Size'] = 1.0;
+
+  controls['Color A 1'] = "#7dcd52";
+  controls['Color A 2'] = "#9bd489";
+  controls['Texture A'] = 0.2;
+  controls['Texture A Shape'] = 1.6;
+
+  controls['Color B 1'] = "#f5f5f5";
+  controls['Color B 2'] = "#cdcdcd";
+  controls['Texture B'] = 1.7;
+  controls['Texture B Shape'] = 5.0;
+
+  controls['Eye Color'] = "#af3333";
+  controls['Eye Size'] = 0.45;
+  controls['Pupil Size'] = 0.25;
+  controls['Pupil Shape'] = -0.1;
+
+}
+
+
+function amazonMilk() {
+  controls['Body Size'] = 1.5;
+  controls['Head Size'] = 1;
+  controls['Limb Size'] = 0.9;
+  controls['Digit Size'] = 0.62;
+
+  controls['Eye Size'] = 0.4;
+  controls['Pupil Size'] = 0.28;
+  controls['Pupil Shape'] = 0.06;
+
+
+  controls['Color A 1'] = "#cce5ed";
+  controls['Color A 2'] = "#273428";
+  controls['Color B 1'] = "#273428";
+  controls['Color B 2'] = "#87d3eb";
+  controls['Eye Color'] = "#c0a096";
+
+  controls['Texture A'] = 2.0;
+  controls['Texture A Shape'] = 2.3;
+  controls['Texture B'] = 2.8;
+  controls['Texture B Shape'] = 2.8;
+
+}
+
+
+function updateSpecies() {
+  if(controls["Species"] == "White's Tree") {
+    whitesTree();
+  } else if(controls["Species"] == "Amazon Milk") {
+    amazonMilk();
+  } else if(controls["Species"] == "Blue Dart") {
+    blueDart();
+  } else if(controls["Species"] == "Red Eyed Tree") {
+    redEyed();
+  } else if(controls["Species"] == "Tomato") {
+    tomato();
+  }
+
+  updateGUI(gui);
+}
+
 function main() {
   // Initial display for framerate
   const stats = Stats();
@@ -168,6 +334,8 @@ function main() {
   // Add controls to the gui
   gui = new DAT.GUI();
   gui.add(controls, 'Randomize!');
+  gui.add(controls, 'Species', ["White's Tree",'Amazon Milk','Blue Dart', 'Red Eyed Tree', 'Tomato']).onChange(updateSpecies);
+
   gui.add(controls, 'Body Size', 1.4, 3).step(0.1);
   gui.add(controls, 'Head Size', 0.6, 2).step(0.1);
   gui.add(controls, 'Limb Size', 0.6, 2).step(0.1);
@@ -213,8 +381,7 @@ function main() {
   // Initial call to load scene
   loadScene();
 
-  const camera = new Camera(vec3.fromValues(0, 0, 10), vec3.fromValues(0, 0, 0));
-
+  const camera = new Camera(vec3.fromValues(0, 0, 15), vec3.fromValues(0, 0, 0));
   const renderer = new OpenGLRenderer(canvas);
   renderer.setClearColor(225/255, 240/255, 246/255, 1);
   gl.enable(gl.DEPTH_TEST);
